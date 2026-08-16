@@ -250,17 +250,6 @@
         "handle_label": "@jotar.footwear",
         "handle_url": "https://instagram.com"
       }
-    },
-    "jotar_newsletter_footer": {
-      "type": "jotar-newsletter-footer",
-      "settings": {
-        "newsletter_heading": "GET 10% OFF\nYOUR FIRST ORDER",
-        "newsletter_subtext": "Join our newsletter and be the first to know about new arrivals and exclusive offers.",
-        "email_placeholder": "Enter your email",
-        "subscribe_btn_label": "SUBSCRIBE",
-        "brand_name": "JOTAR",
-        "brand_tagline": "Step into style with premium comfort and timeless design."
-      }
     }
   },
   "order": [
@@ -272,7 +261,6 @@
     "jotar_trust_bar",
     "jotar_trending_collection",
     "jotar_testimonials",
-    "jotar_social_gallery",
-    "jotar_newsletter_footer"
+    "jotar_social_gallery"
   ]
 }

@@ -3474,5 +3474,316 @@ main :is(.product, .product-section) {
   }
 }
 
+/* ==========================================================================
+   GLOBAL LUXURY DARK FOOTER & NEWSLETTER STYLES (MATCHING EXACT REFERENCE)
+   ========================================================================== */
+.jotar-footer-section {
+  background-color: #0c0c0c !important;
+  color: #ffffff !important;
+  font-family: var(--jotar-font-primary) !important;
+  padding: 70px 0 32px 0 !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+/* 1. Newsletter Area (JOIN THE MOVEMENT) */
+.jotar-newsletter {
+  padding-bottom: 50px !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  margin-bottom: 50px !important;
+}
+
+.jotar-newsletter__wrapper {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 40px !important;
+  flex-wrap: wrap !important;
+}
+
+.jotar-newsletter__heading {
+  font-size: 1.625rem !important;
+  font-weight: 900 !important;
+  letter-spacing: -0.01em !important;
+  color: #ffffff !important;
+  margin: 0 0 6px 0 !important;
+  text-transform: uppercase !important;
+  line-height: 1.15 !important;
+}
+
+.jotar-newsletter__subtext {
+  font-size: 0.875rem !important;
+  color: #888888 !important;
+  margin: 0 !important;
+}
+
+.jotar-newsletter__form-wrap {
+  flex: 1 !important;
+  max-width: 480px !important;
+  min-width: 280px !important;
+}
+
+.jotar-newsletter__input-group {
+  display: flex !important;
+  align-items: center !important;
+  background: #181818 !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 6px !important;
+  overflow: hidden !important;
+  width: 100% !important;
+  transition: border-color 0.2s ease !important;
+}
+
+.jotar-newsletter__input-group:focus-within {
+  border-color: #ffffff !important;
+}
+
+.jotar-newsletter__input {
+  background: transparent !important;
+  border: none !important;
+  color: #ffffff !important;
+  font-family: var(--jotar-font-primary) !important;
+  font-size: 0.875rem !important;
+  padding: 14px 18px !important;
+  flex: 1 !important;
+  outline: none !important;
+}
+
+.jotar-newsletter__input::placeholder {
+  color: #666666 !important;
+}
+
+.jotar-newsletter__submit {
+  background-color: #ffffff !important;
+  color: #111111 !important;
+  border: none !important;
+  font-family: var(--jotar-font-primary) !important;
+  font-size: 0.8125rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  padding: 0 24px !important;
+  height: 46px !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  flex-shrink: 0 !important;
+}
+
+.jotar-newsletter__submit:hover {
+  background-color: #e0e0e0 !important;
+}
+
+.jotar-newsletter__msg {
+  font-size: 0.75rem !important;
+  margin-top: 6px !important;
+}
+
+.jotar-newsletter__msg.is-success {
+  color: #4caf50 !important;
+}
+
+.jotar-newsletter__msg.is-error {
+  color: #f44336 !important;
+}
+
+/* 2. Footer Links Grid (5 Columns) */
+.jotar-footer__grid {
+  display: grid !important;
+  grid-template-columns: 1.6fr 1fr 1fr 1fr 1fr !important;
+  gap: 48px !important;
+  margin-bottom: 50px !important;
+}
+
+.jotar-footer__brand-col {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 14px !important;
+}
+
+.jotar-footer__logo-link {
+  text-decoration: none !important;
+  color: #ffffff !important;
+  display: flex !important;
+  flex-direction: column !important;
+  line-height: 1 !important;
+}
+
+.jotar-footer__logo-text {
+  font-size: 1.75rem !important;
+  font-weight: 900 !important;
+  letter-spacing: -0.02em !important;
+}
+
+.jotar-footer__logo-sub {
+  font-size: 0.625rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.25em !important;
+  color: #888888 !important;
+  margin-top: 2px !important;
+}
+
+.jotar-footer__tagline {
+  font-size: 0.8125rem !important;
+  color: #888888 !important;
+  line-height: 1.6 !important;
+  max-width: 240px !important;
+  margin: 0 !important;
+}
+
+.jotar-footer__socials {
+  display: flex !important;
+  gap: 12px !important;
+  align-items: center !important;
+  margin-top: 4px !important;
+}
+
+.jotar-footer__social-link {
+  width: 34px !important;
+  height: 34px !important;
+  border-radius: 50% !important;
+  background: #1a1a1a !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #ffffff !important;
+  text-decoration: none !important;
+  transition: all 0.2s ease !important;
+}
+
+.jotar-footer__social-link:hover {
+  background: #ffffff !important;
+  color: #111111 !important;
+  transform: translateY(-2px) !important;
+}
+
+.jotar-footer__social-link svg {
+  width: 16px !important;
+  height: 16px !important;
+  fill: currentColor !important;
+}
+
+.jotar-footer__title {
+  font-size: 0.8125rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: #ffffff !important;
+  margin: 0 0 18px 0 !important;
+}
+
+.jotar-footer__list {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+}
+
+.jotar-footer__link {
+  font-size: 0.8125rem !important;
+  color: #888888 !important;
+  text-decoration: none !important;
+  transition: color 0.2s ease !important;
+}
+
+.jotar-footer__link:hover {
+  color: #ffffff !important;
+}
+
+/* 3. Bottom Copyright & Payment Badges */
+.jotar-footer__bottom {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding-top: 24px !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+  font-size: 0.75rem !important;
+  color: #666666 !important;
+  flex-wrap: wrap !important;
+  gap: 16px !important;
+}
+
+.jotar-footer__payments {
+  display: flex !important;
+  gap: 8px !important;
+  align-items: center !important;
+}
+
+.jotar-pay-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 24px !important;
+  padding: 0 10px !important;
+  background: #1a1a1a !important;
+  border-radius: 4px !important;
+  font-size: 0.6875rem !important;
+  font-weight: 800 !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.jotar-pay-badge--mc {
+  display: inline-flex !important;
+  gap: 2px !important;
+  align-items: center !important;
+  padding: 0 8px !important;
+}
+
+.mc-dot {
+  width: 10px !important;
+  height: 10px !important;
+  border-radius: 50% !important;
+  display: inline-block !important;
+}
+
+.mc-red {
+  background: #eb001b !important;
+}
+
+.mc-orange {
+  background: #f79e1b !important;
+  margin-left: -4px !important;
+}
+
+.jotar-pay-badge--paypal {
+  font-style: italic !important;
+  font-weight: 800 !important;
+  color: #0079c1 !important;
+  background: #ffffff !important;
+}
+
+/* Responsive Footer */
+@media (max-width: 900px) {
+  .jotar-footer__grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 36px !important;
+  }
+  .jotar-footer__brand-col {
+    grid-column: 1 / -1 !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .jotar-newsletter__wrapper {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+  .jotar-newsletter__form-wrap {
+    width: 100% !important;
+  }
+  .jotar-footer__grid {
+    grid-template-columns: 1fr !important;
+    gap: 28px !important;
+  }
+  .jotar-footer__bottom {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+}
+
+
 
 

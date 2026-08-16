@@ -138,11 +138,7 @@
         {{ content_for_layout }}
       </main>
 
-      {%- unless template.name == 'index' -%}
-        <footer>
-          {% sections 'footer-group' %}
-        </footer>
-      {%- endunless -%}
+      {% section 'jotar-newsletter-footer' %}
     </div>
 
     {% render 'cart-drawer', render_wrapper: true %}
