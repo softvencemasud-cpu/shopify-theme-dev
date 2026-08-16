@@ -264,8 +264,8 @@
   .header__row--top {
     min-height: 60px !important;
     height: 60px !important;
-    padding-left: 16px !important;
-    padding-right: 16px !important;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
     display: flex !important;
     align-items: center !important;
   }
