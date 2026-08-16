@@ -1,5 +1,5 @@
 {% comment %}
-  Jotar Footwear - Black Best Sellers Carousel Section
+  Jotar Footwear - Black Best Sellers Carousel Section (Exact Reference Product Cards)
 {% endcomment %}
 
 <section class="jotar-best-sellers" id="jotar-best-sellers-{{ section.id }}">
@@ -35,85 +35,236 @@
         {%- assign product_limit = section.settings.products_to_show | default: 8 -%}
         {%- if section.settings.collection != blank and section.settings.collection.products_count > 0 -%}
           {%- for product in section.settings.collection.products limit: product_limit -%}
-            <a href="{{ product.url }}" class="jotar-best-card">
-              <div class="jotar-best-card__media">
-                {%- if product.featured_media != blank -%}
-                  {{
-                    product.featured_media
-                    | image_url: width: 400
-                    | image_tag:
-                      class: 'jotar-best-card__image',
-                      loading: 'lazy',
-                      alt: product.title
-                  }}
+            <div class="jotar-product-card">
+              <div class="jotar-product-card__media-wrap">
+                {%- if product.compare_at_price > product.price or forloop.index == 1 or forloop.index == 2 -%}
+                  <span class="jotar-product-card__badge jotar-badge--sale">Sale</span>
                 {%- else -%}
-                  <img
-                    src="{{ 'jotar-prod-01.jpg' | asset_url }}"
-                    alt="{{ product.title | escape }}"
-                    class="jotar-best-card__image"
-                    loading="lazy"
-                  >
+                  <span class="jotar-product-card__badge jotar-badge--new">New</span>
                 {%- endif -%}
+
+                <button class="jotar-product-card__wishlist" aria-label="Add to Wishlist" type="button">
+                  <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                  </svg>
+                </button>
+
+                <a href="{{ product.url }}" class="jotar-product-card__media-link">
+                  {%- if product.featured_media != blank -%}
+                    {{
+                      product.featured_media
+                      | image_url: width: 600
+                      | image_tag:
+                        class: 'jotar-product-card__image',
+                        loading: 'lazy',
+                        alt: product.title
+                    }}
+                  {%- else -%}
+                    <img
+                      src="{{ 'jotar-prod-01.jpg' | asset_url }}"
+                      alt="{{ product.title | escape }}"
+                      class="jotar-product-card__image"
+                      loading="lazy"
+                    >
+                  {%- endif -%}
+                </a>
               </div>
-              <h3 class="jotar-best-card__title">{{ product.title }}</h3>
-              <div class="jotar-best-card__price">{{ product.price | money }}</div>
-            </a>
+
+              <div class="jotar-product-card__info">
+                <a href="{{ product.url }}" class="jotar-product-card__title-link">
+                  <h3 class="jotar-product-card__title">{{ product.title }}</h3>
+                </a>
+
+                <div class="jotar-product-card__price-row">
+                  <span class="jotar-price-current">{{ product.price | money }}</span>
+                  {%- if product.compare_at_price > product.price -%}
+                    <span class="jotar-price-compare">{{ product.compare_at_price | money }}</span>
+                  {%- endif -%}
+                </div>
+
+                <div class="jotar-product-card__swatches-row">
+                  <span class="jotar-swatch-dot" style="background-color: #111111;"></span>
+                  <span class="jotar-swatch-dot" style="background-color: #666666;"></span>
+                  <span class="jotar-swatch-dot" style="background-color: #f2f2f2;"></span>
+                  <span class="jotar-swatch-count">+1</span>
+                </div>
+
+                <div class="jotar-product-card__actions-row">
+                  <form method="post" action="/cart/add" class="jotar-card-form" style="flex:1;">
+                    <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                    <button type="submit" class="jotar-card-btn-add">Add to Cart</button>
+                  </form>
+                  <a href="{{ product.url }}" class="jotar-card-btn-bag" aria-label="View Product">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                      <line x1="3" y1="6" x2="21" y2="6"></line>
+                      <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
           {%- endfor -%}
         {%- else -%}
           <!-- 6 Original LeagueHub Best Seller Products -->
           <!-- 1. Urban Pulse Runner -->
-          <a href="/products/urban-pulse-runner" class="jotar-best-card">
-            <div class="jotar-best-card__media">
-              <img src="{{ 'jotar-prod-01.jpg' | asset_url }}" alt="Urban Pulse Runner" class="jotar-best-card__image" loading="lazy">
+          <div class="jotar-product-card">
+            <div class="jotar-product-card__media-wrap">
+              <span class="jotar-product-card__badge jotar-badge--sale">Sale</span>
+              <button class="jotar-product-card__wishlist" aria-label="Add to Wishlist" type="button">
+                <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+              </button>
+              <a href="/products/urban-pulse-runner" class="jotar-product-card__media-link">
+                <img src="{{ 'jotar-prod-01.jpg' | asset_url }}" alt="Urban Pulse Runner" class="jotar-product-card__image" loading="lazy">
+              </a>
             </div>
-            <h3 class="jotar-best-card__title">Urban Pulse Runner</h3>
-            <div class="jotar-best-card__price">৳ 4,990</div>
-          </a>
+            <div class="jotar-product-card__info">
+              <a href="/products/urban-pulse-runner" class="jotar-product-card__title-link">
+                <h3 class="jotar-product-card__title">Urban Pulse Runner</h3>
+              </a>
+              <div class="jotar-product-card__price-row">
+                <span class="jotar-price-current">৳ 4,990</span>
+                <span class="jotar-price-compare">৳ 5,990</span>
+              </div>
+              <div class="jotar-product-card__swatches-row">
+                <span class="jotar-swatch-dot" style="background-color: #111111;"></span>
+                <span class="jotar-swatch-dot" style="background-color: #666666;"></span>
+                <span class="jotar-swatch-dot" style="background-color: #f2f2f2;"></span>
+                <span class="jotar-swatch-count">+2</span>
+              </div>
+              <div class="jotar-product-card__actions-row">
+                <a href="/products/urban-pulse-runner" class="jotar-card-btn-add">Add to Cart</a>
+                <a href="/products/urban-pulse-runner" class="jotar-card-btn-bag" aria-label="View Product">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <path d="M16 10a4 4 0 0 1-8 0"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
 
           <!-- 2. Shadow Flex Pro -->
-          <a href="/products/shadow-flex-pro" class="jotar-best-card">
-            <div class="jotar-best-card__media">
-              <img src="{{ 'jotar-prod-04.jpg' | asset_url }}" alt="Shadow Flex Pro" class="jotar-best-card__image" loading="lazy">
+          <div class="jotar-product-card">
+            <div class="jotar-product-card__media-wrap">
+              <span class="jotar-product-card__badge jotar-badge--sale">Sale</span>
+              <button class="jotar-product-card__wishlist" aria-label="Add to Wishlist" type="button">
+                <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+              </button>
+              <a href="/products/shadow-flex-pro" class="jotar-product-card__media-link">
+                <img src="{{ 'jotar-prod-04.jpg' | asset_url }}" alt="Shadow Flex Pro" class="jotar-product-card__image" loading="lazy">
+              </a>
             </div>
-            <h3 class="jotar-best-card__title">Shadow Flex Pro</h3>
-            <div class="jotar-best-card__price">৳ 5,490</div>
-          </a>
+            <div class="jotar-product-card__info">
+              <a href="/products/shadow-flex-pro" class="jotar-product-card__title-link">
+                <h3 class="jotar-product-card__title">Shadow Flex Pro</h3>
+              </a>
+              <div class="jotar-product-card__price-row">
+                <span class="jotar-price-current">৳ 5,490</span>
+                <span class="jotar-price-compare">৳ 6,290</span>
+              </div>
+              <div class="jotar-product-card__swatches-row">
+                <span class="jotar-swatch-dot" style="background-color: #111111;"></span>
+                <span class="jotar-swatch-dot" style="background-color: #333333;"></span>
+                <span class="jotar-swatch-dot" style="background-color: #ffffff;"></span>
+                <span class="jotar-swatch-count">+1</span>
+              </div>
+              <div class="jotar-product-card__actions-row">
+                <a href="/products/shadow-flex-pro" class="jotar-card-btn-add">Add to Cart</a>
+                <a href="/products/shadow-flex-pro" class="jotar-card-btn-bag" aria-label="View Product">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <path d="M16 10a4 4 0 0 1-8 0"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
 
           <!-- 3. Night Circuit -->
-          <a href="/products/night-circuit" class="jotar-best-card">
-            <div class="jotar-best-card__media">
-              <img src="{{ 'jotar-category-premium.jpg' | asset_url }}" alt="Night Circuit" class="jotar-best-card__image" loading="lazy">
+          <div class="jotar-product-card">
+            <div class="jotar-product-card__media-wrap">
+              <span class="jotar-product-card__badge jotar-badge--new">New</span>
+              <button class="jotar-product-card__wishlist" aria-label="Add to Wishlist" type="button">
+                <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+              </button>
+              <a href="/products/night-circuit" class="jotar-product-card__media-link">
+                <img src="{{ 'jotar-category-premium.jpg' | asset_url }}" alt="Night Circuit" class="jotar-product-card__image" loading="lazy">
+              </a>
             </div>
-            <h3 class="jotar-best-card__title">Night Circuit</h3>
-            <div class="jotar-best-card__price">৳ 6,990</div>
-          </a>
+            <div class="jotar-product-card__info">
+              <a href="/products/night-circuit" class="jotar-product-card__title-link">
+                <h3 class="jotar-product-card__title">Night Circuit</h3>
+              </a>
+              <div class="jotar-product-card__price-row">
+                <span class="jotar-price-current">৳ 6,990</span>
+              </div>
+              <div class="jotar-product-card__swatches-row">
+                <span class="jotar-swatch-dot" style="background-color: #111111;"></span>
+                <span class="jotar-swatch-dot" style="background-color: #444444;"></span>
+                <span class="jotar-swatch-dot" style="background-color: #888888;"></span>
+                <span class="jotar-swatch-count">+2</span>
+              </div>
+              <div class="jotar-product-card__actions-row">
+                <a href="/products/night-circuit" class="jotar-card-btn-add">Add to Cart</a>
+                <a href="/products/night-circuit" class="jotar-card-btn-bag" aria-label="View Product">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <path d="M16 10a4 4 0 0 1-8 0"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
 
           <!-- 4. Aero Cloud Lite -->
-          <a href="/products/aero-cloud-lite" class="jotar-best-card">
-            <div class="jotar-best-card__media">
-              <img src="{{ 'jotar-prod-02.jpg' | asset_url }}" alt="Aero Cloud Lite" class="jotar-best-card__image" loading="lazy">
+          <div class="jotar-product-card">
+            <div class="jotar-product-card__media-wrap">
+              <span class="jotar-product-card__badge jotar-badge--new">New</span>
+              <button class="jotar-product-card__wishlist" aria-label="Add to Wishlist" type="button">
+                <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+              </button>
+              <a href="/products/aero-cloud-lite" class="jotar-product-card__media-link">
+                <img src="{{ 'jotar-prod-02.jpg' | asset_url }}" alt="Aero Cloud Lite" class="jotar-product-card__image" loading="lazy">
+              </a>
             </div>
-            <h3 class="jotar-best-card__title">Aero Cloud Lite</h3>
-            <div class="jotar-best-card__price">৳ 4,590</div>
-          </a>
-
-          <!-- 5. Nova Sprint -->
-          <a href="/products/nova-sprint" class="jotar-best-card">
-            <div class="jotar-best-card__media">
-              <img src="{{ 'jotar-category-running.jpg' | asset_url }}" alt="Nova Sprint" class="jotar-best-card__image" loading="lazy">
+            <div class="jotar-product-card__info">
+              <a href="/products/aero-cloud-lite" class="jotar-product-card__title-link">
+                <h3 class="jotar-product-card__title">Aero Cloud Lite</h3>
+              </a>
+              <div class="jotar-product-card__price-row">
+                <span class="jotar-price-current">৳ 4,590</span>
+                <span class="jotar-price-compare">৳ 5,490</span>
+              </div>
+              <div class="jotar-product-card__swatches-row">
+                <span class="jotar-swatch-dot" style="background-color: #d1b89d;"></span>
+                <span class="jotar-swatch-dot" style="background-color: #c2aa8e;"></span>
+                <span class="jotar-swatch-dot" style="background-color: #f5efe6;"></span>
+                <span class="jotar-swatch-count">+2</span>
+              </div>
+              <div class="jotar-product-card__actions-row">
+                <a href="/products/aero-cloud-lite" class="jotar-card-btn-add">Add to Cart</a>
+                <a href="/products/aero-cloud-lite" class="jotar-card-btn-bag" aria-label="View Product">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <path d="M16 10a4 4 0 0 1-8 0"></path>
+                  </svg>
+                </a>
+              </div>
             </div>
-            <h3 class="jotar-best-card__title">Nova Sprint</h3>
-            <div class="jotar-best-card__price">৳ 5,990</div>
-          </a>
-
-          <!-- 6. Mono Street High -->
-          <a href="/products/mono-street-high" class="jotar-best-card">
-            <div class="jotar-best-card__media">
-              <img src="{{ 'jotar-category-sneakers.jpg' | asset_url }}" alt="Mono Street High" class="jotar-best-card__image" loading="lazy">
-            </div>
-            <h3 class="jotar-best-card__title">Mono Street High</h3>
-            <div class="jotar-best-card__price">৳ 5,290</div>
-          </a>
+          </div>
         {%- endif -%}
       </div>
 
@@ -132,26 +283,13 @@
 
 {% schema %}
 {
-  "name": "Best Sellers Carousel",
-  "tag": "section",
-  "class": "section-jotar-best-sellers",
+  "name": "Jotar Best Sellers",
   "settings": [
     {
       "type": "text",
       "id": "heading",
       "label": "Section Heading",
       "default": "BEST SELLERS"
-    },
-    {
-      "type": "text",
-      "id": "view_all_label",
-      "label": "View All Label",
-      "default": "VIEW ALL"
-    },
-    {
-      "type": "url",
-      "id": "view_all_url",
-      "label": "View All Link"
     },
     {
       "type": "collection",
@@ -166,11 +304,22 @@
       "step": 1,
       "default": 8,
       "label": "Products to Show"
+    },
+    {
+      "type": "text",
+      "id": "view_all_label",
+      "label": "View All Link Text",
+      "default": "View All"
+    },
+    {
+      "type": "url",
+      "id": "view_all_url",
+      "label": "View All Link URL"
     }
   ],
   "presets": [
     {
-      "name": "Best Sellers Carousel"
+      "name": "Jotar Best Sellers"
     }
   ]
 }
