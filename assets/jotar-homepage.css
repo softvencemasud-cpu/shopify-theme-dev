@@ -25,19 +25,206 @@
   --jotar-max-width: 1440px;
 }
 
-/* Global / Header Logo Reset */
+/* ==========================================================================
+   HEADER & LOGO DESIGN SYSTEM
+   ========================================================================== */
+#header-component,
+.header-component,
+.header {
+  background-color: #ffffff !important;
+  border-bottom: 1px solid #ebebeb !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.03) !important;
+  min-height: 72px !important;
+  position: relative !important;
+  z-index: 100 !important;
+}
+
+.header__row,
+.header__row--top {
+  max-width: var(--jotar-max-width) !important;
+  margin: 0 auto !important;
+  padding: 0 32px !important;
+  width: 100% !important;
+  min-height: 72px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  box-sizing: border-box !important;
+}
+
+/* Left: Logo Column */
+.header__column--left,
+.header__column:first-child {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+}
+
 .header-logo,
 .header-logo:hover,
 .header-logo text,
-.header-logo a,
-.header-logo__image-container {
+.header-logo a {
+  text-decoration: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+.jotar-brand-logo {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  transition: opacity 0.2s ease !important;
+}
+
+.jotar-brand-logo:hover {
+  opacity: 0.85 !important;
+}
+
+.jotar-brand-logo__mark {
+  width: 32px !important;
+  height: 32px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-shrink: 0 !important;
+}
+
+.jotar-brand-logo__svg {
+  width: 32px !important;
+  height: 32px !important;
+  display: block !important;
+}
+
+.jotar-brand-logo__text-group {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  gap: 2px !important;
+  text-align: left !important;
+}
+
+.jotar-brand-logo__primary {
   font-family: var(--jotar-font-primary) !important;
-  font-size: 1.125rem !important;
+  font-size: 1.25rem !important;
   font-weight: 900 !important;
-  letter-spacing: 0.08em !important;
+  letter-spacing: 0.16em !important;
+  color: #111111 !important;
+  line-height: 1 !important;
+  text-transform: uppercase !important;
+}
+
+.jotar-brand-logo__tagline {
+  font-family: var(--jotar-font-primary) !important;
+  font-size: 0.5625rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.26em !important;
+  color: #888888 !important;
+  line-height: 1 !important;
+  text-transform: uppercase !important;
+}
+
+/* Center: Navigation Menu */
+.header__column--center,
+.menu-list {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.menu-list__list {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.menu-list__link,
+.menu-list__item,
+.menu-list__link-title {
+  font-family: var(--jotar-font-primary) !important;
+  font-size: 0.8125rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.12em !important;
   text-transform: uppercase !important;
   color: #111111 !important;
   text-decoration: none !important;
+  padding: 8px 16px !important;
+  border-radius: 4px !important;
+  transition: color 0.2s ease, background-color 0.2s ease !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+.menu-list__link:hover,
+.menu-list__item:hover {
+  color: #000000 !important;
+  background-color: #f7f7f7 !important;
+}
+
+/* Right: Actions / Icons */
+.header__column--right,
+.header-actions,
+.header__actions {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 16px !important;
+}
+
+.header-actions a,
+.header-actions button,
+.header-actions__link,
+.header-actions__action {
+  color: #111111 !important;
+  width: 38px !important;
+  height: 38px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 50% !important;
+  transition: background-color 0.2s ease, transform 0.2s ease !important;
+  text-decoration: none !important;
+}
+
+.header-actions a:hover,
+.header-actions button:hover {
+  background-color: #f4f4f4 !important;
+  transform: scale(1.06) !important;
+}
+
+.header-actions svg {
+  width: 20px !important;
+  height: 20px !important;
+  stroke: #111111 !important;
+  stroke-width: 1.8 !important;
+  fill: none !important;
+}
+
+@media (max-width: 768px) {
+  #header-component,
+  .header {
+    min-height: 60px !important;
+  }
+  .header__row,
+  .header__row--top {
+    min-height: 60px !important;
+    padding: 0 18px !important;
+  }
+  .jotar-brand-logo__primary {
+    font-size: 1.0625rem !important;
+  }
+  .jotar-brand-logo__mark {
+    width: 26px !important;
+    height: 26px !important;
+  }
+  .jotar-brand-logo__svg {
+    width: 26px !important;
+    height: 26px !important;
+  }
 }
 
 /* Container */
