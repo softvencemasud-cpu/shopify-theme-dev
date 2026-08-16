@@ -4,7 +4,7 @@
 
 body {
   color: var(--color-foreground);
-  background: red;
+  background: var(--color-background);
   display: flex;
   flex-direction: column;
   margin: 0;
