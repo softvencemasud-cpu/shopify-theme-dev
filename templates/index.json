@@ -19,6 +19,7 @@
         "primary_btn_url": "/collections/all",
         "secondary_btn_label": "SHOP WOMEN",
         "secondary_btn_url": "/collections/all",
+        "desktop_image": "shopify://shop_images/BOLtGGPkktAAAMX75ryj66ff0E.avif",
         "bg_color": "#f6f6f4",
         "text_color": "#111111",
         "show_slider_dots": true
@@ -31,32 +32,32 @@
           "type": "category",
           "settings": {
             "title": "SNEAKERS",
-            "card_bg": "#181818",
-            "link": "/collections/all"
+            "link": "/collections/all",
+            "card_bg": "#181818"
           }
         },
         "category_running": {
           "type": "category",
           "settings": {
             "title": "RUNNING",
-            "card_bg": "#24292e",
-            "link": "/collections/all"
+            "link": "/collections/all",
+            "card_bg": "#24292e"
           }
         },
         "category_casual": {
           "type": "category",
           "settings": {
             "title": "CASUAL",
-            "card_bg": "#332f2c",
-            "link": "/collections/all"
+            "link": "/collections/all",
+            "card_bg": "#332f2c"
           }
         },
         "category_premium": {
           "type": "category",
           "settings": {
             "title": "PREMIUM",
-            "card_bg": "#191919",
-            "link": "/collections/all"
+            "link": "/collections/all",
+            "card_bg": "#191919"
           }
         }
       },
@@ -76,6 +77,7 @@
         "heading": "NEW ARRIVALS",
         "view_all_label": "VIEW ALL",
         "view_all_url": "/collections/all",
+        "collection": "",
         "products_to_show": 4,
         "show_badge": true,
         "show_wishlist": true,
@@ -89,6 +91,7 @@
         "heading": "BEST SELLERS",
         "view_all_label": "VIEW ALL",
         "view_all_url": "/collections/all",
+        "collection": "",
         "products_to_show": 8
       }
     },
@@ -198,12 +201,42 @@
     "jotar_social_gallery": {
       "type": "jotar-social-gallery",
       "blocks": {
-        "post_1": { "type": "image", "settings": { "link": "https://instagram.com" } },
-        "post_2": { "type": "image", "settings": { "link": "https://instagram.com" } },
-        "post_3": { "type": "image", "settings": { "link": "https://instagram.com" } },
-        "post_4": { "type": "image", "settings": { "link": "https://instagram.com" } },
-        "post_5": { "type": "image", "settings": { "link": "https://instagram.com" } },
-        "post_6": { "type": "image", "settings": { "link": "https://instagram.com" } }
+        "post_1": {
+          "type": "image",
+          "settings": {
+            "link": "https://instagram.com"
+          }
+        },
+        "post_2": {
+          "type": "image",
+          "settings": {
+            "link": "https://instagram.com"
+          }
+        },
+        "post_3": {
+          "type": "image",
+          "settings": {
+            "link": "https://instagram.com"
+          }
+        },
+        "post_4": {
+          "type": "image",
+          "settings": {
+            "link": "https://instagram.com"
+          }
+        },
+        "post_5": {
+          "type": "image",
+          "settings": {
+            "link": "https://instagram.com"
+          }
+        },
+        "post_6": {
+          "type": "image",
+          "settings": {
+            "link": "https://instagram.com"
+          }
+        }
       },
       "block_order": [
         "post_1",
