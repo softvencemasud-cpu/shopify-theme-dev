@@ -1674,7 +1674,7 @@
 }
 
 /* ==========================================================================
-   UNIFIED LUXURY PRODUCT CARD DESIGN SYSTEM (EXACT REFERENCE RECREATION)
+   UNIFIED LUXURY PRODUCT CARD DESIGN SYSTEM (SINGLE CLEAN LAYER & SILKY VIBE)
    ========================================================================== */
 .jotar-product-card,
 .product-card,
@@ -1687,11 +1687,11 @@
   flex-direction: column !important;
   position: relative !important;
   background-color: #ffffff !important;
-  border: 1px solid #ebebeb !important;
+  border: 1px solid #e8e8e8 !important;
   border-radius: 12px !important;
   padding: 12px !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02) !important;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02) !important;
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease !important;
   box-sizing: border-box !important;
   overflow: hidden !important;
 }
@@ -1699,12 +1699,12 @@
 .jotar-product-card:hover,
 .product-card:hover,
 .product-grid__card:hover {
-  transform: translateY(-6px) !important;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08) !important;
-  border-color: #dcdcd8 !important;
+  transform: translateY(-4px) !important;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06) !important;
+  border-color: #d4d4d0 !important;
 }
 
-/* Media wrapper for product card */
+/* Media wrapper for product card - Single Clean Image Box, NO nested padding */
 .jotar-product-card__media-wrap,
 .product-card__media-wrap,
 .product-card__gallery,
@@ -1713,43 +1713,42 @@
 .product-grid__card .media,
 .product-card slideshow-component {
   position: relative !important;
-  background-color: #f6f6f4 !important;
+  background-color: #ededeb !important;
   border-radius: 8px !important;
   aspect-ratio: 1 / 0.85 !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
+  display: block !important;
   overflow: hidden !important;
-  padding: 14px !important;
-  margin-bottom: 0 !important;
-  transition: background-color 0.3s ease !important;
+  padding: 0 !important;
+  margin: 0 !important;
   box-sizing: border-box !important;
   width: 100% !important;
 }
 
-.jotar-product-card:hover .jotar-product-card__media-wrap,
-.product-card:hover .product-card__media-wrap,
-.product-card:hover .card-gallery,
-.product-grid__card:hover .card-gallery {
-  background-color: #f0f0ee !important;
+.jotar-product-card__media-link {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  overflow: hidden !important;
 }
 
-/* Product image inside card */
+/* Product image fills the media frame edge-to-edge seamlessly */
 .jotar-product-card__image,
 .product-card__image,
 .product-grid__card img,
 .product-card img {
   width: 100% !important;
   height: 100% !important;
-  object-fit: contain !important;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  object-fit: cover !important;
+  display: block !important;
+  transition: transform 0.5s cubic-bezier(0.2, 1, 0.3, 1) !important;
+  transform-origin: center center !important;
 }
 
 .jotar-product-card:hover .jotar-product-card__image,
 .product-card:hover .product-card__image,
 .product-card:hover img,
 .product-grid__card:hover img {
-  transform: scale(1.08) !important;
+  transform: scale(1.04) !important;
 }
 
 /* Product Card Badges (Sale Red Pill / New White Pill) */
