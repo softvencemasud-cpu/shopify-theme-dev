@@ -248,65 +248,16 @@
   }
 
   .header-actions__cart-icon {
-    --cart-bubble-size: 20px;
-    --cart-bubble-top: 4.5px;
-    --cart-bubble-right: 2.5px;
-
     position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  .header-actions__cart-icon .cart-bubble {
-    position: absolute;
-    width: var(--cart-bubble-size, 20px);
-    top: var(--cart-bubble-top);
-    right: var(--cart-bubble-right);
-  }
-
-  @media screen and (min-width: 750px) {
-    .header-actions__cart-icon--text.header-actions__cart-icon .cart-bubble {
-      position: relative;
-      top: 0;
-    }
-  }
-
-  .header-actions__cart-icon .cart-bubble__text {
-    font-family: var(--font-paragraph--family);
-    font-weight: var(--font-paragraph--weight);
-  }
-
-  .header-actions__cart-icon.header-actions__cart-icon--has-cart svg {
-    mask: none;
-    -webkit-mask: none;
-  }
-
-  .cart-bubble.cart-bubble--animating .cart-bubble__background {
-    animation: grow var(--animation-speed) var(--animation-easing);
-  }
-
-  .cart-bubble--animating .cart-bubble__text {
-    --start-y: -1em;
-    --start-opacity: 1;
-    /* Set initial transform state before animation starts */
-    transform: translate(0, var(--start-y, -1em));
-    opacity: var(--start-opacity, 1);
-    animation: move-and-fade var(--animation-speed) var(--animation-easing);
-  }
-
-  cart-icon:has(.cart-bubble__text-count:empty) {
-    --cart-bubble-size: 10px;
-    --cart-bubble-top: 9px;
-    --cart-bubble-right: 9px;
-
-    .svg-wrapper {
-      --cart-bubble-top: 4px;
-      --cart-bubble-right: 4px;
-    }
-  }
-
-  @media screen and (min-width: 750px) {
-    cart-icon.header-actions__cart-icon--text:has(.cart-bubble__text-count:empty) {
-      --cart-bubble-right: 2.5px;
-    }
+  .header-actions__cart-icon svg {
+    mask: none !important;
+    -webkit-mask: none !important;
+    display: block;
   }
 
   .header-actions__text {

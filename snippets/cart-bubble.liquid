@@ -1,27 +1,12 @@
 {%- doc -%}
-  @param [limit] - {number}
-
-  The maximum number of items to display. Anything above shows as "99+".
-
-  Colors: reads --cart-bubble-background / --cart-bubble-text from an ancestor. Falls back to a contrasting pair
-  computed from the palette foreground when unset.
+  Cart Bubble Badge - Exact Bulletproof Circle
 {%- enddoc -%}
-
-{% liquid
-  assign bubble_bg_fallback = settings.page_text_color
-  assign bubble_text_fallback = settings.page_background_color
-%}
 
 <div
   ref="cartBubble"
   class="cart-bubble{% if cart == empty %} visually-hidden{% endif %}"
-  style="--cart-bubble-background-fallback: {{ bubble_bg_fallback }}; --cart-bubble-text-fallback: {{ bubble_text_fallback }};"
-  {% assign item_count = cart.item_count %}
-  {% if item_count <= 99 %}
-    data-maintain-ratio
-  {% endif %}
+  data-testid="cart-bubble-wrapper"
 >
-  <span class="cart-bubble__background"></span>
   <span
     ref="cartBubbleText"
     id="cart-bubble-text"
@@ -33,7 +18,7 @@
       aria-hidden="true"
       data-testid="cart-bubble"
     >
-      {%- if limit == blank or cart.item_count < limit %}
+      {%- if limit == blank or cart.item_count < limit -%}
         {{- cart.item_count -}}
       {%- endif -%}
     </span>
@@ -42,42 +27,57 @@
 
 {% stylesheet %}
   .cart-bubble {
-    --cart-padding: 0.2em;
-
-    position: relative;
-    width: 20px;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    border-width: 0;
-    display: flex;
-    line-height: normal;
-    align-items: center;
-    justify-content: center;
-    color: var(--cart-bubble-text, var(--cart-bubble-text-fallback));
-    padding-inline: var(--cart-padding);
+    position: absolute !important;
+    top: -5px !important;
+    right: -7px !important;
+    width: 18px !important;
+    height: 18px !important;
+    min-width: 18px !important;
+    max-width: 18px !important;
+    min-height: 18px !important;
+    max-height: 18px !important;
+    border-radius: 50% !important;
+    background-color: #111111 !important;
+    color: #ffffff !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border: 2px solid #ffffff !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    z-index: 10 !important;
+    pointer-events: none !important;
+    transform: none !important;
+    overflow: hidden !important;
   }
 
-  .cart-bubble[data-maintain-ratio] {
-    aspect-ratio: 1;
-  }
-
-  .cart-bubble[data-maintain-ratio] .cart-bubble__background {
-    border-radius: var(--style-border-radius-50);
-  }
-
-  .cart-bubble__background {
-    position: absolute;
-    inset: 0;
-    background-color: var(--cart-bubble-background, var(--cart-bubble-background-fallback));
-    border-radius: var(--style-border-radius-lg);
+  .cart-bubble.visually-hidden {
+    display: none !important;
   }
 
   .cart-bubble__text {
-    font-size: var(--font-size--3xs);
-    z-index: var(--layer-flat);
-    line-height: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+    font-size: 10px !important;
+    font-weight: 800 !important;
+    line-height: 1 !important;
+    color: #ffffff !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: none !important;
+  }
+
+  .cart-bubble__text-count {
+    display: block !important;
+    line-height: 1 !important;
+  }
+
+  .cart-bubble__text-count.hidden {
+    display: none !important;
   }
 {% endstylesheet %}
