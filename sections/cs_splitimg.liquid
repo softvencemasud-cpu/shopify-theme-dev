@@ -1,0 +1,510 @@
+{%- style -%}
+  /* Section Wrapper & Outer Padding */
+  .section-wrapper-{{ section.id }} {
+    width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding-top: {{ section.settings.padding_top_mobile }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    padding-left: {{ section.settings.padding_horizontal_mobile }}px;
+    padding-right: {{ section.settings.padding_horizontal_mobile }}px;
+
+    {% if section.settings.full_width %}
+      max-width: 100%;
+    {% else %}
+      max-width: {{ section.settings.max_width }}px;
+    {% endif %}
+  }
+
+  @media (min-width: 768px) {
+    .section-wrapper-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+      padding-left: {{ section.settings.padding_horizontal }}px;
+      padding-right: {{ section.settings.padding_horizontal }}px;
+    }
+  }
+
+  /* Main Inner Section Container */
+  .custom-section-{{ section.id }} {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: {{ section.settings.bg_color }};
+    overflow: hidden;
+  }
+
+  /* Desktop Layout */
+  @media (min-width: 768px) {
+    .custom-section-{{ section.id }} {
+      flex-direction: {% if section.settings.layout == 'left' %}row-reverse{% else %}row{% endif %};
+      min-height: {{ section.settings.desktop_height }}px;
+    }
+  }
+
+  /* Text Content Area */
+  .custom-section-{{ section.id }} .split-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+  }
+
+  @media (min-width: 768px) {
+    .custom-section-{{ section.id }} .split-content {
+      padding: 40px 8%;
+    }
+  }
+
+  .custom-section-{{ section.id }} .split-content-inner {
+    max-width: 520px;
+    width: 100%;
+  }
+
+  /* Typography */
+  .custom-section-{{ section.id }} .split-subheading {
+    color: {{ section.settings.subheading_color }};
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    font-family: inherit;
+  }
+
+  .custom-section-{{ section.id }} .split-heading {
+    color: {{ section.settings.heading_color }};
+    font-size: 32px;
+    font-weight: 900;
+    line-height: 1.1;
+    margin: 0 0 20px 0;
+    text-transform: uppercase;
+    font-family: inherit;
+  }
+
+  @media (min-width: 768px) {
+    .custom-section-{{ section.id }} .split-heading {
+      font-size: 48px;
+      margin: 0 0 25px 0;
+    }
+  }
+
+  .custom-section-{{ section.id }} .split-text {
+    color: {{ section.settings.text_color }};
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 30px;
+    font-family: inherit;
+  }
+
+  @media (min-width: 768px) {
+    .custom-section-{{ section.id }} .split-text {
+      font-size: 18px;
+      margin-bottom: 40px;
+    }
+  }
+
+  /* Same Button Design */
+  .custom-section-{{ section.id }} .split-btn {
+    position: relative;
+    z-index: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 14px 30px;
+    overflow: hidden;
+
+    background: {{ section.settings.button_bg_color }};
+    color: {{ section.settings.button_text_color }};
+
+    border:
+      {{ section.settings.button_border_width }}px
+      solid
+      {{ section.settings.button_border_color }};
+
+    border-radius: 0;
+    box-shadow: none;
+    text-decoration: none;
+
+    font-family: inherit;
+    font-size: {{ section.settings.button_font_size }}px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+
+    transition: color 0.35s ease;
+  }
+
+  @media (min-width: 768px) {
+    .custom-section-{{ section.id }} .split-btn {
+      padding: 16px 36px;
+    }
+  }
+
+  /* Bottom-to-top hover fill */
+  .custom-section-{{ section.id }} .split-btn::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: {{ section.settings.button_hover_bg_color }};
+
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.35s ease;
+  }
+
+  .custom-section-{{ section.id }} .split-btn span {
+    position: relative;
+    z-index: 1;
+    color: inherit;
+    transition: color 0.35s ease;
+  }
+
+  .custom-section-{{ section.id }} .split-btn:hover::before,
+  .custom-section-{{ section.id }} .split-btn:focus-visible::before {
+    transform: scaleY(1);
+  }
+
+  .custom-section-{{ section.id }} .split-btn:hover span,
+  .custom-section-{{ section.id }} .split-btn:focus-visible span {
+    color: {{ section.settings.button_hover_text_color }};
+  }
+
+  .custom-section-{{ section.id }} .split-btn:focus-visible {
+    outline: 2px solid {{ section.settings.button_border_color }};
+    outline-offset: 3px;
+  }
+
+  /* Image Area */
+  .custom-section-{{ section.id }} .split-image {
+    flex: 1.2;
+    min-height: {{ section.settings.mobile_height }}px;
+    display: flex;
+  }
+
+  .custom-section-{{ section.id }} .split-image img,
+  .custom-section-{{ section.id }} .split-image svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+{%- endstyle -%}
+
+<div class="section-wrapper-{{ section.id }}">
+  <div class="custom-section-{{ section.id }}">
+    <div class="split-content">
+      <div class="split-content-inner">
+        {% if section.settings.subheading != blank %}
+          <div class="split-subheading">
+            {{ section.settings.subheading }}
+          </div>
+        {% endif %}
+
+        {% if section.settings.heading != blank %}
+          <h2 class="split-heading">
+            {{ section.settings.heading }}
+          </h2>
+        {% endif %}
+
+        {% if section.settings.text != blank %}
+          <div class="split-text">
+            {{ section.settings.text }}
+          </div>
+        {% endif %}
+
+        {% if section.settings.button_label != blank %}
+          <a
+            href="{{ section.settings.button_link | default: '#' }}"
+            class="split-btn"
+          >
+            <span>{{ section.settings.button_label }}</span>
+          </a>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="split-image">
+      {% if section.settings.image != blank %}
+        {{
+          section.settings.image
+          | image_url: width: 1500
+          | image_tag:
+            loading: 'lazy',
+            sizes: '(max-width: 767px) 100vw, 60vw'
+        }}
+      {% else %}
+        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Custom Split Banner",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Layout & Outer Padding"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full Width Section",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 1000,
+      "max": 1800,
+      "step": 20,
+      "unit": "px",
+      "label": "Max Width",
+      "default": 1400
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Desktop Top Padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Desktop Bottom Padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_horizontal",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Desktop Left/Right Padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Mobile Top Padding",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Mobile Bottom Padding",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_horizontal_mobile",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Mobile Left/Right Padding",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Height Settings"
+    },
+    {
+      "type": "range",
+      "id": "desktop_height",
+      "min": 300,
+      "max": 800,
+      "step": 10,
+      "unit": "px",
+      "label": "Desktop Section Height",
+      "default": 500
+    },
+    {
+      "type": "range",
+      "id": "mobile_height",
+      "min": 200,
+      "max": 600,
+      "step": 10,
+      "unit": "px",
+      "label": "Mobile Image Height",
+      "default": 350
+    },
+    {
+      "type": "header",
+      "content": "Image Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "Upload image_69a607.jpg here."
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Image Alignment (Desktop)",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "right"
+    },
+    {
+      "type": "header",
+      "content": "Text Content"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "BUILT BY FARMERS, FOR FARMERS"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "CLOTHING THAT WORKS AS HARD AS YOU DO."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>We know the job never stops. That's why our gear is made tough, comfortable and ready for anything the day throws at you.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "SHOP NOW"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "label": "Button Font Size",
+      "min": 9,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 11
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Button Default Background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Default Text Color",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_bg_color",
+      "label": "Button Hover Fill Color",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text_color",
+      "label": "Button Hover Text Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "button_border_width",
+      "label": "Button Border Width",
+      "min": 0,
+      "max": 5,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "button_border_color",
+      "label": "Button Border Color",
+      "default": "#111111"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#FAF9F5"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading Color",
+      "default": "#54634B"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#444444"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Split Banner",
+      "category": "Image"
+    }
+  ]
+}
+{% endschema %}

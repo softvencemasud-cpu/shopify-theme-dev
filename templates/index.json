@@ -1,0 +1,533 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero_jVaWmY": {
+      "type": "hero",
+      "blocks": {
+        "text_YLPk4p": {
+          "type": "text",
+          "name": "t:names.heading",
+          "settings": {
+            "text": "<p>Browse our latest products</p>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "h2",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "{{ settings.color_palette.background }}",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "button_H9gpTf": {
+          "type": "button",
+          "name": "t:names.button",
+          "settings": {
+            "label": "Shop all",
+            "link": "shopify://pages/quote-form",
+            "open_in_new_tab": false,
+            "style_class": "button-custom",
+            "custom_button_background": "rgba(0,0,0,0)",
+            "custom_button_text": "{{ settings.color_palette.background }}",
+            "custom_button_border": "{{ settings.color_palette.background }}",
+            "link_text_color": "",
+            "width": "fit-content",
+            "custom_width": 100,
+            "width_mobile": "fit-content",
+            "custom_width_mobile": 100
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "text_YLPk4p",
+        "button_H9gpTf"
+      ],
+      "name": "t:names.hero",
+      "settings": {
+        "media_type_1": "image",
+        "media_type_2": "image",
+        "stack_media_on_mobile": false,
+        "custom_mobile_media": false,
+        "media_type_1_mobile": "image",
+        "media_type_2_mobile": "image",
+        "link": "",
+        "open_in_new_tab": false,
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "space-between",
+        "vertical_alignment": "flex-end",
+        "align_baseline": true,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "flex-end",
+        "gap": 24,
+        "section_width": "page-width",
+        "section_height": "medium",
+        "section_height_custom": 50,
+        "background_color": "rgba(0,0,0,0)",
+        "toggle_overlay": true,
+        "overlay_color": "#12121266",
+        "overlay_style": "solid",
+        "gradient_direction": "to bottom",
+        "blurred_reflection": false,
+        "reflection_opacity": 75,
+        "padding-block-start": 100,
+        "padding-block-end": 72
+      }
+    },
+    "product_list_fa6P9H": {
+      "type": "product-list",
+      "blocks": {
+        "static-header": {
+          "type": "_product-list-content",
+          "name": "t:names.header",
+          "static": true,
+          "settings": {
+            "content_direction": "row",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "space-between",
+            "vertical_alignment": "flex-end",
+            "align_baseline": true,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "background_color": "",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_list_text_YFtzcL": {
+              "type": "_product-list-text",
+              "name": "t:names.collection_title",
+              "settings": {
+                "text": "<h3>{{ closest.collection.title }}</h3>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h4",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_list_button_MWeP9V": {
+              "type": "_product-list-button",
+              "name": "t:names.product_list_button",
+              "settings": {
+                "label": "View all",
+                "open_in_new_tab": false,
+                "style_class": "link",
+                "custom_button_background": "{{ settings.color_palette.foreground }}",
+                "custom_button_text": "{{ settings.color_palette.background }}",
+                "custom_button_border": "{{ settings.color_palette.background }}",
+                "link_text_color": "",
+                "width": "fit-content",
+                "custom_width": 100,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 100
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_list_text_YFtzcL",
+            "product_list_button_MWeP9V"
+          ]
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "name": "t:names.product_card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 4,
+            "background_color": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_card_gallery_677WP3": {
+              "type": "_product-card-gallery",
+              "name": "t:names.product_card_media",
+              "settings": {
+                "image_ratio": "adapt",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_color": "",
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_title_YXxMTj": {
+              "type": "product-title",
+              "name": "t:names.product_title",
+              "settings": {
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 4,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "price_JQzVV4": {
+              "type": "price",
+              "name": "t:names.product_price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": false,
+                "type_preset": "h6",
+                "width": "100%",
+                "alignment": "left",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "text_color": "",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_card_gallery_677WP3",
+            "product_title_YXxMTj",
+            "price_JQzVV4"
+          ]
+        }
+      },
+      "name": "t:names.product_list",
+      "settings": {
+        "collection": "all",
+        "layout_type": "grid",
+        "carousel_on_mobile": false,
+        "max_products": 8,
+        "columns": 4,
+        "mobile_columns": "2",
+        "mobile_card_size": "60cqw",
+        "columns_gap": 8,
+        "rows_gap": 24,
+        "icons_style": "arrow",
+        "icons_shape": "none",
+        "section_width": "page-width",
+        "horizontal_alignment": "flex-start",
+        "gap": 28,
+        "background_color": "{{ settings.color_palette.background }}",
+        "padding-block-start": 48,
+        "padding-block-end": 48
+      }
+    },
+    "cs_faq_showcase_3zgBmz": {
+      "type": "cs_faq-showcase",
+      "blocks": {
+        "faq_ni8a7L": {
+          "type": "faq",
+          "settings": {
+            "question": "What types of produce do you grow?",
+            "answer": "<p>We grow a wide range of fresh produce, including fruits like strawberries and grapes, vegetables such as tomatoes, carrots, and leafy greens, as well as herbs and specialty crops like microgreens and gourmet vegetables.</p>",
+            "open_by_default": true
+          }
+        },
+        "faq_FC84Kh": {
+          "type": "faq",
+          "settings": {
+            "question": "How can I purchase your products?",
+            "answer": "<p>You can purchase our products directly from the farm, through selected local retailers, or by contacting us for current availability and ordering options.</p>",
+            "open_by_default": false
+          }
+        },
+        "faq_3rETwb": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you offer farm tours?",
+            "answer": "<p>Yes. Farm tours are available by appointment, and we recommend booking in advance so we can prepare the best possible experience.</p>",
+            "open_by_default": false
+          }
+        },
+        "faq_4Nbm7N": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you use any chemicals or pesticides?",
+            "answer": "<p>We follow responsible growing practices and use crop treatments only when necessary, with careful attention to safety, quality, and environmental impact.</p>",
+            "open_by_default": false
+          }
+        }
+      },
+      "block_order": [
+        "faq_ni8a7L",
+        "faq_FC84Kh",
+        "faq_3rETwb",
+        "faq_4Nbm7N"
+      ],
+      "name": "FAQ Image Showcase",
+      "settings": {
+        "custom_class": "",
+        "content_max_width": 1280,
+        "left_background": "#176408",
+        "right_background": "#fff5d1",
+        "left_split_width": 35,
+        "desktop_padding_top": 84,
+        "desktop_padding_bottom": 84,
+        "mobile_padding_top": 40,
+        "mobile_padding_bottom": 48,
+        "desktop_column_gap": 64,
+        "mobile_side_padding": 20,
+        "desktop_min_height": 760,
+        "featured_image": "shopify://shop_images/BOLtGGPkktAAAMX75ryj66ff0E.avif",
+        "image_alt": "",
+        "image_width": 600,
+        "image_height": 600,
+        "image_mobile_height": 440,
+        "image_radius": 16,
+        "image_focal_position": "center center",
+        "image_overlay_opacity": 0,
+        "enable_image_shadow": false,
+        "show_contact_card": true,
+        "phone_number": "+123 456 789 963",
+        "phone_link": "",
+        "contact_supporting_text": "Book a free visiting",
+        "contact_background": "#ffca0a",
+        "contact_text_color": "#0d3e12",
+        "contact_icon_background": "#176408",
+        "contact_icon_color": "#ffca0a",
+        "contact_radius": 16,
+        "contact_padding": 18,
+        "contact_width": 278,
+        "contact_x": 24,
+        "contact_y": 24,
+        "mobile_contact_placement": "overlay",
+        "show_eyebrow": true,
+        "eyebrow_text": "Frequently Asked Questions",
+        "eyebrow_text_color": "#2d7a23",
+        "eyebrow_border_color": "#2d7a23",
+        "eyebrow_background": "#fff5d1",
+        "eyebrow_font_size": 14,
+        "eyebrow_border_width": 1,
+        "eyebrow_radius": 24,
+        "eyebrow_padding_x": 16,
+        "eyebrow_padding_y": 8,
+        "heading": "How Can We Help You?",
+        "heading_color": "#0d3e12",
+        "heading_size_desktop": 44,
+        "heading_size_tablet": 38,
+        "heading_size_mobile": 32,
+        "heading_weight": "700",
+        "heading_line_height": "1.1",
+        "heading_bottom_spacing": 36,
+        "heading_max_width": 600,
+        "faq_background": "#fff5d1",
+        "faq_border_color": "#4d8c44",
+        "faq_border_width": 1,
+        "faq_radius": 11,
+        "question_color": "#173d17",
+        "answer_color": "#6b7057",
+        "divider_color": "#4d8c44",
+        "icon_border_color": "#4d8c44",
+        "icon_color": "#2d7a23",
+        "icon_background": "#fff5d1",
+        "question_size_desktop": 18,
+        "question_size_mobile": 16,
+        "answer_size_desktop": 15,
+        "answer_size_mobile": 14,
+        "faq_padding_y": 20,
+        "faq_padding_x": 22,
+        "faq_item_gap": 22,
+        "animation_duration": 350,
+        "allow_multiple": false,
+        "open_first_item": true
+      }
+    },
+    "cs_best_colleciton_ptkhK4": {
+      "type": "cs_best-colleciton",
+      "name": "Custom Best Sellers",
+      "settings": {
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "bg_color": "#ffffff",
+        "heading": "BEST SELLERS",
+        "text_color": "#000000",
+        "collection": "",
+        "products_to_show": 5,
+        "products_per_row": 5,
+        "hover_btn_font_size": 11,
+        "hover_btn_bg": "#ffffff",
+        "hover_btn_color": "#111111",
+        "hover_btn_bg_hover": "#111111",
+        "hover_btn_color_hover": "#ffffff",
+        "hover_btn_border_width": 1,
+        "hover_btn_border_color": "#111111",
+        "sold_out_btn_bg": "#e5e5e5",
+        "sold_out_btn_color": "#777777",
+        "button_label": "VIEW ALL PRODUCTS",
+        "button_link": "",
+        "btn_bg_color": "#4b533b",
+        "btn_text_color": "#ffffff"
+      }
+    },
+    "cs_splitimg_9ACjiw": {
+      "type": "cs_splitimg",
+      "name": "Custom Split Banner",
+      "settings": {
+        "full_width": false,
+        "max_width": 1400,
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "padding_horizontal": 40,
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20,
+        "padding_horizontal_mobile": 16,
+        "desktop_height": 500,
+        "mobile_height": 350,
+        "layout": "right",
+        "subheading": "BUILT BY FARMERS, FOR FARMERS",
+        "heading": "CLOTHING THAT WORKS AS HARD AS YOU DO.",
+        "text": "<p>We know the job never stops. That's why our gear is made tough, comfortable and ready for anything the day throws at you.</p>",
+        "button_label": "SHOP NOW",
+        "button_link": "",
+        "button_font_size": 11,
+        "button_bg_color": "#ffffff",
+        "button_text_color": "#111111",
+        "button_hover_bg_color": "#111111",
+        "button_hover_text_color": "#ffffff",
+        "button_border_width": 1,
+        "button_border_color": "#111111",
+        "bg_color": "#faf9f5",
+        "subheading_color": "#54634b",
+        "heading_color": "#111111",
+        "text_color": "#444444"
+      }
+    },
+    "cs_track_PijJqX": {
+      "type": "cs_track",
+      "name": "Free Resource Opt-in",
+      "settings": {
+        "badge_text": "FREE DIGITAL RESOURCE",
+        "heading": "The Gentle Consistency Tracker",
+        "subtext": "<p>This is our first free digital resource — created to help you build gentle, sustainable consistency, without pressure or the need to be perfect. Enter your email below and we'll send it straight to your inbox.</p>",
+        "email_placeholder": "Your email address",
+        "button_label": "Get My Free Tracker",
+        "loading_text": "Please wait...",
+        "email_subject": "New Free Resource Download Request",
+        "success_message": "Thank you. Your tracker is downloading now.",
+        "trust_message": "No spam. Just thoughtful resources designed to support your journey.",
+        "pdf_url": "https://docs.google.com/document/d/1HvxvA5F5N6SGFZ-pIER893ivt0niKEAj7jjP6PCRp6w/edit?usp=sharing",
+        "pdf_filename": "gentle-consistency-tracker.pdf",
+        "background_color": "#fcfbf8"
+      }
+    },
+    "cs_herotack_WRxDPq": {
+      "type": "cs_herotack",
+      "name": "Gentle Hero",
+      "settings": {
+        "eyebrow": "Welcome",
+        "heading": "<p>A Gentle<br/><em>Next Step</em></p>",
+        "subtitle": "A simple digital companion for your next step.",
+        "body_text": "<p>Whether you arrived from inside <em>The Intentional Weekly Journal</em> or through the Shine & Bambou website, this page is here to offer a gentle continuation.</p>",
+        "email_placeholder": "Your email address",
+        "button_label": "Get the Free Tracker",
+        "loading_label": "Downloading...",
+        "success_message": "Thank you. Your PDF download has started.",
+        "trust_message": "No spam. Just thoughtful resources designed to support your journey.",
+        "pdf_url": "https://cdn.shopify.com/s/files/1/0949/3309/0685/files/2485125e-a7eb-44b5-a22f-175f182d518b.pdf?v=1786007310",
+        "pdf_file_name": "gentle-consistency-tracker.pdf",
+        "missing_pdf_message": "Please add the PDF file link in the section settings.",
+        "download_error_message": "The PDF could not be downloaded. Please try again.",
+        "show_scroll_cue": true,
+        "scroll_target": "",
+        "min_height": 100,
+        "bg_color": "#FCFBF8",
+        "heading_color": "#3D3327",
+        "subtext_color": "#7A6A56",
+        "body_color": "#2F281D",
+        "btn_bg": "#2F281D",
+        "btn_text_color": "#FCFBF8",
+        "btn_hover": "#8F7A61"
+      }
+    }
+  },
+  "order": [
+    "hero_jVaWmY",
+    "product_list_fa6P9H",
+    "cs_faq_showcase_3zgBmz",
+    "cs_best_colleciton_ptkhK4",
+    "cs_splitimg_9ACjiw",
+    "cs_track_PijJqX",
+    "cs_herotack_WRxDPq"
+  ]
+}

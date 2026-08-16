@@ -1,0 +1,530 @@
+
+
+
+{%- style -%}
+  :root {
+    --q-accent: {{ section.settings.accent_clr }};
+    --q-accent-hover: {{ section.settings.accent_hover_clr }};
+    --q-bg-form: {{ section.settings.form_bg }};
+    --q-text-main: #2C3E50;
+    --q-text-muted: #7F8C8D;
+    --q-border-color: #E0E6ED;
+    --q-border-focus: {{ section.settings.accent_clr }};
+    --q-input-bg: #F8FAFC;
+    --q-error: #E74C3C;
+  }
+
+  .section-{{ section.id }} {
+    padding: {{ section.settings.pad_v }}px 20px;
+    background: {{ section.settings.bg_gradient }};
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+
+  .quote-form-container {
+    background: var(--q-bg-form);
+    max-width: {{ section.settings.max_w }}px;
+    width: 100%;
+    margin: 0 auto;
+    border-radius: 16px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    padding: 40px 50px;
+    box-sizing: border-box;
+  }
+
+  /* Header */
+  .quote-form-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 35px;
+    text-align: center;
+  }
+  .quote-form-header svg {
+    width: 32px;
+    height: 32px;
+    color: var(--q-accent);
+  }
+  .quote-form-header h2 {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--q-text-main);
+    margin: 0;
+    letter-spacing: 0.5px;
+  }
+
+  /* Grid System */
+  .q-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 24px 16px;
+  }
+  .q-col-12 { grid-column: span 12; }
+  .q-col-6 { grid-column: span 6; }
+  .q-col-4 { grid-column: span 4; }
+
+  /* Section Divider */
+  .q-section-title {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 15px;
+    margin-bottom: 5px;
+  }
+  .q-section-title span {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--q-text-main);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+  }
+  .q-section-title hr {
+    flex-grow: 1;
+    border: none;
+    border-top: 2px solid var(--q-border-color);
+    margin: 0;
+  }
+
+  /* Input Fields */
+  .q-field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .q-field-group label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--q-text-main);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .q-required-asterisk {
+    color: var(--q-error);
+  }
+  
+  .q-input-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  .q-input-wrap svg.input-icon {
+    position: absolute;
+    left: 14px;
+    width: 18px;
+    height: 18px;
+    color: var(--q-text-muted);
+    pointer-events: none;
+    transition: color 0.3s ease;
+  }
+  .q-input-wrap input,
+  .q-input-wrap select,
+  .q-input-wrap textarea {
+    width: 100%;
+    background: var(--q-input-bg);
+    border: 1px solid var(--q-border-color);
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 15px;
+    color: var(--q-text-main);
+    outline: none;
+    transition: all 0.3s ease;
+    font-family: inherit;
+    box-sizing: border-box;
+    appearance: none;
+  }
+  
+  /* Focus States */
+  .q-input-wrap input:focus,
+  .q-input-wrap select:focus,
+  .q-input-wrap textarea:focus {
+    border-color: var(--q-border-focus);
+    box-shadow: 0 0 0 4px rgba(42, 211, 195, 0.15);
+    background: #ffffff;
+  }
+  .q-input-wrap input:focus + svg.input-icon,
+  .q-input-wrap select:focus + svg.input-icon {
+    color: var(--q-border-focus);
+  }
+
+  /* Icons Padding */
+  .q-input-wrap.has-icon input,
+  .q-input-wrap.has-icon select {
+    padding-left: 42px;
+  }
+
+  /* Custom Select Arrow */
+  .q-select-wrap::after {
+    content: "";
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%237F8C8D'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    pointer-events: none;
+  }
+
+  .q-help-text {
+    font-size: 12px;
+    color: var(--q-text-muted);
+    margin-top: 2px;
+  }
+
+  /* Submit Button */
+  .q-submit-btn {
+    background: var(--q-accent);
+    color: #fff;
+    border: none;
+    width: 100%;
+    padding: 16px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+  }
+  .q-submit-btn:hover {
+    background: var(--q-accent-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  }
+  .q-submit-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .q-back-link {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: var(--q-text-muted);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+  .q-back-link:hover {
+    color: var(--q-accent);
+    text-decoration: underline;
+  }
+
+  /* Success Modal */
+  .contact-success-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.8); display: flex; align-items: center; justify-content: center; z-index: 10001; opacity: 0; visibility: hidden; transition: opacity 0.4s ease; backdrop-filter: blur(8px); }
+  .contact-success-modal.is-active { opacity: 1; visibility: visible; }
+  .success-modal-content { background: #fff; padding: 40px; border-radius: 16px; text-align: center; max-width: 400px; width: 90%; transform: translateY(30px) scale(0.95); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); }
+  .contact-success-modal.is-active .success-modal-content { transform: translateY(0) scale(1); }
+  .success-modal-content .icon-circle { width: 80px; height: 80px; background: #10B981; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
+  .success-modal-content .icon-circle svg { width: 40px; height: 40px; }
+  .success-modal-content .text { font-size: 20px; font-weight: 700; color: var(--q-text-main); margin: 0; line-height: 1.4; }
+
+  /* Mobile Responsive */
+  @media (max-width: 768px) {
+    .section-{{ section.id }} { padding: 40px 15px; }
+    .quote-form-container { padding: 30px 20px; border-radius: 12px; }
+    .q-col-6, .q-col-4 { grid-column: span 12; }
+    .quote-form-header { flex-direction: column; gap: 10px; margin-bottom: 25px; }
+    .quote-form-header h2 { font-size: 22px; }
+    .q-submit-btn { padding: 14px; font-size: 15px; }
+  }
+{%- endstyle -%}
+
+<div class="section-{{ section.id }}">
+  <div class="quote-form-container">
+    
+    <div class="quote-form-header">
+      {% if section.settings.show_header_icon %}
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+        <polyline points="14 2 14 8 20 8"></polyline>
+        <line x1="16" y1="13" x2="8" y2="13"></line>
+        <line x1="16" y1="17" x2="8" y2="17"></line>
+        <polyline points="10 9 9 9 8 9"></polyline>
+      </svg>
+      {% endif %}
+      <h2>{{ section.settings.title }}</h2>
+    </div>
+
+    {% form 'contact', id: 'CustomQuoteForm' %}
+      
+      <!-- Success Message Modal -->
+      {% if form.posted_successfully? %}
+        <div id="SuccessModal-{{ section.id }}" class="contact-success-modal is-active">
+          <div class="success-modal-content">
+            <div class="icon-circle">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            </div>
+            <p class="text">{{ section.settings.success_msg }}</p>
+          </div>
+        </div>
+        <script>
+          document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('SuccessModal-{{ section.id }}');
+            if(modal) {
+              setTimeout(function() {
+                modal.classList.remove('is-active');
+                setTimeout(() => modal.style.display = 'none', 400);
+              }, 4000);
+            }
+          });
+        </script>
+      {% endif %}
+
+      <!-- Error Messages -->
+      {% if form.errors %}
+        <div style="background: #FEE2E2; color: #DC2626; padding: 15px; border-radius: 8px; margin-bottom: 20px; font-size: 14px;">
+          {{ form.errors | default_errors }}
+        </div>
+      {% endif %}
+
+      <div class="q-grid">
+        {% for block in section.blocks %}
+          
+          {%- assign col_class = 'q-col-12' -%}
+          {%- if block.settings.width == '50' -%}
+            {%- assign col_class = 'q-col-6' -%}
+          {%- elsif block.settings.width == '33' -%}
+            {%- assign col_class = 'q-col-4' -%}
+          {%- endif -%}
+
+          {% case block.type %}
+            
+            {% when 'section_title' %}
+              <div class="q-section-title q-col-12" {{ block.shopify_attributes }}>
+                <span>{{ block.settings.title }}</span>
+                <hr>
+              </div>
+
+            {% when 'text_input' %}
+              <div class="q-field-group {{ col_class }}" {{ block.shopify_attributes }}>
+                <label for="Field-{{ block.id }}">
+                  {{ block.settings.lbl }}
+                  {% if block.settings.req %}<span class="q-required-asterisk">*</span>{% endif %}
+                </label>
+                <div class="q-input-wrap {% if block.settings.icon != 'none' %}has-icon{% endif %}">
+                  {% if block.settings.icon == 'location' %}
+                    <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                  {% elsif block.settings.icon == 'user' %}
+                    <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                  {% elsif block.settings.icon == 'company' %}
+                    <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><path d="M9 22v-4h6v4"></path><path d="M8 6h.01"></path><path d="M16 6h.01"></path><path d="M12 6h.01"></path><path d="M12 10h.01"></path><path d="M12 14h.01"></path><path d="M16 10h.01"></path><path d="M16 14h.01"></path><path d="M8 10h.01"></path><path d="M8 14h.01"></path></svg>
+                  {% endif %}
+                  <input id="Field-{{ block.id }}" type="text" name="contact[{{ block.settings.lbl | handle }}]" placeholder="{{ block.settings.plc }}" {% if block.settings.req %}required{% endif %}>
+                </div>
+                {% if block.settings.help_text != blank %}<span class="q-help-text">{{ block.settings.help_text }}</span>{% endif %}
+              </div>
+
+            {% when 'email_input' %}
+              <div class="q-field-group {{ col_class }}" {{ block.shopify_attributes }}>
+                <label for="Field-{{ block.id }}">
+                  {{ block.settings.lbl }}
+                  {% if block.settings.req %}<span class="q-required-asterisk">*</span>{% endif %}
+                </label>
+                <div class="q-input-wrap has-icon">
+                  <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                  <input id="Field-{{ block.id }}" type="email" name="contact[email]" placeholder="{{ block.settings.plc }}" {% if block.settings.req %}required{% endif %}>
+                </div>
+                {% if block.settings.help_text != blank %}<span class="q-help-text">{{ block.settings.help_text }}</span>{% endif %}
+              </div>
+
+            {% when 'phone_input' %}
+              <div class="q-field-group {{ col_class }}" {{ block.shopify_attributes }}>
+                <label for="Field-{{ block.id }}">
+                  {{ block.settings.lbl }}
+                  {% if block.settings.req %}<span class="q-required-asterisk">*</span>{% endif %}
+                </label>
+                <div class="q-input-wrap has-icon">
+                  <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                  <input id="Field-{{ block.id }}" type="tel" name="contact[phone]" placeholder="{{ block.settings.plc }}" {% if block.settings.req %}required{% endif %}>
+                </div>
+                {% if block.settings.help_text != blank %}<span class="q-help-text">{{ block.settings.help_text }}</span>{% endif %}
+              </div>
+
+            {% when 'dropdown' %}
+              <div class="q-field-group {{ col_class }}" {{ block.shopify_attributes }}>
+                <label for="Field-{{ block.id }}">
+                  {{ block.settings.lbl }}
+                  {% if block.settings.req %}<span class="q-required-asterisk">*</span>{% endif %}
+                </label>
+                <div class="q-input-wrap q-select-wrap">
+                  <select id="Field-{{ block.id }}" name="contact[{{ block.settings.lbl | handle }}]" {% if block.settings.req %}required{% endif %}>
+                    <option value="" disabled selected>{{ block.settings.plc }}</option>
+                    {% assign options = block.settings.options | split: ',' %}
+                    {% for opt in options %}
+                      <option value="{{ opt | strip }}">{{ opt | strip }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                {% if block.settings.help_text != blank %}<span class="q-help-text">{{ block.settings.help_text }}</span>{% endif %}
+              </div>
+
+            {% when 'textarea' %}
+              <div class="q-field-group {{ col_class }}" {{ block.shopify_attributes }}>
+                <label for="Field-{{ block.id }}">
+                  {{ block.settings.lbl }}
+                  {% if block.settings.req %}<span class="q-required-asterisk">*</span>{% endif %}
+                </label>
+                <div class="q-input-wrap">
+                  <textarea id="Field-{{ block.id }}" rows="4" name="contact[body]" placeholder="{{ block.settings.plc }}" {% if block.settings.req %}required{% endif %}></textarea>
+                </div>
+              </div>
+
+          {% endcase %}
+        {% endfor %}
+
+        <!-- Submit Button -->
+        <div class="q-col-12">
+          <button type="submit" class="q-submit-btn">
+            {{ section.settings.btn_txt }}
+            {% if section.settings.show_btn_icon %}
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            {% endif %}
+          </button>
+          
+          {% if section.settings.back_link != blank %}
+            <a href="{{ section.settings.back_url }}" class="q-back-link">{{ section.settings.back_link }}</a>
+          {% endif %}
+        </div>
+
+      </div>
+    {% endform %}
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Custom Quote Form",
+  "settings": [
+    { "type": "header", "content": "Colors & Layout" },
+    { "type": "text", "id": "bg_gradient", "label": "Background Gradient/Color", "default": "linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%)", "info": "E.g., #ffffff or linear-gradient(...)" },
+    { "type": "color", "id": "form_bg", "label": "Form Background Color", "default": "#ffffff" },
+    { "type": "color", "id": "accent_clr", "label": "Accent Color (Buttons/Icons)", "default": "#000000" },
+    { "type": "color", "id": "accent_hover_clr", "label": "Accent Hover Color", "default": "#333333" },
+    { "type": "range", "id": "pad_v", "min": 20, "max": 150, "step": 5, "unit": "px", "label": "Vertical Padding", "default": 60 },
+    { "type": "range", "id": "max_w", "min": 500, "max": 1000, "step": 10, "unit": "px", "label": "Form Max Width", "default": 750 },
+    
+    { "type": "header", "content": "Content" },
+    { "type": "checkbox", "id": "show_header_icon", "label": "Show Header Icon", "default": true },
+    { "type": "text", "id": "title", "label": "Form Title", "default": "REQUEST A CUSTOM QUOTE" },
+    { "type": "text", "id": "btn_txt", "label": "Submit Button Text", "default": "SUBMIT REQUEST" },
+    { "type": "checkbox", "id": "show_btn_icon", "label": "Show Button Icon", "default": true },
+    { "type": "text", "id": "success_msg", "label": "Success Message", "default": "Thank you! Your quote request has been sent successfully." },
+    { "type": "text", "id": "back_link", "label": "Back Link Text", "default": "Return to Homepage" },
+    { "type": "url", "id": "back_url", "label": "Back Link URL" }
+  ],
+  "blocks": [
+    {
+      "type": "section_title",
+      "name": "Divider Title",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "1. CLIENT INFORMATION" }
+      ]
+    },
+    {
+      "type": "text_input",
+      "name": "Text Input",
+      "settings": [
+        { "type": "text", "id": "lbl", "label": "Label", "default": "Name" },
+        { "type": "text", "id": "plc", "label": "Placeholder", "default": "Enter your full name" },
+        { "type": "text", "id": "help_text", "label": "Help Text (Subtext)", "info": "Optional small text below input" },
+        { "type": "select", "id": "icon", "label": "Icon", "options": [
+          { "value": "none", "label": "None" },
+          { "value": "user", "label": "User Profile" },
+          { "value": "company", "label": "Building/Company" },
+          { "value": "location", "label": "Location Pin" }
+        ], "default": "none" },
+        { "type": "select", "id": "width", "label": "Desktop Width", "options": [
+          { "value": "100", "label": "Full Width (100%)" },
+          { "value": "50", "label": "Half Width (50%)" },
+          { "value": "33", "label": "One Third (33%)" }
+        ], "default": "100" },
+        { "type": "checkbox", "id": "req", "label": "Is this field Required?", "default": true }
+      ]
+    },
+    {
+      "type": "email_input",
+      "name": "Email Input",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "lbl", "label": "Label", "default": "Email Address" },
+        { "type": "text", "id": "plc", "label": "Placeholder", "default": "you@email.com" },
+        { "type": "select", "id": "width", "label": "Desktop Width", "options": [
+          { "value": "100", "label": "Full Width" },
+          { "value": "50", "label": "Half Width" }
+        ], "default": "50" },
+        { "type": "checkbox", "id": "req", "label": "Is this field Required?", "default": true }
+      ]
+    },
+    {
+      "type": "phone_input",
+      "name": "Phone Input",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "lbl", "label": "Label", "default": "Phone Number" },
+        { "type": "text", "id": "plc", "label": "Placeholder", "default": "+1 234 567 8900" },
+        { "type": "select", "id": "width", "label": "Desktop Width", "options": [
+          { "value": "100", "label": "Full Width" },
+          { "value": "50", "label": "Half Width" }
+        ], "default": "50" },
+        { "type": "checkbox", "id": "req", "label": "Is this field Required?", "default": false }
+      ]
+    },
+    {
+      "type": "dropdown",
+      "name": "Dropdown Select",
+      "settings": [
+        { "type": "text", "id": "lbl", "label": "Label", "default": "Interested Service" },
+        { "type": "text", "id": "plc", "label": "Placeholder", "default": "Select an option..." },
+        { "type": "textarea", "id": "options", "label": "Options (comma separated)", "default": "Web Design, SEO, Marketing, Other", "info": "Separate each option with a comma (,)" },
+        { "type": "text", "id": "help_text", "label": "Help Text (Subtext)" },
+        { "type": "select", "id": "width", "label": "Desktop Width", "options": [
+          { "value": "100", "label": "Full Width" },
+          { "value": "50", "label": "Half Width" },
+          { "value": "33", "label": "One Third (33%)" }
+        ], "default": "100" },
+        { "type": "checkbox", "id": "req", "label": "Is this field Required?", "default": true }
+      ]
+    },
+    {
+      "type": "textarea",
+      "name": "Message Area",
+      "settings": [
+        { "type": "text", "id": "lbl", "label": "Label", "default": "Project Details" },
+        { "type": "text", "id": "plc", "label": "Placeholder", "default": "Tell us more about your requirements..." },
+        { "type": "checkbox", "id": "req", "label": "Is this field Required?", "default": true }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Quote Form",
+      "blocks": [
+        { "type": "section_title", "settings": { "title": "1. Contact Information" } },
+        { "type": "text_input", "settings": { "lbl": "Full Name", "plc": "Enter your name", "icon": "user", "width": "50" } },
+        { "type": "text_input", "settings": { "lbl": "Company Name", "plc": "Your business name", "icon": "company", "width": "50", "req": false } },
+        { "type": "email_input", "settings": { "width": "50" } },
+        { "type": "phone_input", "settings": { "width": "50" } },
+        { "type": "section_title", "settings": { "title": "2. Project Requirements" } },
+        { "type": "dropdown", "settings": { "width": "100" } },
+        { "type": "textarea" }
+      ]
+    }
+  ]
+}
+{% endschema %}

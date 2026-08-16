@@ -1,0 +1,348 @@
+{{ 'free-resource-tracker.css' | asset_url | stylesheet_tag }}
+
+{% assign resource_form_id = 'resource-tracker-form-' | append: section.id %}
+
+<section
+  id="ResourceSection-{{ section.id }}"
+  class="resource-section"
+  style="background-color: {{ section.settings.background_color }};"
+  data-pdf-url="{{ section.settings.pdf_url }}"
+  data-pdf-filename="{{ section.settings.pdf_filename | default: 'free-resource.pdf' | escape }}"
+>
+  <div class="resource-section__inner{% if section.settings.image %} resource-section__inner--with-image{% endif %}">
+
+    {% if section.settings.image %}
+      <div class="resource-section__media">
+        <img
+          src="{{ section.settings.image | image_url: width: 1200 }}"
+          alt="{{ section.settings.image.alt | default: section.settings.heading | escape }}"
+          width="{{ section.settings.image.width }}"
+          height="{{ section.settings.image.height }}"
+          loading="lazy"
+          class="resource-section__image"
+        >
+      </div>
+    {% endif %}
+
+    <div class="resource-section__content">
+
+      {% if section.settings.badge_text != blank %}
+        <span class="resource-section__badge">
+          {{ section.settings.badge_text | escape }}
+        </span>
+      {% endif %}
+
+      {% if section.settings.heading != blank %}
+        <h2 class="resource-section__heading">
+          {{ section.settings.heading | escape }}
+        </h2>
+      {% endif %}
+
+      {% if section.settings.subtext != blank %}
+        <div class="resource-section__subtext">
+          {{ section.settings.subtext }}
+        </div>
+      {% endif %}
+
+      <div class="resource-section__form-wrap">
+
+        {% form 'contact', id: resource_form_id, class: 'resource-section__form' %}
+
+          {% if form.posted_successfully? %}
+
+            <p
+              class="resource-section__success"
+              role="status"
+              data-resource-form-success
+            >
+              {{ section.settings.success_message | default: "Thank you. Your tracker is downloading now." }}
+            </p>
+
+          {% else %}
+
+            <input
+              type="hidden"
+              name="contact[subject]"
+              value="{{ section.settings.email_subject | escape }}"
+            >
+
+            <input
+              type="hidden"
+              name="contact[resource]"
+              value="{{ section.settings.heading | escape }}"
+            >
+
+            <input
+              type="hidden"
+              name="contact[body]"
+              value="A customer has requested the free digital resource: {{ section.settings.heading | escape }}"
+            >
+
+            <label
+              for="ResourceEmail-{{ section.id }}"
+              class="visually-hidden"
+            >
+              {{ section.settings.email_placeholder | default: "Your email address" }}
+            </label>
+
+            <div class="resource-section__field-row">
+
+              <input
+                type="email"
+                name="contact[email]"
+                id="ResourceEmail-{{ section.id }}"
+                class="resource-section__input"
+                placeholder="{{ section.settings.email_placeholder | escape }}"
+                value="{% if form.email %}{{ form.email | escape }}{% elsif customer %}{{ customer.email | escape }}{% endif %}"
+                required
+                autocomplete="email"
+                autocorrect="off"
+                autocapitalize="off"
+                spellcheck="false"
+                aria-required="true"
+              >
+
+              <button
+                type="submit"
+                class="resource-section__button"
+                data-resource-submit
+                data-default-text="{{ section.settings.button_label | escape }}"
+                data-loading-text="{{ section.settings.loading_text | escape }}"
+              >
+                {{ section.settings.button_label | escape }}
+              </button>
+
+            </div>
+
+            {% if form.errors %}
+              <div
+                class="resource-section__error"
+                role="alert"
+              >
+                {{ form.errors | default_errors }}
+              </div>
+            {% endif %}
+
+          {% endif %}
+
+        {% endform %}
+
+        {% if section.settings.trust_message != blank %}
+          <p class="resource-section__trust">
+            {{ section.settings.trust_message | escape }}
+          </p>
+        {% endif %}
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  (() => {
+    const sectionId = 'ResourceSection-{{ section.id }}';
+    const storageKey = 'resource-download-request-{{ section.id }}';
+
+    function initializeResourceSection() {
+      const section = document.getElementById(sectionId);
+
+      if (!section || section.dataset.initialized === 'true') {
+        return;
+      }
+
+      section.dataset.initialized = 'true';
+
+      const form = section.querySelector('.resource-section__form');
+      const submitButton = section.querySelector('[data-resource-submit]');
+      const successMessage = section.querySelector('[data-resource-form-success]');
+      const pdfUrl = section.dataset.pdfUrl;
+      const pdfFilename = section.dataset.pdfFilename || 'free-resource.pdf';
+
+      if (form && submitButton) {
+        form.addEventListener('submit', function() {
+          sessionStorage.setItem(storageKey, 'true');
+
+          submitButton.disabled = true;
+          submitButton.setAttribute('aria-busy', 'true');
+
+          const loadingText = submitButton.dataset.loadingText;
+
+          if (loadingText) {
+            submitButton.textContent = loadingText;
+          }
+        });
+      }
+
+      if (
+        successMessage &&
+        pdfUrl &&
+        sessionStorage.getItem(storageKey) === 'true'
+      ) {
+        sessionStorage.removeItem(storageKey);
+
+        window.setTimeout(function() {
+          downloadResourceFile(pdfUrl, pdfFilename);
+        }, 500);
+      }
+    }
+
+    async function downloadResourceFile(fileUrl, filename) {
+      try {
+        const response = await fetch(fileUrl);
+
+        if (!response.ok) {
+          throw new Error('PDF download request failed.');
+        }
+
+        const fileBlob = await response.blob();
+        const objectUrl = URL.createObjectURL(fileBlob);
+
+        const downloadLink = document.createElement('a');
+
+        downloadLink.href = objectUrl;
+        downloadLink.download = filename;
+        downloadLink.style.display = 'none';
+
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        downloadLink.remove();
+
+        window.setTimeout(function() {
+          URL.revokeObjectURL(objectUrl);
+        }, 1000);
+      } catch (error) {
+        const fallbackLink = document.createElement('a');
+
+        fallbackLink.href = fileUrl;
+        fallbackLink.target = '_blank';
+        fallbackLink.rel = 'noopener';
+        fallbackLink.style.display = 'none';
+
+        document.body.appendChild(fallbackLink);
+        fallbackLink.click();
+        fallbackLink.remove();
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', initializeResourceSection);
+    document.addEventListener('shopify:section:load', initializeResourceSection);
+
+    if (document.readyState !== 'loading') {
+      initializeResourceSection();
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Free Resource Opt-in",
+  "tag": "section",
+  "class": "shopify-section--resource-tracker",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Small label",
+      "default": "FREE DIGITAL RESOURCE"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The Gentle Consistency Tracker"
+    },
+    {
+      "type": "richtext",
+      "id": "subtext",
+      "label": "Supporting text",
+      "default": "<p>This is our first free digital resource — created to help you build gentle, sustainable consistency, without pressure or the need to be perfect. Enter your email below and we'll send it straight to your inbox.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Email form"
+    },
+    {
+      "type": "text",
+      "id": "email_placeholder",
+      "label": "Email placeholder",
+      "default": "Your email address"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Get My Free Tracker"
+    },
+    {
+      "type": "text",
+      "id": "loading_text",
+      "label": "Button loading text",
+      "default": "Please wait..."
+    },
+    {
+      "type": "text",
+      "id": "email_subject",
+      "label": "Store email subject",
+      "default": "New Free Resource Download Request"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "Thank you. Your tracker is downloading now."
+    },
+    {
+      "type": "text",
+      "id": "trust_message",
+      "label": "Trust message",
+      "default": "No spam. Just thoughtful resources designed to support your journey."
+    },
+    {
+      "type": "header",
+      "content": "PDF download"
+    },
+    {
+      "type": "url",
+      "id": "pdf_url",
+      "label": "PDF file URL",
+      "info": "Upload the PDF in Shopify Content > Files, copy the file URL and paste it here."
+    },
+    {
+      "type": "text",
+      "id": "pdf_filename",
+      "label": "Downloaded PDF filename",
+      "default": "gentle-consistency-tracker.pdf",
+      "info": "Include .pdf at the end of the filename."
+    },
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Optional image"
+    },
+    {
+      "type": "header",
+      "content": "Design"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#FCFBF8"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Free Resource Opt-in"
+    }
+  ]
+}
+{% endschema %}

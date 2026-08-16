@@ -1,0 +1,169 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "blocks": {
+        "heading": {
+          "type": "text",
+          "name": "t:names.title",
+          "settings": {
+            "text": "<h1>{{ closest.page.title }}</h1>",
+            "width": "100%",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "h2",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "page-content": {
+          "type": "page-content",
+          "settings": {
+            "text_color": ""
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "heading",
+        "page-content"
+      ],
+      "disabled": true,
+      "settings": {
+        "content_direction": "column",
+        "gap": 32,
+        "background_color": "{{ settings.color_palette.background }}",
+        "padding-block-start": 40,
+        "padding-block-end": 80
+      }
+    },
+    "cs_quote_form_eENeyX": {
+      "type": "cs_quote_form",
+      "blocks": {
+        "section_title_L3cTQU": {
+          "type": "section_title",
+          "settings": {
+            "title": "1. Contact Information"
+          }
+        },
+        "text_input_LkVWHC": {
+          "type": "text_input",
+          "settings": {
+            "lbl": "Full Name",
+            "plc": "Enter your name",
+            "help_text": "",
+            "icon": "user",
+            "width": "50",
+            "req": true
+          }
+        },
+        "text_input_TA96a7": {
+          "type": "text_input",
+          "settings": {
+            "lbl": "Company Name",
+            "plc": "Your business name",
+            "help_text": "",
+            "icon": "company",
+            "width": "50",
+            "req": false
+          }
+        },
+        "email_input_hjDCVr": {
+          "type": "email_input",
+          "settings": {
+            "lbl": "Email Address",
+            "plc": "you@email.com",
+            "width": "50",
+            "req": true
+          }
+        },
+        "phone_input_LEDntc": {
+          "type": "phone_input",
+          "settings": {
+            "lbl": "Phone Number",
+            "plc": "+1 234 567 8900",
+            "width": "50",
+            "req": false
+          }
+        },
+        "section_title_WEaXpU": {
+          "type": "section_title",
+          "settings": {
+            "title": "2. Project Requirements"
+          }
+        },
+        "dropdown_YQDiHz": {
+          "type": "dropdown",
+          "settings": {
+            "lbl": "Interested Service",
+            "plc": "Select an option...",
+            "options": "Web Design, SEO, Marketing, Other",
+            "help_text": "",
+            "width": "100",
+            "req": true
+          }
+        },
+        "textarea_G7kY4c": {
+          "type": "textarea",
+          "settings": {
+            "lbl": "Project Details",
+            "plc": "Tell us more about your requirements...",
+            "req": true
+          }
+        }
+      },
+      "block_order": [
+        "section_title_L3cTQU",
+        "text_input_LkVWHC",
+        "text_input_TA96a7",
+        "email_input_hjDCVr",
+        "phone_input_LEDntc",
+        "section_title_WEaXpU",
+        "dropdown_YQDiHz",
+        "textarea_G7kY4c"
+      ],
+      "name": "Custom Quote Form",
+      "settings": {
+        "bg_gradient": "linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%)",
+        "form_bg": "#ffffff",
+        "accent_clr": "#000000",
+        "accent_hover_clr": "#333333",
+        "pad_v": 60,
+        "max_w": 750,
+        "show_header_icon": true,
+        "title": "REQUEST A CUSTOM QUOTE",
+        "btn_txt": "SUBMIT REQUEST",
+        "show_btn_icon": true,
+        "success_msg": "Thank you! Your quote request has been sent successfully.",
+        "back_link": "Return to Homepage",
+        "back_url": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "cs_quote_form_eENeyX"
+  ]
+}

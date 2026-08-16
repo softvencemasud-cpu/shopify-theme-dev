@@ -1,0 +1,860 @@
+{% comment %}
+  Section — Gentle Hero with Email & PDF Download
+{% endcomment %}
+
+{% liquid
+  assign form_id = 'GentleHeroForm-' | append: section.id
+  assign iframe_name = 'GentleHeroFrame-' | append: section.id
+%}
+
+<style>
+  @font-face {
+    font-family: 'Cormorant Garamond SemiBold';
+    src: url('https://cdn.shopify.com/s/files/1/0000/0000/0000/files/CormorantGaramond-SemiBold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  .hero-{{ section.id }} {
+    --bg: {{ section.settings.bg_color }};
+    --heading: {{ section.settings.heading_color }};
+    --subtext: {{ section.settings.subtext_color }};
+    --body: {{ section.settings.body_color }};
+    --btn-bg: {{ section.settings.btn_bg }};
+    --btn-text: {{ section.settings.btn_text_color }};
+    --btn-hover: {{ section.settings.btn_hover }};
+
+    position: relative;
+    background: var(--bg);
+    min-height: {{ section.settings.min_height }}vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 140px 24px 100px;
+    overflow: hidden;
+  }
+
+  .hero-{{ section.id }} .hero__bloom {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(
+        ellipse 640px 420px at 18% 12%,
+        rgba(143, 122, 97, 0.16),
+        transparent 60%
+      ),
+      radial-gradient(
+        ellipse 520px 420px at 86% 78%,
+        rgba(221, 214, 202, 0.55),
+        transparent 65%
+      );
+    pointer-events: none;
+  }
+
+  .hero-{{ section.id }} .hero__inner {
+    position: relative;
+    width: 100%;
+    max-width: 700px;
+    z-index: 2;
+  }
+
+  .hero-{{ section.id }} .eyebrow {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 12.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--subtext);
+    font-weight: 500;
+    margin: 0 0 26px;
+  }
+
+  .hero-{{ section.id }} h1 {
+    font-family: 'Cormorant Garamond SemiBold', serif;
+    font-weight: 500;
+    color: var(--heading);
+    font-size: clamp(46px, 7vw, 56px);
+    line-height: 1.08;
+    margin: 0 0 26px;
+  }
+
+  .hero-{{ section.id }} h1 em {
+    font-style: italic;
+    color: var(--btn-hover);
+  }
+
+  .hero-{{ section.id }} .hero__subtitle {
+    font-family: 'Cormorant Garamond SemiBold', serif;
+    font-weight: 500;
+    font-style: italic;
+    font-size: clamp(19px, 2.4vw, 23px);
+    color: var(--subtext);
+    margin: 0 0 22px;
+  }
+
+  .hero-{{ section.id }} .hero__body {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    color: var(--body);
+    max-width: 540px;
+    margin: 0 auto 36px;
+    line-height: 1.7;
+  }
+
+  .hero-{{ section.id }} .hero__body p {
+    margin: 0;
+  }
+
+  .hero-{{ section.id }} .hero__body em {
+    font-style: italic;
+    color: var(--heading);
+  }
+
+  /* Email form */
+  .hero-{{ section.id }} .hero__form-wrap {
+    width: 100%;
+    max-width: 590px;
+    margin: 0 auto;
+  }
+
+  .hero-{{ section.id }} .hero__form {
+    width: 100%;
+    margin: 0;
+  }
+
+  .hero-{{ section.id }} .hero__field-row {
+    width: 100%;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .hero-{{ section.id }} .hero__email-input {
+    flex: 1;
+    min-width: 0;
+    height: 50px;
+    padding: 0 18px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    line-height: 1;
+    color: var(--body);
+    background: #ffffff;
+    border: 1px solid rgba(143, 122, 97, 0.42);
+    border-radius: 0;
+    box-sizing: border-box;
+    transition:
+      border-color 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+
+  .hero-{{ section.id }} .hero__email-input::placeholder {
+    color: var(--subtext);
+    opacity: 0.75;
+  }
+
+  .hero-{{ section.id }} .hero__email-input:focus {
+    outline: none;
+    border-color: var(--btn-hover);
+    box-shadow: 0 0 0 3px rgba(143, 122, 97, 0.1);
+  }
+
+  .hero-{{ section.id }} .btn {
+    min-height: 50px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    padding: 12px 30px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    line-height: 1.2;
+    letter-spacing: 0.03em;
+    font-weight: 500;
+    text-decoration: none;
+    background: var(--btn-bg);
+    color: var(--btn-text);
+    border: 0;
+    border-radius: 0;
+    cursor: pointer;
+    box-shadow: 0 10px 30px -12px rgba(47, 40, 29, 0.45);
+    transition:
+      background-color 0.35s ease,
+      transform 0.35s ease,
+      box-shadow 0.35s ease,
+      opacity 0.35s ease;
+  }
+
+  .hero-{{ section.id }} .btn:hover,
+  .hero-{{ section.id }} .btn:focus-visible {
+    background: var(--btn-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 34px -10px rgba(143, 122, 97, 0.55);
+  }
+
+  .hero-{{ section.id }} .btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+    transform: none;
+  }
+
+  .hero-{{ section.id }} .hero__trust {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--subtext);
+    margin: 14px 0 0;
+  }
+
+  .hero-{{ section.id }} .hero__success,
+  .hero-{{ section.id }} .hero__error {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    line-height: 1.5;
+    padding: 12px 16px;
+    margin: 14px 0 0;
+  }
+
+  .hero-{{ section.id }} .hero__success {
+    color: var(--heading);
+    background: rgba(243, 238, 230, 0.92);
+    border: 1px solid rgba(143, 122, 97, 0.25);
+  }
+
+  .hero-{{ section.id }} .hero__error {
+    color: #a43e36;
+    background: rgba(255, 240, 238, 0.95);
+    border: 1px solid rgba(176, 71, 63, 0.25);
+  }
+
+  .hero-{{ section.id }} .hero__success[hidden],
+  .hero-{{ section.id }} .hero__error[hidden] {
+    display: none;
+  }
+
+  .hero-{{ section.id }} .hero__iframe {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    border: 0;
+    opacity: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .hero-{{ section.id }} .scroll-cue {
+    position: absolute;
+    bottom: 44px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+  }
+
+  .hero-{{ section.id }} .scroll-cue__line {
+    width: 1px;
+    height: 56px;
+    background: linear-gradient(
+      to bottom,
+      var(--subtext),
+      transparent
+    );
+    display: block;
+    animation: heroCue-{{ section.id }} 2.4s ease-in-out infinite;
+  }
+
+  @keyframes heroCue-{{ section.id }} {
+    0%,
+    100% {
+      opacity: 0.35;
+      transform: translateY(0);
+    }
+
+    50% {
+      opacity: 1;
+      transform: translateY(10px);
+    }
+  }
+
+  .hero-{{ section.id }} .fade-up {
+    opacity: 0;
+    transform: translateY(28px);
+    transition:
+      opacity 0.9s cubic-bezier(.16, .8, .32, 1),
+      transform 0.9s cubic-bezier(.16, .8, .32, 1);
+    transition-delay: calc(var(--delay, 0) * 0.12s);
+  }
+
+  .hero-{{ section.id }}.in-view .fade-up {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .hero-{{ section.id }} .visually-hidden {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    clip-path: inset(50%) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+
+  @media screen and (max-width: 600px) {
+    .hero-{{ section.id }} {
+      padding: 120px 20px 90px;
+      min-height: auto;
+    }
+
+    .hero-{{ section.id }} h1 {
+      font-size: 42px;
+    }
+
+    .hero-{{ section.id }} .hero__field-row {
+      flex-direction: column;
+    }
+
+    .hero-{{ section.id }} .hero__email-input,
+    .hero-{{ section.id }} .btn {
+      width: 100%;
+    }
+
+    .hero-{{ section.id }} .btn {
+      min-height: 50px;
+    }
+
+    .hero-{{ section.id }} .scroll-cue {
+      display: none;
+    }
+  }
+</style>
+
+<section
+  id="GentleHero-{{ section.id }}"
+  class="hero-{{ section.id }}"
+>
+  <div class="hero__bloom" aria-hidden="true"></div>
+
+  <div class="hero__inner">
+
+    {% if section.settings.eyebrow != blank %}
+      <p class="eyebrow fade-up">
+        {{ section.settings.eyebrow | escape }}
+      </p>
+    {% endif %}
+
+    {% if section.settings.heading != blank %}
+      <div class="fade-up" style="--delay: 1;">
+        {{ section.settings.heading
+          | replace: '<p>', '<h1>'
+          | replace: '</p>', '</h1>'
+        }}
+      </div>
+    {% endif %}
+
+    {% if section.settings.subtitle != blank %}
+      <p
+        class="hero__subtitle fade-up"
+        style="--delay: 2;"
+      >
+        {{ section.settings.subtitle | escape }}
+      </p>
+    {% endif %}
+
+    {% if section.settings.body_text != blank %}
+      <div
+        class="hero__body fade-up"
+        style="--delay: 3;"
+      >
+        {{ section.settings.body_text }}
+      </div>
+    {% endif %}
+
+    <div
+      class="hero__form-wrap fade-up"
+      style="--delay: 4;"
+    >
+      {% form 'contact',
+        id: form_id,
+        class: 'hero__form',
+        target: iframe_name
+      %}
+
+        <input
+          type="hidden"
+          name="contact[Resource]"
+          value="{{ section.settings.heading | strip_html | escape }}"
+        >
+
+        <input
+          type="hidden"
+          name="contact[tags]"
+          value="free-resource, gentle-hero, pdf-download"
+        >
+
+        <input
+          type="hidden"
+          name="contact[body]"
+          value="A customer requested the free PDF resource from the Gentle Hero section."
+        >
+
+        <label
+          for="GentleHeroEmail-{{ section.id }}"
+          class="visually-hidden"
+        >
+          {{ section.settings.email_placeholder | escape }}
+        </label>
+
+        <div class="hero__field-row">
+          <input
+            type="email"
+            id="GentleHeroEmail-{{ section.id }}"
+            class="hero__email-input"
+            name="contact[email]"
+            placeholder="{{ section.settings.email_placeholder | escape }}"
+            autocomplete="email"
+            required
+            aria-required="true"
+          >
+
+          <button
+            type="submit"
+            class="btn"
+            data-default-label="{{ section.settings.button_label | escape }}"
+            data-loading-label="{{ section.settings.loading_label | escape }}"
+          >
+            {{ section.settings.button_label | escape }}
+          </button>
+        </div>
+
+        <p
+          class="hero__success"
+          data-hero-success
+          role="status"
+          aria-live="polite"
+          hidden
+        >
+          {{ section.settings.success_message | escape }}
+        </p>
+
+        <p
+          class="hero__error"
+          data-hero-error
+          role="alert"
+          aria-live="assertive"
+          hidden
+        ></p>
+
+      {% endform %}
+
+      {% if section.settings.trust_message != blank %}
+        <p class="hero__trust">
+          {{ section.settings.trust_message | escape }}
+        </p>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if section.settings.show_scroll_cue %}
+    <a
+      href="{{ section.settings.scroll_target | default: '#MainContent' }}"
+      class="scroll-cue"
+      aria-label="Scroll to learn more"
+    >
+      <span class="scroll-cue__line"></span>
+    </a>
+  {% endif %}
+
+  <iframe
+    name="{{ iframe_name }}"
+    class="hero__iframe"
+    title="Gentle Hero form submission"
+    tabindex="-1"
+    aria-hidden="true"
+  ></iframe>
+</section>
+
+<script>
+  (function() {
+    var section = document.getElementById(
+      'GentleHero-{{ section.id }}'
+    );
+
+    if (!section || section.dataset.heroInitialized === 'true') {
+      return;
+    }
+
+    section.dataset.heroInitialized = 'true';
+
+    /*
+     * Entrance animation
+     */
+    if ('IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(
+        function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in-view');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.1
+        }
+      );
+
+      observer.observe(section);
+    } else {
+      section.classList.add('in-view');
+    }
+
+    /*
+     * Email form and PDF download
+     */
+    var form = section.querySelector('#{{ form_id }}');
+
+    var iframe = section.querySelector(
+      'iframe[name="{{ iframe_name }}"]'
+    );
+
+    var emailInput = section.querySelector(
+      '#GentleHeroEmail-{{ section.id }}'
+    );
+
+    var submitButton = form
+      ? form.querySelector('.btn')
+      : null;
+
+    var successMessage = section.querySelector(
+      '[data-hero-success]'
+    );
+
+    var errorMessage = section.querySelector(
+      '[data-hero-error]'
+    );
+
+    var pdfUrl = {{ section.settings.pdf_url | json }};
+
+    var pdfFileName = {{ section.settings.pdf_file_name
+      | default: 'free-resource.pdf'
+      | json
+    }};
+
+    var missingPdfMessage = {{ section.settings.missing_pdf_message
+      | default: 'Please add the PDF file link in the section settings.'
+      | json
+    }};
+
+    var downloadErrorMessage = {{ section.settings.download_error_message
+      | default: 'The PDF could not be downloaded. Please try again.'
+      | json
+    }};
+
+    var formSubmitted = false;
+    var downloadCompleted = false;
+
+    if (
+      !form ||
+      !iframe ||
+      !emailInput ||
+      !submitButton ||
+      !successMessage ||
+      !errorMessage
+    ) {
+      return;
+    }
+
+    var defaultButtonLabel =
+      submitButton.dataset.defaultLabel ||
+      submitButton.textContent.trim();
+
+    var loadingButtonLabel =
+      submitButton.dataset.loadingLabel ||
+      'Downloading...';
+
+    function clearMessages() {
+      successMessage.hidden = true;
+      errorMessage.hidden = true;
+      errorMessage.textContent = '';
+    }
+
+    function showError(message) {
+      successMessage.hidden = true;
+      errorMessage.textContent = message;
+      errorMessage.hidden = false;
+    }
+
+    async function downloadPdfDirectly() {
+      if (!pdfUrl) {
+        return false;
+      }
+
+      try {
+        var response = await fetch(pdfUrl, {
+          method: 'GET',
+          credentials: 'omit'
+        });
+
+        if (!response.ok) {
+          throw new Error('PDF request failed');
+        }
+
+        var pdfBlob = await response.blob();
+        var blobUrl = URL.createObjectURL(pdfBlob);
+        var downloadLink = document.createElement('a');
+
+        downloadLink.href = blobUrl;
+        downloadLink.download =
+          pdfFileName || 'free-resource.pdf';
+
+        downloadLink.style.display = 'none';
+
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        downloadLink.remove();
+
+        window.setTimeout(function() {
+          URL.revokeObjectURL(blobUrl);
+        }, 2000);
+
+        return true;
+      } catch (error) {
+        console.error('Gentle Hero PDF download error:', error);
+        return false;
+      }
+    }
+
+    form.addEventListener('submit', async function(event) {
+      event.preventDefault();
+      clearMessages();
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      if (!pdfUrl) {
+        showError(missingPdfMessage);
+        return;
+      }
+
+      submitButton.disabled = true;
+      submitButton.textContent = loadingButtonLabel;
+
+      downloadCompleted = await downloadPdfDirectly();
+
+      if (!downloadCompleted) {
+        submitButton.disabled = false;
+        submitButton.textContent = defaultButtonLabel;
+        showError(downloadErrorMessage);
+        return;
+      }
+
+      formSubmitted = true;
+
+      /*
+       * Submit the email to Shopify's contact form
+       * inside the hidden iframe, so no page redirect occurs.
+       */
+      HTMLFormElement.prototype.submit.call(form);
+    });
+
+    iframe.addEventListener('load', function() {
+      if (!formSubmitted) {
+        return;
+      }
+
+      formSubmitted = false;
+
+      submitButton.disabled = false;
+      submitButton.textContent = defaultButtonLabel;
+
+      if (downloadCompleted) {
+        errorMessage.hidden = true;
+        successMessage.hidden = false;
+        form.reset();
+      }
+
+      downloadCompleted = false;
+    });
+
+    emailInput.addEventListener('input', clearMessages);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Gentle Hero",
+  "tag": "section",
+  "class": "section-gentle-hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Welcome"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>A Gentle<br><em>Next Step</em></p>"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "A simple digital companion for your next step."
+    },
+    {
+      "type": "richtext",
+      "id": "body_text",
+      "label": "Body text",
+      "default": "<p>Whether you arrived from inside <em>The Intentional Weekly Journal</em> or through the Shine & Bambou website, this page is here to offer a gentle continuation.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Email form"
+    },
+    {
+      "type": "text",
+      "id": "email_placeholder",
+      "label": "Email placeholder",
+      "default": "Your email address"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Get the Free Tracker"
+    },
+    {
+      "type": "text",
+      "id": "loading_label",
+      "label": "Loading button label",
+      "default": "Downloading..."
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "Thank you. Your PDF download has started."
+    },
+    {
+      "type": "text",
+      "id": "trust_message",
+      "label": "Trust message",
+      "default": "No spam. Just thoughtful resources designed to support your journey."
+    },
+    {
+      "type": "header",
+      "content": "PDF download"
+    },
+    {
+      "type": "url",
+      "id": "pdf_url",
+      "label": "PDF file link",
+      "info": "Upload the PDF in Shopify Content > Files and add the file URL here."
+    },
+    {
+      "type": "text",
+      "id": "pdf_file_name",
+      "label": "Downloaded file name",
+      "default": "gentle-consistency-tracker.pdf",
+      "info": "The file name must end with .pdf"
+    },
+    {
+      "type": "text",
+      "id": "missing_pdf_message",
+      "label": "Missing PDF message",
+      "default": "Please add the PDF file link in the section settings."
+    },
+    {
+      "type": "text",
+      "id": "download_error_message",
+      "label": "Download error message",
+      "default": "The PDF could not be downloaded. Please try again."
+    },
+    {
+      "type": "header",
+      "content": "Section settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_scroll_cue",
+      "label": "Show scroll indicator",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "scroll_target",
+      "label": "Scroll indicator link"
+    },
+    {
+      "type": "range",
+      "id": "min_height",
+      "label": "Minimum height (vh)",
+      "min": 30,
+      "max": 100,
+      "step": 5,
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background",
+      "default": "#FCFBF8"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading",
+      "default": "#3D3327"
+    },
+    {
+      "type": "color",
+      "id": "subtext_color",
+      "label": "Subtext",
+      "default": "#7A6A56"
+    },
+    {
+      "type": "color",
+      "id": "body_color",
+      "label": "Body text",
+      "default": "#2F281D"
+    },
+    {
+      "type": "color",
+      "id": "btn_bg",
+      "label": "Button background",
+      "default": "#2F281D"
+    },
+    {
+      "type": "color",
+      "id": "btn_text_color",
+      "label": "Button text",
+      "default": "#FCFBF8"
+    },
+    {
+      "type": "color",
+      "id": "btn_hover",
+      "label": "Button hover / accent",
+      "default": "#8F7A61"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Gentle Hero"
+    }
+  ]
+}
+{% endschema %}

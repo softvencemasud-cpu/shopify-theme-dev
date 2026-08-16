@@ -1,0 +1,1475 @@
+{% liquid
+  assign faq_image = section.settings.featured_image
+  assign faq_image_alt = section.settings.image_alt | default: faq_image.alt | default: section.settings.heading
+  assign phone_href = section.settings.phone_link
+  if phone_href == blank
+    assign clean_phone = section.settings.phone_number | remove: ' ' | remove: '(' | remove: ')' | remove: '-' | remove: '.'
+    assign phone_href = 'tel:' | append: clean_phone
+  endif
+%}
+
+<section
+  id="CustomFaqShowcase-{{ section.id }}"
+  class="custom-faq-showcase custom-faq-showcase--{{ section.id }} {{ section.settings.custom_class | escape }}"
+  data-custom-faq-showcase
+  data-allow-multiple="{{ section.settings.allow_multiple }}"
+  data-animation-duration="{{ section.settings.animation_duration }}"
+  style="
+    --cfs-left-bg: {{ section.settings.left_background }};
+    --cfs-right-bg: {{ section.settings.right_background }};
+    --cfs-left-width: {{ section.settings.left_split_width }}%;
+    --cfs-content-max: {{ section.settings.content_max_width }}px;
+    --cfs-pt: {{ section.settings.desktop_padding_top }}px;
+    --cfs-pb: {{ section.settings.desktop_padding_bottom }}px;
+    --cfs-mobile-pt: {{ section.settings.mobile_padding_top }}px;
+    --cfs-mobile-pb: {{ section.settings.mobile_padding_bottom }}px;
+    --cfs-column-gap: {{ section.settings.desktop_column_gap }}px;
+    --cfs-mobile-side: {{ section.settings.mobile_side_padding }}px;
+    --cfs-min-height: {{ section.settings.desktop_min_height }}px;
+    --cfs-image-width: {{ section.settings.image_width }}px;
+    --cfs-image-height: {{ section.settings.image_height }}px;
+    --cfs-image-mobile-height: {{ section.settings.image_mobile_height }}px;
+    --cfs-image-radius: {{ section.settings.image_radius }}px;
+    --cfs-image-position: {{ section.settings.image_focal_position }};
+    --cfs-image-overlay: {{ section.settings.image_overlay_opacity | divided_by: 100.0 }};
+    --cfs-contact-bg: {{ section.settings.contact_background }};
+    --cfs-contact-text: {{ section.settings.contact_text_color }};
+    --cfs-contact-icon-bg: {{ section.settings.contact_icon_background }};
+    --cfs-contact-icon: {{ section.settings.contact_icon_color }};
+    --cfs-contact-radius: {{ section.settings.contact_radius }}px;
+    --cfs-contact-padding: {{ section.settings.contact_padding }}px;
+    --cfs-contact-width: {{ section.settings.contact_width }}px;
+    --cfs-contact-x: {{ section.settings.contact_x }}px;
+    --cfs-contact-y: {{ section.settings.contact_y }}px;
+    --cfs-eyebrow-text: {{ section.settings.eyebrow_text_color }};
+    --cfs-eyebrow-border: {{ section.settings.eyebrow_border_color }};
+    --cfs-eyebrow-bg: {{ section.settings.eyebrow_background }};
+    --cfs-eyebrow-size: {{ section.settings.eyebrow_font_size }}px;
+    --cfs-eyebrow-radius: {{ section.settings.eyebrow_radius }}px;
+    --cfs-eyebrow-px: {{ section.settings.eyebrow_padding_x }}px;
+    --cfs-eyebrow-py: {{ section.settings.eyebrow_padding_y }}px;
+    --cfs-eyebrow-border-width: {{ section.settings.eyebrow_border_width }}px;
+    --cfs-heading-color: {{ section.settings.heading_color }};
+    --cfs-heading-desktop: {{ section.settings.heading_size_desktop }}px;
+    --cfs-heading-tablet: {{ section.settings.heading_size_tablet }}px;
+    --cfs-heading-mobile: {{ section.settings.heading_size_mobile }}px;
+    --cfs-heading-weight: {{ section.settings.heading_weight }};
+    --cfs-heading-line-height: {{ section.settings.heading_line_height }};
+    --cfs-heading-bottom: {{ section.settings.heading_bottom_spacing }}px;
+    --cfs-heading-max: {{ section.settings.heading_max_width }}px;
+    --cfs-faq-bg: {{ section.settings.faq_background }};
+    --cfs-faq-border: {{ section.settings.faq_border_color }};
+    --cfs-faq-border-width: {{ section.settings.faq_border_width }}px;
+    --cfs-faq-radius: {{ section.settings.faq_radius }}px;
+    --cfs-question-color: {{ section.settings.question_color }};
+    --cfs-answer-color: {{ section.settings.answer_color }};
+    --cfs-divider-color: {{ section.settings.divider_color }};
+    --cfs-icon-border: {{ section.settings.icon_border_color }};
+    --cfs-icon-color: {{ section.settings.icon_color }};
+    --cfs-icon-bg: {{ section.settings.icon_background }};
+    --cfs-question-desktop: {{ section.settings.question_size_desktop }}px;
+    --cfs-question-mobile: {{ section.settings.question_size_mobile }}px;
+    --cfs-answer-desktop: {{ section.settings.answer_size_desktop }}px;
+    --cfs-answer-mobile: {{ section.settings.answer_size_mobile }}px;
+    --cfs-faq-py: {{ section.settings.faq_padding_y }}px;
+    --cfs-faq-px: {{ section.settings.faq_padding_x }}px;
+    --cfs-faq-gap: {{ section.settings.faq_item_gap }}px;
+    --cfs-duration: {{ section.settings.animation_duration }}ms;
+  "
+>
+  <div class="custom-faq-showcase__background" aria-hidden="true">
+    <span class="custom-faq-showcase__background-left"></span>
+    <span class="custom-faq-showcase__background-right"></span>
+  </div>
+
+  <div class="custom-faq-showcase__inner">
+    <div class="custom-faq-showcase__media-column">
+      <div class="custom-faq-showcase__image-shell{% if section.settings.enable_image_shadow %} custom-faq-showcase__image-shell--shadow{% endif %}{% if section.settings.show_contact_card and section.settings.mobile_contact_placement == 'below' %} custom-faq-showcase__image-shell--contact-below{% endif %}">
+        {% if faq_image != blank %}
+          {{
+            faq_image
+            | image_url: width: 1400
+            | image_tag:
+              class: 'custom-faq-showcase__image',
+              widths: '360, 480, 640, 760, 900, 1100, 1400',
+              sizes: '(min-width: 1200px) 548px, (min-width: 750px) 46vw, calc(100vw - 40px)',
+              alt: faq_image_alt,
+              loading: 'lazy'
+          }}
+        {% else %}
+          {{ 'image' | placeholder_svg_tag: 'custom-faq-showcase__placeholder' }}
+        {% endif %}
+        <span class="custom-faq-showcase__image-overlay" aria-hidden="true"></span>
+
+        {% if section.settings.show_contact_card %}
+          <a
+            class="custom-faq-showcase__contact-card custom-faq-showcase__contact-card--{{ section.settings.mobile_contact_placement }}"
+            href="{{ phone_href }}"
+            aria-label="Call {{ section.settings.phone_number | escape }}"
+          >
+            <span class="custom-faq-showcase__contact-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8.17 3.5H5.64c-.63 0-1.14.51-1.14 1.14 0 8.21 6.65 14.86 14.86 14.86.63 0 1.14-.51 1.14-1.14v-2.53c0-.55-.39-1.02-.93-1.12l-3.42-.68c-.49-.1-.99.08-1.31.47l-.75.91a12.19 12.19 0 0 1-5.5-5.5l.91-.75c.39-.32.57-.82.47-1.31l-.68-3.42a1.14 1.14 0 0 0-1.12-.93Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span class="custom-faq-showcase__contact-copy">
+              <span class="custom-faq-showcase__phone">{{ section.settings.phone_number | escape }}</span>
+              {% if section.settings.contact_supporting_text != blank %}
+                <span class="custom-faq-showcase__supporting">{{ section.settings.contact_supporting_text | escape }}</span>
+              {% endif %}
+            </span>
+          </a>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="custom-faq-showcase__content-column">
+      {% if section.settings.show_eyebrow and section.settings.eyebrow_text != blank %}
+        <div class="custom-faq-showcase__eyebrow">{{ section.settings.eyebrow_text | escape }}</div>
+      {% endif %}
+
+      {% if section.settings.heading != blank %}
+        <h2 class="custom-faq-showcase__heading">{{ section.settings.heading | escape }}</h2>
+      {% endif %}
+
+      <div class="custom-faq-showcase__accordion" role="presentation">
+        {% for block in section.blocks %}
+          {% liquid
+            assign should_open = block.settings.open_by_default
+            if section.settings.open_first_item and forloop.first
+              assign should_open = true
+            endif
+          %}
+          <div
+            class="custom-faq-showcase__item{% if should_open %} is-open{% endif %}"
+            data-faq-item
+            {{ block.shopify_attributes }}
+          >
+            <h3 class="custom-faq-showcase__question-heading">
+              <button
+                class="custom-faq-showcase__question"
+                type="button"
+                aria-expanded="{% if should_open %}true{% else %}false{% endif %}"
+                aria-controls="CustomFaqPanel-{{ section.id }}-{{ block.id }}"
+                id="CustomFaqButton-{{ section.id }}-{{ block.id }}"
+                data-faq-toggle
+              >
+                <span>{{ block.settings.question | escape }}</span>
+                <span class="custom-faq-showcase__chevron" aria-hidden="true">
+                  <svg viewBox="0 0 20 20" width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="m7.5 4.75 5.25 5.25-5.25 5.25" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </button>
+            </h3>
+
+            <div
+              class="custom-faq-showcase__answer-panel"
+              id="CustomFaqPanel-{{ section.id }}-{{ block.id }}"
+              role="region"
+              aria-labelledby="CustomFaqButton-{{ section.id }}-{{ block.id }}"
+              aria-hidden="{% if should_open %}false{% else %}true{% endif %}"
+              {% unless should_open %}inert{% endunless %}
+              data-faq-panel
+            >
+              <div class="custom-faq-showcase__answer-inner">
+                <div class="custom-faq-showcase__divider" aria-hidden="true"></div>
+                <div class="custom-faq-showcase__answer rte">{{ block.settings.answer }}</div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  #CustomFaqShowcase-{{ section.id }} {
+    position: relative;
+    isolation: isolate;
+    min-height: var(--cfs-min-height);
+    padding: var(--cfs-pt) 0 var(--cfs-pb);
+    overflow: hidden;
+    color: var(--cfs-heading-color);
+  }
+
+  #CustomFaqShowcase-{{ section.id }} *,
+  #CustomFaqShowcase-{{ section.id }} *::before,
+  #CustomFaqShowcase-{{ section.id }} *::after {
+    box-sizing: border-box;
+  }
+
+  #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__background {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    display: flex;
+    pointer-events: none;
+  }
+
+  #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__background-left {
+    width: var(--cfs-left-width);
+    flex: 0 0 var(--cfs-left-width);
+    background: var(--cfs-left-bg);
+  }
+
+  #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__background-right {
+    flex: 1 1 auto;
+    background: var(--cfs-right-bg);
+  }
+
+  #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__inner {
+    width: min(calc(100% - 40px), var(--cfs-content-max));
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 560px);
+    gap: var(--cfs-column-gap);
+    align-items: start;
+  }
+
+  #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__media-column {
+    width: min(100%, var(--cfs-image-width));
+    justify-self: center;
+    min-width: 0;
+  }
+
+  #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__image-shell {
+    position: relative;
+    width: 100%;
+    height: var(--cfs-image-height);
+    border-radius: var(--cfs-image-radius);
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.18);
+  }
+
+  #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__image-shell--shadow {
+    box-shadow: 0 16px 38px rgba(16, 61, 18, 0.12);
+  }
+
+  #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__image,
+  #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__placeholder {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: var(--cfs-image-position);
+  }
+
+  #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__placeholder {
+    background: rgba(255, 255, 255, 0.25);
+    color: rgba(16, 61, 18, 0.28);
+  }
+
+  #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__image-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: #000;
+    opacity: var(--cfs-image-overlay);
+    pointer-events: none;
+  }
+
+  #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__contact-card {
+    position: absolute;
+    z-index: 2;
+    right: var(--cfs-contact-x);
+    bottom: var(--cfs-contact-y);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: min(var(--cfs-contact-width), calc(100% - 24px));
+    min-height: 92px;
+    padding: var(--cfs-contact-padding);
+    border-radius: var(--cfs-contact-radius);
+    background: var(--cfs-contact-bg);
+    color: var(--cfs-contact-text);
+    text-decoration: none;
+    line-height: 1.2;
+  }
+
+
+  #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__contact-card:focus-visible,
+  #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__question:focus-visible {
+    outline: 3px solid currentColor;
+    outline-offset: 3px;
+  }
+
+  #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__contact-icon {
+    display: grid;
+    place-items: center;
+    flex: 0 0 54px;
+    width: 54px;
+    height: 54px;
+    border-radius: 999px;
+    background: var(--cfs-contact-icon-bg);
+    color: var(--cfs-contact-icon);
+  }
+
+  #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__contact-copy {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__phone {
+    display: block;
+    font-size: clamp(17px, 1.45vw, 21px);
+    font-weight: 750;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+  }
+
+  #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__supporting {
+    display: block;
+    font-size: 14px;
+    font-weight: 650;
+  }
+
+  #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__content-column {
+    min-width: 0;
+    width: 100%;
+  }
+
+  #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    padding: var(--cfs-eyebrow-py) var(--cfs-eyebrow-px);
+    border: var(--cfs-eyebrow-border-width) solid var(--cfs-eyebrow-border);
+    border-radius: var(--cfs-eyebrow-radius);
+    background: var(--cfs-eyebrow-bg);
+    color: var(--cfs-eyebrow-text);
+    font-size: var(--cfs-eyebrow-size);
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__heading {
+    max-width: var(--cfs-heading-max);
+    margin: 18px 0 var(--cfs-heading-bottom);
+    color: var(--cfs-heading-color);
+    font-family: inherit;
+    font-size: var(--cfs-heading-desktop);
+    font-weight: var(--cfs-heading-weight);
+    line-height: var(--cfs-heading-line-height);
+    letter-spacing: -0.035em;
+  }
+
+  #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__accordion {
+    display: flex;
+    flex-direction: column;
+    gap: var(--cfs-faq-gap);
+  }
+
+  #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__item {
+    overflow: hidden;
+    border: var(--cfs-faq-border-width) solid var(--cfs-faq-border);
+    border-radius: var(--cfs-faq-radius);
+    background: var(--cfs-faq-bg);
+  }
+
+  #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__question-heading {
+    margin: 0;
+  }
+
+  #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__question {
+    appearance: none;
+    width: 100%;
+    min-height: 74px;
+    margin: 0;
+    padding: var(--cfs-faq-py) var(--cfs-faq-px);
+    border: 0;
+    background: transparent;
+    color: var(--cfs-question-color);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    text-align: left;
+    font: inherit;
+    font-size: var(--cfs-question-desktop);
+    font-weight: 750;
+    line-height: 1.35;
+  }
+
+  #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__question > span:first-child {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__chevron {
+    display: grid;
+    place-items: center;
+    flex: 0 0 34px;
+    width: 34px;
+    height: 34px;
+    border: 1px solid var(--cfs-icon-border);
+    border-radius: 999px;
+    background: var(--cfs-icon-bg);
+    color: var(--cfs-icon-color);
+  }
+
+  #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__chevron svg {
+    transition: transform var(--cfs-duration) ease;
+  }
+
+  #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__item.is-open .custom-faq-showcase__chevron svg {
+    transform: rotate(90deg);
+  }
+
+  #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__answer-panel {
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    transition: height var(--cfs-duration) ease, visibility 0s linear var(--cfs-duration);
+  }
+
+  #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__item.is-open .custom-faq-showcase__answer-panel {
+    visibility: visible;
+    transition: height var(--cfs-duration) ease, visibility 0s linear 0s;
+  }
+
+  #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__answer-inner {
+    padding: 0 var(--cfs-faq-px) calc(var(--cfs-faq-py) + 2px);
+  }
+
+  #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__divider {
+    width: 100%;
+    margin: 0 0 20px;
+    border-top: 1px dashed var(--cfs-divider-color);
+  }
+
+  #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__answer {
+    color: var(--cfs-answer-color);
+    font-size: var(--cfs-answer-desktop);
+    line-height: 1.55;
+  }
+
+  #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__answer > *:first-child {
+    margin-top: 0;
+  }
+
+  #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__answer > *:last-child {
+    margin-bottom: 0;
+  }
+
+  @media screen and (max-width: 1199px) and (min-width: 750px) {
+    #CustomFaqShowcase-{{ section.id }} {
+      min-height: auto;
+    }
+
+    #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__inner {
+      grid-template-columns: minmax(0, 44%) minmax(0, 56%);
+      gap: clamp(24px, 4vw, var(--cfs-column-gap));
+    }
+
+    #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__media-column {
+      width: 100%;
+    }
+
+    #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__image-shell {
+      height: min(var(--cfs-image-height), 56vw);
+    }
+
+    #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__heading {
+      font-size: var(--cfs-heading-tablet);
+    }
+
+    #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__contact-card {
+      right: 14px;
+      bottom: 14px;
+      width: min(var(--cfs-contact-width), calc(100% - 28px));
+      min-height: 82px;
+      gap: 10px;
+      padding: min(var(--cfs-contact-padding), 16px);
+    }
+
+    #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__contact-icon {
+      flex-basis: 46px;
+      width: 46px;
+      height: 46px;
+    }
+
+    #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__phone {
+      font-size: clamp(15px, 1.8vw, 19px);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    #CustomFaqShowcase-{{ section.id }} {
+      min-height: 0;
+      padding: 0;
+      background: var(--cfs-right-bg);
+      overflow: hidden;
+    }
+
+    #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__background {
+      display: none;
+    }
+
+    #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__inner {
+      width: calc(100% - (var(--cfs-mobile-side) * 2));
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__media-column,
+    #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__content-column {
+      position: relative;
+      width: 100%;
+      max-width: none;
+      isolation: isolate;
+    }
+
+    #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__media-column {
+      padding-top: var(--cfs-mobile-pt);
+      padding-bottom: 38px;
+      background: var(--cfs-left-bg);
+      box-shadow: 0 0 0 100vmax var(--cfs-left-bg);
+      clip-path: inset(0 -100vmax);
+    }
+
+    #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__content-column {
+      padding-top: 42px;
+      padding-bottom: var(--cfs-mobile-pb);
+      background: var(--cfs-right-bg);
+      box-shadow: 0 0 0 100vmax var(--cfs-right-bg);
+      clip-path: inset(0 -100vmax);
+    }
+
+    #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__image-shell {
+      width: 100%;
+      height: min(var(--cfs-image-mobile-height), 125vw);
+    }
+
+    #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__contact-card {
+      right: 14px;
+      bottom: 14px;
+      width: min(var(--cfs-contact-width), calc(100% - 28px));
+      min-height: 78px;
+      padding: min(var(--cfs-contact-padding), 15px);
+      gap: 11px;
+    }
+
+    #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__contact-card--below {
+      position: relative;
+      right: auto;
+      bottom: auto;
+      width: 100%;
+      margin-top: 14px;
+    }
+
+    #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__image-shell--contact-below {
+      height: auto;
+      overflow: visible;
+      background: transparent;
+    }
+
+    #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__image-shell--contact-below .custom-faq-showcase__image,
+    #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__image-shell--contact-below .custom-faq-showcase__placeholder,
+    #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__image-shell--contact-below .custom-faq-showcase__image-overlay {
+      height: min(var(--cfs-image-mobile-height), 125vw);
+      border-radius: var(--cfs-image-radius);
+    }
+
+    #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__contact-icon {
+      flex-basis: 46px;
+      width: 46px;
+      height: 46px;
+    }
+
+    #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__phone {
+      font-size: clamp(16px, 5.4vw, 20px);
+    }
+
+    #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__supporting {
+      font-size: 13px;
+    }
+
+    #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__heading {
+      margin-top: 16px;
+      font-size: var(--cfs-heading-mobile);
+    }
+
+    #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__question {
+      min-height: 68px;
+      gap: 12px;
+      font-size: var(--cfs-question-mobile);
+    }
+
+    #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__answer {
+      font-size: var(--cfs-answer-mobile);
+    }
+
+    #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__chevron {
+      flex-basis: 32px;
+      width: 32px;
+      height: 32px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__chevron svg,
+    #CustomFaqShowcase-{{ section.id }} .custom-faq-showcase__answer-panel {
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
+
+<script>
+  (() => {
+    const selector = '[data-custom-faq-showcase]';
+
+    function initialiseFaqShowcase(section) {
+      if (!section || section.dataset.faqInitialised === 'true') return;
+      section.dataset.faqInitialised = 'true';
+
+      const allowMultiple = section.dataset.allowMultiple === 'true';
+      const configuredDuration = Number.parseInt(section.dataset.animationDuration || '350', 10);
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const duration = reducedMotion ? 0 : configuredDuration;
+      const items = Array.from(section.querySelectorAll('[data-faq-item]'));
+
+      function setPanelHeight(item, open, animate = true) {
+        const button = item.querySelector('[data-faq-toggle]');
+        const panel = item.querySelector('[data-faq-panel]');
+        if (!button || !panel) return;
+
+        window.clearTimeout(panel._faqTimer);
+
+        if (open) {
+          item.classList.add('is-open');
+          button.setAttribute('aria-expanded', 'true');
+          panel.setAttribute('aria-hidden', 'false');
+          panel.removeAttribute('inert');
+
+          if (!animate || duration === 0) {
+            panel.style.height = 'auto';
+            return;
+          }
+
+          panel.style.height = '0px';
+          requestAnimationFrame(() => {
+            panel.style.height = `${panel.scrollHeight}px`;
+          });
+
+          panel._faqTimer = window.setTimeout(() => {
+            if (item.classList.contains('is-open')) panel.style.height = 'auto';
+          }, duration + 30);
+        } else {
+          button.setAttribute('aria-expanded', 'false');
+          panel.setAttribute('aria-hidden', 'true');
+          panel.setAttribute('inert', '');
+
+          if (!animate || duration === 0) {
+            item.classList.remove('is-open');
+            panel.style.height = '0px';
+            return;
+          }
+
+          if (panel.style.height === 'auto' || !panel.style.height) {
+            panel.style.height = `${panel.scrollHeight}px`;
+          }
+
+          requestAnimationFrame(() => {
+            item.classList.remove('is-open');
+            panel.style.height = '0px';
+          });
+        }
+      }
+
+      const initiallyOpen = items.filter((item) => item.classList.contains('is-open'));
+      if (!allowMultiple && initiallyOpen.length > 1) {
+        initiallyOpen.slice(1).forEach((item) => setPanelHeight(item, false, false));
+      }
+
+      items.forEach((item) => {
+        const isOpen = item.classList.contains('is-open');
+        setPanelHeight(item, isOpen, false);
+
+        const button = item.querySelector('[data-faq-toggle]');
+        if (!button) return;
+
+        button.addEventListener('click', () => {
+          const willOpen = !item.classList.contains('is-open');
+
+          if (willOpen && !allowMultiple) {
+            items.forEach((otherItem) => {
+              if (otherItem !== item && otherItem.classList.contains('is-open')) {
+                setPanelHeight(otherItem, false, true);
+              }
+            });
+          }
+
+          setPanelHeight(item, willOpen, true);
+        });
+      });
+
+      section.addEventListener('faq:open-block', (event) => {
+        const item = event.detail && event.detail.item;
+        if (!item) return;
+
+        if (!allowMultiple) {
+          items.forEach((otherItem) => {
+            if (otherItem !== item && otherItem.classList.contains('is-open')) {
+              setPanelHeight(otherItem, false, false);
+            }
+          });
+        }
+        setPanelHeight(item, true, false);
+      });
+    }
+
+    function initialiseAll(root = document) {
+      root.querySelectorAll(selector).forEach(initialiseFaqShowcase);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => initialiseAll(document), { once: true });
+    } else {
+      initialiseAll(document);
+    }
+
+    if (!window.__customFaqShowcaseThemeEventsBound) {
+      window.__customFaqShowcaseThemeEventsBound = true;
+
+      document.addEventListener('shopify:section:load', (event) => {
+        initialiseAll(event.target);
+      });
+
+      document.addEventListener('shopify:block:select', (event) => {
+        const item = event.target.closest('[data-faq-item]');
+        const section = event.target.closest(selector);
+        if (!item || !section) return;
+        section.dispatchEvent(new CustomEvent('faq:open-block', { detail: { item } }));
+      });
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "FAQ image showcase",
+  "tag": "section",
+  "class": "section-custom-faq-showcase",
+  "max_blocks": 20,
+  "settings": [
+    {
+      "type": "header",
+      "content": "General"
+    },
+    {
+      "type": "text",
+      "id": "custom_class",
+      "label": "Section custom class"
+    },
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "min": 1000,
+      "max": 1600,
+      "step": 20,
+      "unit": "px",
+      "label": "Content maximum width",
+      "default": 1280
+    },
+    {
+      "type": "color",
+      "id": "left_background",
+      "label": "Left background color",
+      "default": "#176408"
+    },
+    {
+      "type": "color",
+      "id": "right_background",
+      "label": "Right background color",
+      "default": "#FFF5D1"
+    },
+    {
+      "type": "range",
+      "id": "left_split_width",
+      "min": 25,
+      "max": 50,
+      "step": 1,
+      "unit": "%",
+      "label": "Left split width",
+      "default": 35
+    },
+    {
+      "type": "range",
+      "id": "desktop_padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Desktop top padding",
+      "default": 84
+    },
+    {
+      "type": "range",
+      "id": "desktop_padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Desktop bottom padding",
+      "default": 84
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "min": 0,
+      "max": 96,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile top padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "min": 0,
+      "max": 96,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile bottom padding",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "desktop_column_gap",
+      "min": 20,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Desktop column gap",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "mobile_side_padding",
+      "min": 12,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Mobile side padding",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "desktop_min_height",
+      "min": 500,
+      "max": 1000,
+      "step": 10,
+      "unit": "px",
+      "label": "Desktop minimum height",
+      "default": 760
+    },
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "featured_image",
+      "label": "Featured image"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image alt text"
+    },
+    {
+      "type": "range",
+      "id": "image_width",
+      "min": 360,
+      "max": 700,
+      "step": 4,
+      "unit": "px",
+      "label": "Image desktop width",
+      "default": 548
+    },
+    {
+      "type": "range",
+      "id": "image_height",
+      "min": 420,
+      "max": 760,
+      "step": 4,
+      "unit": "px",
+      "label": "Image desktop height",
+      "default": 588
+    },
+    {
+      "type": "range",
+      "id": "image_mobile_height",
+      "min": 280,
+      "max": 680,
+      "step": 4,
+      "unit": "px",
+      "label": "Image mobile height",
+      "default": 440
+    },
+    {
+      "type": "range",
+      "id": "image_radius",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Image border radius",
+      "default": 16
+    },
+    {
+      "type": "select",
+      "id": "image_focal_position",
+      "label": "Image focal position",
+      "default": "center center",
+      "options": [
+        { "value": "left top", "label": "Top left" },
+        { "value": "center top", "label": "Top center" },
+        { "value": "right top", "label": "Top right" },
+        { "value": "left center", "label": "Center left" },
+        { "value": "center center", "label": "Center" },
+        { "value": "right center", "label": "Center right" },
+        { "value": "left bottom", "label": "Bottom left" },
+        { "value": "center bottom", "label": "Bottom center" },
+        { "value": "right bottom", "label": "Bottom right" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "image_overlay_opacity",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "%",
+      "label": "Image overlay opacity",
+      "default": 0
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_image_shadow",
+      "label": "Enable subtle image shadow",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Contact card"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_contact_card",
+      "label": "Show contact card",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "phone_number",
+      "label": "Phone number",
+      "default": "+123 456 789 963"
+    },
+    {
+      "type": "url",
+      "id": "phone_link",
+      "label": "Phone link"
+    },
+    {
+      "type": "text",
+      "id": "contact_supporting_text",
+      "label": "Supporting text",
+      "default": "Book a free visiting"
+    },
+    {
+      "type": "color",
+      "id": "contact_background",
+      "label": "Card background color",
+      "default": "#FFCA0A"
+    },
+    {
+      "type": "color",
+      "id": "contact_text_color",
+      "label": "Card text color",
+      "default": "#0D3E12"
+    },
+    {
+      "type": "color",
+      "id": "contact_icon_background",
+      "label": "Icon circle color",
+      "default": "#176408"
+    },
+    {
+      "type": "color",
+      "id": "contact_icon_color",
+      "label": "Icon color",
+      "default": "#FFCA0A"
+    },
+    {
+      "type": "range",
+      "id": "contact_radius",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Card border radius",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "contact_padding",
+      "min": 12,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Card padding",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "contact_width",
+      "min": 220,
+      "max": 380,
+      "step": 2,
+      "unit": "px",
+      "label": "Desktop card width",
+      "default": 278
+    },
+    {
+      "type": "range",
+      "id": "contact_x",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Desktop right position",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "contact_y",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Desktop bottom position",
+      "default": 24
+    },
+    {
+      "type": "select",
+      "id": "mobile_contact_placement",
+      "label": "Mobile contact-card placement",
+      "default": "overlay",
+      "options": [
+        { "value": "overlay", "label": "Overlay on image" },
+        { "value": "below", "label": "Below image" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "FAQ heading"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_eyebrow",
+      "label": "Show eyebrow label",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "eyebrow_text",
+      "label": "Eyebrow text",
+      "default": "Frequently Asked Questions"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_text_color",
+      "label": "Eyebrow text color",
+      "default": "#2D7A23"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_border_color",
+      "label": "Eyebrow border color",
+      "default": "#2D7A23"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_background",
+      "label": "Eyebrow background color",
+      "default": "#FFF5D1"
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_font_size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Eyebrow font size",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_border_width",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "label": "Eyebrow border width",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_radius",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "label": "Eyebrow border radius",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_padding_x",
+      "min": 8,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "label": "Eyebrow horizontal padding",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_padding_y",
+      "min": 4,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "label": "Eyebrow vertical padding",
+      "default": 8
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "How Can We Help You?"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#0D3E12"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desktop",
+      "min": 28,
+      "max": 72,
+      "step": 1,
+      "unit": "px",
+      "label": "Heading desktop font size",
+      "default": 44
+    },
+    {
+      "type": "range",
+      "id": "heading_size_tablet",
+      "min": 24,
+      "max": 56,
+      "step": 1,
+      "unit": "px",
+      "label": "Heading tablet font size",
+      "default": 38
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "min": 24,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "label": "Heading mobile font size",
+      "default": 32
+    },
+    {
+      "type": "select",
+      "id": "heading_weight",
+      "label": "Heading font weight",
+      "default": "700",
+      "options": [
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" },
+        { "value": "800", "label": "800" },
+        { "value": "900", "label": "900" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "heading_line_height",
+      "label": "Heading line height",
+      "default": "1.1",
+      "options": [
+        { "value": "1", "label": "1.0" },
+        { "value": "1.05", "label": "1.05" },
+        { "value": "1.1", "label": "1.10" },
+        { "value": "1.2", "label": "1.20" },
+        { "value": "1.3", "label": "1.30" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "heading_bottom_spacing",
+      "min": 10,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading bottom spacing",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "heading_max_width",
+      "min": 300,
+      "max": 700,
+      "step": 10,
+      "unit": "px",
+      "label": "Heading maximum width",
+      "default": 600
+    },
+    {
+      "type": "header",
+      "content": "FAQ design"
+    },
+    {
+      "type": "color",
+      "id": "faq_background",
+      "label": "FAQ background color",
+      "default": "#FFF5D1"
+    },
+    {
+      "type": "color",
+      "id": "faq_border_color",
+      "label": "FAQ border color",
+      "default": "#4D8C44"
+    },
+    {
+      "type": "range",
+      "id": "faq_border_width",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "label": "FAQ border width",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "faq_radius",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "label": "FAQ border radius",
+      "default": 11
+    },
+    {
+      "type": "color",
+      "id": "question_color",
+      "label": "Question text color",
+      "default": "#173D17"
+    },
+    {
+      "type": "color",
+      "id": "answer_color",
+      "label": "Answer text color",
+      "default": "#6B7057"
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "label": "Divider color",
+      "default": "#4D8C44"
+    },
+    {
+      "type": "color",
+      "id": "icon_border_color",
+      "label": "Icon border color",
+      "default": "#4D8C44"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon color",
+      "default": "#2D7A23"
+    },
+    {
+      "type": "color",
+      "id": "icon_background",
+      "label": "Icon background color",
+      "default": "#FFF5D1"
+    },
+    {
+      "type": "range",
+      "id": "question_size_desktop",
+      "min": 14,
+      "max": 26,
+      "step": 1,
+      "unit": "px",
+      "label": "Question desktop font size",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "question_size_mobile",
+      "min": 14,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "label": "Question mobile font size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "answer_size_desktop",
+      "min": 13,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "label": "Answer desktop font size",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "answer_size_mobile",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Answer mobile font size",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "faq_padding_y",
+      "min": 12,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "FAQ vertical padding",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "faq_padding_x",
+      "min": 14,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "FAQ horizontal padding",
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "faq_item_gap",
+      "min": 8,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Space between FAQ items",
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "animation_duration",
+      "min": 100,
+      "max": 700,
+      "step": 50,
+      "unit": "ms",
+      "label": "Accordion animation duration",
+      "default": 350
+    },
+    {
+      "type": "checkbox",
+      "id": "allow_multiple",
+      "label": "Allow multiple open items",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "open_first_item",
+      "label": "Open first item by default",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "FAQ item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "What types of produce do you grow?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>We grow a wide range of fresh produce, including seasonal fruits, vegetables, herbs, and specialty crops.</p>"
+        },
+        {
+          "type": "checkbox",
+          "id": "open_by_default",
+          "label": "Open by default",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ Image Showcase",
+      "blocks": [
+        {
+          "type": "faq",
+          "settings": {
+            "question": "What types of produce do you grow?",
+            "answer": "<p>We grow a wide range of fresh produce, including fruits like strawberries and grapes, vegetables such as tomatoes, carrots, and leafy greens, as well as herbs and specialty crops like microgreens and gourmet vegetables.</p>",
+            "open_by_default": true
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "How can I purchase your products?",
+            "answer": "<p>You can purchase our products directly from the farm, through selected local retailers, or by contacting us for current availability and ordering options.</p>",
+            "open_by_default": false
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Do you offer farm tours?",
+            "answer": "<p>Yes. Farm tours are available by appointment, and we recommend booking in advance so we can prepare the best possible experience.</p>",
+            "open_by_default": false
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Do you use any chemicals or pesticides?",
+            "answer": "<p>We follow responsible growing practices and use crop treatments only when necessary, with careful attention to safety, quality, and environmental impact.</p>",
+            "open_by_default": false
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
