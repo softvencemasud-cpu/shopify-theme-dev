@@ -17,26 +17,14 @@
         alt: section.settings.heading
     }}
   {%- else -%}
-    <!-- Fallback Graphic Lifestyle Stairs SVG Background -->
-    <svg class="jotar-promo-banner__bg" viewBox="0 0 1440 500" preserveAspectRatio="xMidYMid slice" fill="none">
-      <rect width="1440" height="500" fill="#141414"/>
-      <!-- Urban concrete steps perspective lines -->
-      <path d="M 0 350 L 1440 300 L 1440 380 L 0 430 Z" fill="#202020"/>
-      <path d="M 0 430 L 1440 380 L 1440 500 L 0 500 Z" fill="#181818"/>
-      <path d="M 0 280 L 1440 230 L 1440 300 L 0 350 Z" fill="#282828"/>
-      <!-- Lifestyle shoe resting on step on right side -->
-      <g transform="translate(700, 140) rotate(-6)">
-        <!-- Sneaker on stairs silhouette -->
-        <path d="M 120 180 C 140 130, 200 95, 270 80 C 330 65, 390 45, 440 30 C 470 20, 495 40, 485 65 C 470 105, 500 145, 530 180 L 120 180 Z" fill="#111111"/>
-        <path d="M 170 120 C 230 90, 310 90, 370 70 C 340 100, 280 130, 200 130 Z" fill="#2a2a2a"/>
-        <!-- Sculpted Midsole -->
-        <path d="M 100 180 C 160 170, 280 172, 380 168 C 450 164, 530 172, 550 180 C 555 195, 535 215, 480 220 C 370 225, 240 225, 130 220 C 100 218, 90 200, 100 180 Z" fill="#ffffff"/>
-        <!-- Gum Outsole Accent -->
-        <path d="M 120 218 C 220 224, 380 224, 490 218 C 470 230, 140 230, 120 218 Z" fill="#bfa074"/>
-        <!-- Pant cuff -->
-        <path d="M 410 40 C 430 -20, 470 -40, 520 -40 C 540 -10, 510 30, 480 50 Z" fill="#090909"/>
-      </g>
-    </svg>
+    <img
+      src="{{ 'jotar-lifestyle-banner.jpg' | asset_url }}"
+      alt="{{ section.settings.heading | default: 'Built For Every Step' | escape }}"
+      class="jotar-promo-banner__bg"
+      loading="lazy"
+      width="1920"
+      height="1080"
+    >
   {%- endif -%}
 
   <div

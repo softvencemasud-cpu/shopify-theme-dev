@@ -71,40 +71,15 @@
             }}
           </picture>
         {%- else -%}
-          {% comment %} Polished inline SVG sneaker fallback matching screenshot {% endcomment %}
-          <svg class="jotar-hero__image" viewBox="0 0 600 380" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <filter id="heroDropShadow" x="-20%" y="-20%" width="140%" height="150%">
-                <feDropShadow dx="0" dy="28" stdDeviation="24" flood-color="#000000" flood-opacity="0.22" />
-              </filter>
-              <linearGradient id="soleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#ffffff"/>
-                <stop offset="60%" stop-color="#f0f0f0"/>
-                <stop offset="100%" stop-color="#e2e2e0"/>
-              </linearGradient>
-            </defs>
-            <g filter="url(#heroDropShadow)">
-              <!-- Outer Sneaker Silhouette -->
-              <path d="M 80 230 C 100 170, 160 120, 240 100 C 310 85, 380 60, 440 40 C 470 30, 500 55, 490 85 C 475 130, 510 180, 540 220 C 560 245, 540 270, 490 275 L 120 275 C 90 275, 70 255, 80 230 Z" fill="#0f0f0f" />
-              <!-- White Leather Accents & Wave -->
-              <path d="M 120 220 C 180 180, 260 210, 340 160 C 410 120, 450 70, 470 65 C 480 80, 460 120, 440 150 C 400 200, 310 225, 230 230 Z" fill="#f8f8f8" />
-              <!-- Mesh / Insole Collar -->
-              <path d="M 430 50 C 450 75, 460 100, 440 125 C 420 105, 410 80, 420 55 Z" fill="#252525" />
-              <!-- Black Swoosh Wave Overlay -->
-              <path d="M 220 185 C 280 155, 350 145, 400 120 C 370 160, 300 195, 220 185 Z" fill="#111111" />
-              <!-- Thick Sculpted Midsole -->
-              <path d="M 70 260 C 120 250, 250 255, 340 248 C 420 242, 510 248, 555 252 C 565 275, 545 305, 490 310 C 380 315, 220 315, 110 310 C 70 305, 55 285, 70 260 Z" fill="url(#soleGrad)" />
-              <!-- Wavy Traction Line -->
-              <path d="M 85 285 Q 160 270 240 288 T 400 285 T 530 280" stroke="#111111" stroke-width="4" fill="none" stroke-linecap="round" />
-              <!-- Outsole Bottom Grip -->
-              <path d="M 90 308 C 180 314, 380 314, 510 308 C 480 322, 140 322, 90 308 Z" fill="#111111" />
-              <!-- Lacing Eyelets Detail -->
-              <circle cx="340" cy="115" r="4" fill="#ffffff" />
-              <circle cx="370" cy="95" r="4" fill="#ffffff" />
-              <circle cx="400" cy="75" r="4" fill="#ffffff" />
-              <path d="M 330 120 L 360 105 M 360 100 L 390 85 M 390 80 L 420 65" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" />
-            </g>
-          </svg>
+          <img
+            src="{{ 'jotar-hero-desktop.jpg' | asset_url }}"
+            alt="{{ section.settings.heading | default: 'New Collection Sneakers' | escape }}"
+            class="jotar-hero__image"
+            loading="eager"
+            fetchpriority="high"
+            width="1200"
+            height="675"
+          >
         {%- endif -%}
       </div>
     </div>

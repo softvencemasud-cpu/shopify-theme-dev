@@ -42,12 +42,18 @@
                   alt: 'Social Style Look'
               }}
             {%- else -%}
-              <!-- Fallback Lifestyle Photo representation -->
-              <svg class="jotar-social-card__image" viewBox="0 0 200 170" fill="none">
-                <rect width="200" height="170" fill="#ededed"/>
-                <circle cx="100" cy="85" r="40" fill="#dddddd"/>
-                <path d="M 60 120 C 75 90, 125 80, 155 120 Z" fill="#222"/>
-              </svg>
+              {%- assign social_img = 'jotar-social-01.jpg' -%}
+              {%- if forloop.index == 2 -%}{%- assign social_img = 'jotar-social-02.jpg' -%}{%- endif -%}
+              {%- if forloop.index == 3 -%}{%- assign social_img = 'jotar-social-03.jpg' -%}{%- endif -%}
+              {%- if forloop.index == 4 -%}{%- assign social_img = 'jotar-social-04.jpg' -%}{%- endif -%}
+              {%- if forloop.index == 5 -%}{%- assign social_img = 'jotar-social-05.jpg' -%}{%- endif -%}
+              {%- if forloop.index == 6 -%}{%- assign social_img = 'jotar-social-06.jpg' -%}{%- endif -%}
+              <img
+                src="{{ social_img | asset_url }}"
+                alt="Social Style Look"
+                class="jotar-social-card__image"
+                loading="lazy"
+              >
             {%- endif -%}
 
             <div class="jotar-social-card__icon" aria-label="Instagram">
@@ -60,40 +66,67 @@
           </a>
         {%- endfor -%}
       {%- else -%}
-        <!-- 6 Fallback Social Items Matching Screenshot -->
-        {%- for i in (1..6) -%}
-          <a href="https://instagram.com" class="jotar-social-card" target="_blank" rel="noopener noreferrer">
-            <svg class="jotar-social-card__image" viewBox="0 0 200 170" fill="none">
-              {%- case i -%}
-                {%- when 1 -%}
-                  <rect width="200" height="170" fill="#1c1c1c"/>
-                  <path d="M 40 120 C 55 80, 110 70, 160 120 Z" fill="#2e2e2e"/>
-                {%- when 2 -%}
-                  <rect width="200" height="170" fill="#eae4db"/>
-                  <path d="M 40 120 C 55 80, 110 70, 160 120 Z" fill="#d2c3af"/>
-                {%- when 3 -%}
-                  <rect width="200" height="170" fill="#f4f4f4"/>
-                  <path d="M 40 120 C 55 80, 110 70, 160 120 Z" fill="#111111"/>
-                {%- when 4 -%}
-                  <rect width="200" height="170" fill="#111111"/>
-                  <path d="M 40 120 C 55 80, 110 70, 160 120 Z" fill="#333333"/>
-                {%- when 5 -%}
-                  <rect width="200" height="170" fill="#ffffff"/>
-                  <path d="M 40 120 C 55 80, 110 70, 160 120 Z" fill="#e0e0e0"/>
-                {%- else -%}
-                  <rect width="200" height="170" fill="#262626"/>
-                  <path d="M 40 120 C 55 80, 110 70, 160 120 Z" fill="#ffffff"/>
-              {%- endcase -%}
+        <!-- 6 Fallback Social Items with Real Photographic Images -->
+        <a href="https://instagram.com" class="jotar-social-card" target="_blank" rel="noopener noreferrer">
+          <img src="{{ 'jotar-social-01.jpg' | asset_url }}" alt="Social Look 1" class="jotar-social-card__image" loading="lazy">
+          <div class="jotar-social-card__icon" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
             </svg>
-            <div class="jotar-social-card__icon" aria-label="Instagram">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-              </svg>
-            </div>
-          </a>
-        {%- endfor -%}
+          </div>
+        </a>
+        <a href="https://instagram.com" class="jotar-social-card" target="_blank" rel="noopener noreferrer">
+          <img src="{{ 'jotar-social-02.jpg' | asset_url }}" alt="Social Look 2" class="jotar-social-card__image" loading="lazy">
+          <div class="jotar-social-card__icon" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </div>
+        </a>
+        <a href="https://instagram.com" class="jotar-social-card" target="_blank" rel="noopener noreferrer">
+          <img src="{{ 'jotar-social-03.jpg' | asset_url }}" alt="Social Look 3" class="jotar-social-card__image" loading="lazy">
+          <div class="jotar-social-card__icon" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </div>
+        </a>
+        <a href="https://instagram.com" class="jotar-social-card" target="_blank" rel="noopener noreferrer">
+          <img src="{{ 'jotar-social-04.jpg' | asset_url }}" alt="Social Look 4" class="jotar-social-card__image" loading="lazy">
+          <div class="jotar-social-card__icon" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </div>
+        </a>
+        <a href="https://instagram.com" class="jotar-social-card" target="_blank" rel="noopener noreferrer">
+          <img src="{{ 'jotar-social-05.jpg' | asset_url }}" alt="Social Look 5" class="jotar-social-card__image" loading="lazy">
+          <div class="jotar-social-card__icon" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </div>
+        </a>
+        <a href="https://instagram.com" class="jotar-social-card" target="_blank" rel="noopener noreferrer">
+          <img src="{{ 'jotar-social-06.jpg' | asset_url }}" alt="Social Look 6" class="jotar-social-card__image" loading="lazy">
+          <div class="jotar-social-card__icon" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </div>
+        </a>
       {%- endif -%}
     </div>
   </div>

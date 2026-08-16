@@ -25,10 +25,15 @@
                   | image_tag: class: 'jotar-review-card__avatar', loading: 'lazy', alt: block.settings.name
                 }}
               {%- else -%}
-                <!-- Generic stylish avatar -->
-                <div class="jotar-review-card__avatar" style="display:flex;align-items:center;justify-content:center;background:#222;color:#fff;font-weight:700;font-size:14px;">
-                  {{ block.settings.name | slice: 0, 1 | upcase | default: 'U' }}
-                </div>
+                {%- assign default_avatar = 'jotar-avatar-01.jpg' -%}
+                {%- if forloop.index == 2 -%}{%- assign default_avatar = 'jotar-avatar-02.jpg' -%}{%- endif -%}
+                {%- if forloop.index == 3 -%}{%- assign default_avatar = 'jotar-avatar-03.jpg' -%}{%- endif -%}
+                <img
+                  src="{{ default_avatar | asset_url }}"
+                  alt="{{ block.settings.name | escape }}"
+                  class="jotar-review-card__avatar"
+                  loading="lazy"
+                >
               {%- endif -%}
               <div class="jotar-review-card__meta">
                 <h4 class="jotar-review-card__name">{{ block.settings.name }}</h4>
@@ -38,15 +43,13 @@
           </div>
         {%- endfor -%}
       {%- else -%}
-        <!-- 3 Fallback Customer Reviews Matching Screenshot -->
+        <!-- 3 Fallback Customer Reviews with Real Avatars -->
         <!-- Review 1: Rafiq Hasan -->
         <div class="jotar-review-card">
           <div class="jotar-review-card__stars">★★★★★</div>
           <p class="jotar-review-card__quote">“Super comfortable and looks even better in person. Worth every penny!”</p>
           <div class="jotar-review-card__author">
-            <div class="jotar-review-card__avatar" style="display:flex;align-items:center;justify-content:center;background:#2b2b2b;color:#fff;font-weight:700;font-size:14px;">
-              RH
-            </div>
+            <img src="{{ 'jotar-avatar-01.jpg' | asset_url }}" alt="Rafiq Hasan" class="jotar-review-card__avatar" loading="lazy">
             <div class="jotar-review-card__meta">
               <h4 class="jotar-review-card__name">Rafiq Hasan</h4>
               <p class="jotar-review-card__badge">Verified Buyer</p>
@@ -59,9 +62,7 @@
           <div class="jotar-review-card__stars">★★★★★</div>
           <p class="jotar-review-card__quote">“The quality is premium and delivery was super fast.”</p>
           <div class="jotar-review-card__author">
-            <div class="jotar-review-card__avatar" style="display:flex;align-items:center;justify-content:center;background:#444;color:#fff;font-weight:700;font-size:14px;">
-              NJ
-            </div>
+            <img src="{{ 'jotar-avatar-02.jpg' | asset_url }}" alt="Nusrat Jahan" class="jotar-review-card__avatar" loading="lazy">
             <div class="jotar-review-card__meta">
               <h4 class="jotar-review-card__name">Nusrat Jahan</h4>
               <p class="jotar-review-card__badge">Verified Buyer</p>
@@ -74,9 +75,7 @@
           <div class="jotar-review-card__stars">★★★★★</div>
           <p class="jotar-review-card__quote">“My go-to sneakers brand now. Love the design!”</p>
           <div class="jotar-review-card__author">
-            <div class="jotar-review-card__avatar" style="display:flex;align-items:center;justify-content:center;background:#1a1a1a;color:#fff;font-weight:700;font-size:14px;">
-              TA
-            </div>
+            <img src="{{ 'jotar-avatar-03.jpg' | asset_url }}" alt="Tanvir Ahmed" class="jotar-review-card__avatar" loading="lazy">
             <div class="jotar-review-card__meta">
               <h4 class="jotar-review-card__name">Tanvir Ahmed</h4>
               <p class="jotar-review-card__badge">Verified Buyer</p>

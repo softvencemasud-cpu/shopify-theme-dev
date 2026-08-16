@@ -33,83 +33,62 @@
               {%- else -%}
                 {%- case forloop.index -%}
                   {%- when 1 -%}
-                    <!-- High-top Sneaker SVG -->
-                    <svg class="jotar-category-card__image" viewBox="0 0 280 180" fill="none">
-                      <path d="M 40 140 C 55 90, 80 50, 115 45 C 135 40, 145 65, 140 90 C 175 95, 220 110, 250 140 L 40 140 Z" fill="#ffffff"/>
-                      <path d="M 70 85 C 95 65, 125 60, 130 95 C 105 105, 80 100, 70 85 Z" fill="#111111"/>
-                      <path d="M 35 140 C 90 135, 200 135, 255 140 C 255 155, 220 160, 150 160 C 80 160, 35 155, 35 140 Z" fill="#ececeb"/>
-                      <path d="M 120 105 C 160 100, 195 110, 225 125 C 205 130, 160 125, 120 105 Z" fill="#111111"/>
-                    </svg>
+                    <img
+                      src="{{ 'jotar-category-sneakers.jpg' | asset_url }}"
+                      alt="Sneakers"
+                      class="jotar-category-card__image"
+                      loading="lazy"
+                    >
                   {%- when 2 -%}
-                    <!-- Sleek Running Shoe SVG -->
-                    <svg class="jotar-category-card__image" viewBox="0 0 280 180" fill="none">
-                      <path d="M 40 135 C 70 100, 130 85, 185 80 C 225 90, 245 120, 250 135 L 40 135 Z" fill="#d8d8d8"/>
-                      <path d="M 75 100 C 110 88, 160 85, 190 98 C 170 115, 120 120, 75 100 Z" fill="#ffffff"/>
-                      <path d="M 35 135 C 90 130, 210 130, 255 135 C 255 155, 220 160, 140 160 C 70 160, 35 155, 35 135 Z" fill="#f0f0f0"/>
-                      <!-- Orange Cushion Pop -->
-                      <path d="M 180 138 C 210 136, 235 140, 245 148 C 235 154, 205 154, 180 150 Z" fill="#ff6b00"/>
-                    </svg>
+                    <img
+                      src="{{ 'jotar-category-running.jpg' | asset_url }}"
+                      alt="Running"
+                      class="jotar-category-card__image"
+                      loading="lazy"
+                    >
                   {%- when 3 -%}
-                    <!-- Casual Lifestyle Tan Shoe SVG -->
-                    <svg class="jotar-category-card__image" viewBox="0 0 280 180" fill="none">
-                      <path d="M 45 135 C 65 95, 120 85, 175 80 C 220 90, 240 115, 248 135 L 45 135 Z" fill="#c4b59d"/>
-                      <path d="M 80 100 C 115 90, 155 88, 180 100 C 160 118, 120 120, 80 100 Z" fill="#dfd5c5"/>
-                      <path d="M 40 135 C 90 130, 200 130, 252 135 C 252 155, 215 160, 140 160 C 75 160, 40 155, 40 135 Z" fill="#eae4db"/>
-                      <circle cx="215" cy="148" r="4" fill="#a89a83"/>
-                    </svg>
+                    <img
+                      src="{{ 'jotar-category-casual.jpg' | asset_url }}"
+                      alt="Casual"
+                      class="jotar-category-card__image"
+                      loading="lazy"
+                    >
                   {%- else -%}
-                    <!-- Luxury Premium Black & Gold Shoe SVG -->
-                    <svg class="jotar-category-card__image" viewBox="0 0 280 180" fill="none">
-                      <path d="M 40 135 C 65 90, 125 80, 180 75 C 225 85, 248 115, 252 135 L 40 135 Z" fill="#1c1c1c"/>
-                      <path d="M 75 100 C 115 88, 160 85, 190 98 C 170 115, 120 120, 75 100 Z" fill="#292929"/>
-                      <path d="M 35 135 C 90 130, 210 130, 256 135 C 256 155, 220 160, 140 160 C 70 160, 35 155, 35 135 Z" fill="#111111"/>
-                      <!-- Gold Accent -->
-                      <path d="M 120 108 Q 165 98 210 122" stroke="#d4af37" stroke-width="2.5" fill="none"/>
-                    </svg>
+                    <img
+                      src="{{ 'jotar-category-premium.jpg' | asset_url }}"
+                      alt="Premium"
+                      class="jotar-category-card__image"
+                      loading="lazy"
+                    >
                 {%- endcase -%}
               {%- endif -%}
             </div>
           </a>
         {%- endfor -%}
       {%- else -%}
-        <!-- Default 4 Cards if none added -->
+        <!-- Default 4 Cards with Real Photographic Images -->
         <a href="{{ routes.all_products_collection_url }}" class="jotar-category-card" style="background: #181818;">
           <h3 class="jotar-category-card__title">SNEAKERS</h3>
           <div class="jotar-category-card__media">
-            <svg class="jotar-category-card__image" viewBox="0 0 280 180" fill="none">
-              <path d="M 40 140 C 55 90, 80 50, 115 45 C 135 40, 145 65, 140 90 C 175 95, 220 110, 250 140 L 40 140 Z" fill="#ffffff"/>
-              <path d="M 70 85 C 95 65, 125 60, 130 95 C 105 105, 80 100, 70 85 Z" fill="#111111"/>
-              <path d="M 35 140 C 90 135, 200 135, 255 140 C 255 155, 220 160, 150 160 C 80 160, 35 155, 35 140 Z" fill="#ececeb"/>
-            </svg>
+            <img src="{{ 'jotar-category-sneakers.jpg' | asset_url }}" alt="Sneakers" class="jotar-category-card__image" loading="lazy">
           </div>
         </a>
         <a href="{{ routes.all_products_collection_url }}" class="jotar-category-card" style="background: #24292e;">
           <h3 class="jotar-category-card__title">RUNNING</h3>
           <div class="jotar-category-card__media">
-            <svg class="jotar-category-card__image" viewBox="0 0 280 180" fill="none">
-              <path d="M 40 135 C 70 100, 130 85, 185 80 C 225 90, 245 120, 250 135 L 40 135 Z" fill="#d8d8d8"/>
-              <path d="M 35 135 C 90 130, 210 130, 255 135 C 255 155, 220 160, 140 160 C 70 160, 35 155, 35 135 Z" fill="#f0f0f0"/>
-              <path d="M 180 138 C 210 136, 235 140, 245 148 C 235 154, 205 154, 180 150 Z" fill="#ff6b00"/>
-            </svg>
+            <img src="{{ 'jotar-category-running.jpg' | asset_url }}" alt="Running" class="jotar-category-card__image" loading="lazy">
           </div>
         </a>
         <a href="{{ routes.all_products_collection_url }}" class="jotar-category-card" style="background: #332f2c;">
           <h3 class="jotar-category-card__title">CASUAL</h3>
           <div class="jotar-category-card__media">
-            <svg class="jotar-category-card__image" viewBox="0 0 280 180" fill="none">
-              <path d="M 45 135 C 65 95, 120 85, 175 80 C 220 90, 240 115, 248 135 L 45 135 Z" fill="#c4b59d"/>
-              <path d="M 40 135 C 90 130, 200 130, 252 135 C 252 155, 215 160, 140 160 C 75 160, 40 155, 40 135 Z" fill="#eae4db"/>
-            </svg>
+            <img src="{{ 'jotar-category-casual.jpg' | asset_url }}" alt="Casual" class="jotar-category-card__image" loading="lazy">
           </div>
         </a>
         <a href="{{ routes.all_products_collection_url }}" class="jotar-category-card" style="background: #191919;">
           <h3 class="jotar-category-card__title">PREMIUM</h3>
           <div class="jotar-category-card__media">
-            <svg class="jotar-category-card__image" viewBox="0 0 280 180" fill="none">
-              <path d="M 40 135 C 65 90, 125 80, 180 75 C 225 85, 248 115, 252 135 L 40 135 Z" fill="#1c1c1c"/>
-              <path d="M 35 135 C 90 130, 210 130, 256 135 C 256 155, 220 160, 140 160 C 70 160, 35 155, 35 135 Z" fill="#111111"/>
-              <path d="M 120 108 Q 165 98 210 122" stroke="#d4af37" stroke-width="2.5" fill="none"/>
-            </svg>
+            <img src="{{ 'jotar-category-premium.jpg' | asset_url }}" alt="Premium" class="jotar-category-card__image" loading="lazy">
           </div>
         </a>
       {%- endif -%}
