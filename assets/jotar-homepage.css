@@ -43,7 +43,7 @@
 /* Match container width & padding exactly with .jotar-container */
 .header__row,
 .header__row--top {
-  max-width: 1480px !important;
+  max-width: 1460px !important;
   margin-left: auto !important;
   margin-right: auto !important;
   padding-left: 0px !important;
