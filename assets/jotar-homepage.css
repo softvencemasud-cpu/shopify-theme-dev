@@ -37,6 +37,7 @@
   min-height: 72px !important;
   position: relative !important;
   z-index: 100 !important;
+  width: 100% !important;
 }
 
 .header__row,
@@ -46,15 +47,23 @@
   padding: 0 32px !important;
   width: 100% !important;
   min-height: 72px !important;
-  display: flex !important;
+  box-sizing: border-box !important;
+}
+
+/* 3-Column True Grid Layout across full width */
+.header__columns {
+  display: grid !important;
+  grid-template-columns: 1fr auto 1fr !important;
+  grid-template-areas: 'left center right' !important;
+  width: 100% !important;
   align-items: center !important;
-  justify-content: space-between !important;
+  min-height: 72px !important;
   box-sizing: border-box !important;
 }
 
 /* Left: Logo Column */
-.header__column--left,
-.header__column:first-child {
+.header__column--left {
+  grid-area: left !important;
   display: flex !important;
   align-items: center !important;
   justify-content: flex-start !important;
@@ -126,7 +135,13 @@
 }
 
 /* Center: Navigation Menu */
-.header__column--center,
+.header__column--center {
+  grid-area: center !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
 .menu-list {
   display: flex !important;
   align-items: center !important;
@@ -136,7 +151,7 @@
 .menu-list__list {
   display: flex !important;
   align-items: center !important;
-  gap: 8px !important;
+  gap: 12px !important;
   list-style: none !important;
   margin: 0 !important;
   padding: 0 !important;
@@ -152,27 +167,35 @@
   text-transform: uppercase !important;
   color: #111111 !important;
   text-decoration: none !important;
-  padding: 8px 16px !important;
+  padding: 8px 14px !important;
   border-radius: 4px !important;
-  transition: color 0.2s ease, background-color 0.2s ease !important;
+  transition: color 0.2s ease, opacity 0.2s ease !important;
   display: inline-flex !important;
   align-items: center !important;
+  background: transparent !important;
 }
 
 .menu-list__link:hover,
 .menu-list__item:hover {
-  color: #000000 !important;
-  background-color: #f7f7f7 !important;
+  color: #777777 !important;
+  background: transparent !important;
 }
 
 /* Right: Actions / Icons */
-.header__column--right,
+.header__column--right {
+  grid-area: right !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 18px !important;
+}
+
 .header-actions,
 .header__actions {
   display: flex !important;
   align-items: center !important;
   justify-content: flex-end !important;
-  gap: 16px !important;
+  gap: 18px !important;
 }
 
 .header-actions a,
@@ -188,6 +211,7 @@
   border-radius: 50% !important;
   transition: background-color 0.2s ease, transform 0.2s ease !important;
   text-decoration: none !important;
+  background: transparent !important;
 }
 
 .header-actions a:hover,
@@ -213,6 +237,10 @@
   .header__row--top {
     min-height: 60px !important;
     padding: 0 18px !important;
+  }
+  .header__columns {
+    min-height: 60px !important;
+    grid-template-columns: auto 1fr auto !important;
   }
   .jotar-brand-logo__primary {
     font-size: 1.0625rem !important;
