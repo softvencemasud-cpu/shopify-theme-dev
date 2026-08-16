@@ -2216,8 +2216,3 @@ main>.shopify-section:first-child .section:not(.disable-section-top-offset) {
   }
 }
 
-
-span.header-logo__image-container.header-logo__image-container--original {
-  color: red;
-  font-size: 50px;
-}
