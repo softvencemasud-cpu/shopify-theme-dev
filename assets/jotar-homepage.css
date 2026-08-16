@@ -251,6 +251,75 @@
 }
 
 /* ==========================================================================
+   HEADER CART BUBBLE BADGE FIX (PERFECT CIRCLE & TOP-RIGHT SHOULDER PLACEMENT)
+   ========================================================================== */
+.header-actions__cart-icon,
+cart-icon,
+.header__cart-link {
+  position: relative !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: visible !important;
+}
+
+.header-actions__cart-icon svg,
+cart-icon svg,
+.header-actions__cart-icon.header-actions__cart-icon--has-cart svg {
+  mask: none !important;
+  -webkit-mask: none !important;
+  display: block !important;
+  width: 20px !important;
+  height: 20px !important;
+}
+
+.header-actions__cart-icon .cart-bubble,
+cart-icon .cart-bubble,
+.cart-bubble {
+  position: absolute !important;
+  top: -3px !important;
+  right: -5px !important;
+  width: 18px !important;
+  height: 18px !important;
+  min-width: 18px !important;
+  max-width: 18px !important;
+  aspect-ratio: 1 / 1 !important;
+  border-radius: 50% !important;
+  background-color: #111111 !important;
+  color: #ffffff !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: 1.5px solid #ffffff !important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25) !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  z-index: 10 !important;
+}
+
+.header-actions__cart-icon .cart-bubble__background,
+cart-icon .cart-bubble__background,
+.cart-bubble .cart-bubble__background {
+  display: none !important;
+}
+
+.header-actions__cart-icon .cart-bubble__text,
+cart-icon .cart-bubble__text,
+.cart-bubble .cart-bubble__text,
+.cart-bubble__text-count {
+  font-family: var(--jotar-font-primary) !important;
+  font-size: 10px !important;
+  font-weight: 800 !important;
+  line-height: 1 !important;
+  color: #ffffff !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transform: none !important;
+  opacity: 1 !important;
+}
+
+/* ==========================================================================
    MOBILE HEADER FIX (CLEAN 3-PART BALANCED LAYOUT)
    ========================================================================== */
 @media screen and (max-width: 749px) {
