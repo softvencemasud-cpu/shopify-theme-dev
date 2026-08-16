@@ -2241,9 +2241,18 @@ main :is(.product, .product-section) {
   grid-template-columns: 1.15fr 1fr;
   gap: 48px;
   align-items: start;
+  position: relative;
 }
 
-/* Left Column: Gallery */
+/* Left Column: Sticky Gallery */
+.jotar-pdp__left-col {
+  position: sticky !important;
+  top: 90px !important;
+  align-self: start !important;
+  z-index: 10 !important;
+}
+
+/* Left Column: Gallery Media */
 .jotar-pdp__main-image-wrap {
   position: relative;
   background: #141414;
@@ -2738,6 +2747,10 @@ main :is(.product, .product-section) {
   .jotar-pdp__grid {
     grid-template-columns: 1fr;
     gap: 32px;
+  }
+  .jotar-pdp__left-col {
+    position: static !important;
+    top: unset !important;
   }
   .jotar-pdp__features {
     grid-template-columns: repeat(2, 1fr);
