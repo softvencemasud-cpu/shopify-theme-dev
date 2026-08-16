@@ -1,0 +1,204 @@
+{% comment %}
+  Jotar Footwear - Trust / Benefits Bar Section
+{% endcomment %}
+
+<section class="jotar-trust-bar" id="jotar-trust-bar-{{ section.id }}">
+  <div class="jotar-container">
+    <div class="jotar-trust-grid">
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          <div class="jotar-trust-item" {{ block.shopify_attributes }}>
+            <div class="jotar-trust-icon">
+              {%- case block.settings.icon -%}
+                {%- when 'quality' -%}
+                  <!-- Rosette / Medal Icon -->
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="8" r="7"></circle>
+                    <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+                  </svg>
+                {%- when 'shipping' -%}
+                  <!-- Delivery Truck Icon -->
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="1" y="3" width="15" height="13"></rect>
+                    <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                    <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                    <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                  </svg>
+                {%- when 'returns' -%}
+                  <!-- Package Return Icon -->
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                    <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                    <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                  </svg>
+                {%- when 'payment' -%}
+                  <!-- Shield Lock Icon -->
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    <rect x="9" y="10" width="6" height="5" rx="1"></rect>
+                    <path d="M10 10V8a2 2 0 0 1 4 0v2"></path>
+                  </svg>
+                {%- else -%}
+                  <!-- Custom Image Icon if provided -->
+                  {%- if block.settings.custom_icon != blank -%}
+                    {{ block.settings.custom_icon | image_url: width: 60 | image_tag: loading: 'lazy' }}
+                  {%- else -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="12" cy="8" r="7"></circle>
+                      <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+                    </svg>
+                  {%- endif -%}
+              {%- endcase -%}
+            </div>
+            <div>
+              <h4 class="jotar-trust-title">{{ block.settings.title }}</h4>
+              <p class="jotar-trust-desc">{{ block.settings.description }}</p>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        <!-- Default 4 Trust Benefits -->
+        <div class="jotar-trust-item">
+          <div class="jotar-trust-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="8" r="7"></circle>
+              <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+            </svg>
+          </div>
+          <div>
+            <h4 class="jotar-trust-title">PREMIUM QUALITY</h4>
+            <p class="jotar-trust-desc">Top materials for long-lasting comfort</p>
+          </div>
+        </div>
+
+        <div class="jotar-trust-item">
+          <div class="jotar-trust-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="1" y="3" width="15" height="13"></rect>
+              <polygon points="16 8 20 8 23 11 23 16 16 16 8"></polygon>
+              <circle cx="5.5" cy="18.5" r="2.5"></circle>
+              <circle cx="18.5" cy="18.5" r="2.5"></circle>
+            </svg>
+          </div>
+          <div>
+            <h4 class="jotar-trust-title">FREE SHIPPING</h4>
+            <p class="jotar-trust-desc">Free shipping on all orders over ৳ 3,000</p>
+          </div>
+        </div>
+
+        <div class="jotar-trust-item">
+          <div class="jotar-trust-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+              <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+              <line x1="12" y1="22.08" x2="12" y2="12"></line>
+            </svg>
+          </div>
+          <div>
+            <h4 class="jotar-trust-title">EASY RETURNS</h4>
+            <p class="jotar-trust-desc">30 days easy return and exchange</p>
+          </div>
+        </div>
+
+        <div class="jotar-trust-item">
+          <div class="jotar-trust-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              <rect x="9" y="10" width="6" height="5" rx="1"></rect>
+              <path d="M10 10V8a2 2 0 0 1 4 0v2"></path>
+            </svg>
+          </div>
+          <div>
+            <h4 class="jotar-trust-title">SECURE PAYMENT</h4>
+            <p class="jotar-trust-desc">Safe and secure checkout</p>
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Trust Benefits Bar",
+  "tag": "section",
+  "class": "section-jotar-trust-bar",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit Item",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "quality", "label": "Premium Quality (Medal)" },
+            { "value": "shipping", "label": "Free Shipping (Truck)" },
+            { "value": "returns", "label": "Easy Returns (Package)" },
+            { "value": "payment", "label": "Secure Payment (Shield Lock)" }
+          ],
+          "default": "quality"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_icon",
+          "label": "Custom Icon Image (Optional)"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "PREMIUM QUALITY"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description",
+          "default": "Top materials for long-lasting comfort"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trust Benefits Bar",
+      "blocks": [
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "quality",
+            "title": "PREMIUM QUALITY",
+            "description": "Top materials for long-lasting comfort"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "shipping",
+            "title": "FREE SHIPPING",
+            "description": "Free shipping on all orders over ৳ 3,000"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "returns",
+            "title": "EASY RETURNS",
+            "description": "30 days easy return and exchange"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "payment",
+            "title": "SECURE PAYMENT",
+            "description": "Safe and secure checkout"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

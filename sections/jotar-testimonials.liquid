@@ -1,0 +1,173 @@
+{% comment %}
+  Jotar Footwear - Customer Testimonials Section
+{% endcomment %}
+
+<section class="jotar-testimonials" id="jotar-testimonials-{{ section.id }}">
+  <div class="jotar-container">
+    <div class="jotar-section-header jotar-section-header--center">
+      <h2 class="jotar-section-title">{{ section.settings.heading | default: 'WHAT OUR CUSTOMERS SAY' }}</h2>
+    </div>
+
+    <div class="jotar-testimonials__grid">
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          <div class="jotar-review-card" {{ block.shopify_attributes }}>
+            <div class="jotar-review-card__stars">
+              {%- assign stars_count = block.settings.stars | default: 5 -%}
+              {%- for i in (1..stars_count) -%}★{%- endfor -%}
+            </div>
+            <p class="jotar-review-card__quote">“{{ block.settings.quote }}”</p>
+            <div class="jotar-review-card__author">
+              {%- if block.settings.avatar != blank -%}
+                {{
+                  block.settings.avatar
+                  | image_url: width: 100
+                  | image_tag: class: 'jotar-review-card__avatar', loading: 'lazy', alt: block.settings.name
+                }}
+              {%- else -%}
+                <!-- Generic stylish avatar -->
+                <div class="jotar-review-card__avatar" style="display:flex;align-items:center;justify-content:center;background:#222;color:#fff;font-weight:700;font-size:14px;">
+                  {{ block.settings.name | slice: 0, 1 | upcase | default: 'U' }}
+                </div>
+              {%- endif -%}
+              <div class="jotar-review-card__meta">
+                <h4 class="jotar-review-card__name">{{ block.settings.name }}</h4>
+                <p class="jotar-review-card__badge">{{ block.settings.badge | default: 'Verified Buyer' }}</p>
+              </div>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        <!-- 3 Fallback Customer Reviews Matching Screenshot -->
+        <!-- Review 1: Rafiq Hasan -->
+        <div class="jotar-review-card">
+          <div class="jotar-review-card__stars">★★★★★</div>
+          <p class="jotar-review-card__quote">“Super comfortable and looks even better in person. Worth every penny!”</p>
+          <div class="jotar-review-card__author">
+            <div class="jotar-review-card__avatar" style="display:flex;align-items:center;justify-content:center;background:#2b2b2b;color:#fff;font-weight:700;font-size:14px;">
+              RH
+            </div>
+            <div class="jotar-review-card__meta">
+              <h4 class="jotar-review-card__name">Rafiq Hasan</h4>
+              <p class="jotar-review-card__badge">Verified Buyer</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 2: Nusrat Jahan -->
+        <div class="jotar-review-card">
+          <div class="jotar-review-card__stars">★★★★★</div>
+          <p class="jotar-review-card__quote">“The quality is premium and delivery was super fast.”</p>
+          <div class="jotar-review-card__author">
+            <div class="jotar-review-card__avatar" style="display:flex;align-items:center;justify-content:center;background:#444;color:#fff;font-weight:700;font-size:14px;">
+              NJ
+            </div>
+            <div class="jotar-review-card__meta">
+              <h4 class="jotar-review-card__name">Nusrat Jahan</h4>
+              <p class="jotar-review-card__badge">Verified Buyer</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 3: Tanvir Ahmed -->
+        <div class="jotar-review-card">
+          <div class="jotar-review-card__stars">★★★★★</div>
+          <p class="jotar-review-card__quote">“My go-to sneakers brand now. Love the design!”</p>
+          <div class="jotar-review-card__author">
+            <div class="jotar-review-card__avatar" style="display:flex;align-items:center;justify-content:center;background:#1a1a1a;color:#fff;font-weight:700;font-size:14px;">
+              TA
+            </div>
+            <div class="jotar-review-card__meta">
+              <h4 class="jotar-review-card__name">Tanvir Ahmed</h4>
+              <p class="jotar-review-card__badge">Verified Buyer</p>
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Customer Testimonials",
+  "tag": "section",
+  "class": "section-jotar-testimonials",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "WHAT OUR CUSTOMERS SAY"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial Card",
+      "settings": [
+        {
+          "type": "range",
+          "id": "stars",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5,
+          "label": "Star Rating"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Review Quote",
+          "default": "Super comfortable and looks even better in person. Worth every penny!"
+        },
+        {
+          "type": "image_picker",
+          "id": "avatar",
+          "label": "Customer Avatar"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Customer Name",
+          "default": "Rafiq Hasan"
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge / Subtitle",
+          "default": "Verified Buyer"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Customer Testimonials",
+      "blocks": [
+        {
+          "type": "testimonial",
+          "settings": {
+            "name": "Rafiq Hasan",
+            "quote": "Super comfortable and looks even better in person. Worth every penny!"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "name": "Nusrat Jahan",
+            "quote": "The quality is premium and delivery was super fast."
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "name": "Tanvir Ahmed",
+            "quote": "My go-to sneakers brand now. Love the design!"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,155 @@
+{% comment %}
+  Jotar Footwear - Trending Collection / Editorial Section
+{% endcomment %}
+
+<section class="jotar-trending" id="jotar-trending-{{ section.id }}">
+  <div class="jotar-container">
+    <div class="jotar-trending__grid">
+      <!-- Left Content Column -->
+      <div class="jotar-trending__content">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="jotar-eyebrow">{{ section.settings.eyebrow }}</span>
+        {%- endif -%}
+
+        <h2 class="jotar-trending__heading">
+          STREET <span class="jotar-text-accent">READY</span><br>EVERYDAY COMFORT
+        </h2>
+
+        {%- if section.settings.btn_label != blank -%}
+          <div>
+            <a
+              href="{{ section.settings.btn_url | default: routes.all_products_collection_url }}"
+              class="jotar-btn jotar-btn--primary"
+            >
+              {{ section.settings.btn_label }}
+            </a>
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- Right Editorial Gallery: 3 Images -->
+      <div class="jotar-trending__gallery">
+        <!-- Image 1 -->
+        <div class="jotar-trending__image-wrap">
+          {%- if section.settings.image_1 != blank -%}
+            {{
+              section.settings.image_1
+              | image_url: width: 600
+              | image_tag:
+                class: 'jotar-trending__image',
+                loading: 'lazy',
+                alt: 'Editorial Look 1'
+            }}
+          {%- else -%}
+            <svg class="jotar-trending__image" viewBox="0 0 320 300" fill="none">
+              <rect width="320" height="300" fill="#f4f4f4"/>
+              <!-- Lifestyle Sneaker Model 1 (Black/White high top on feet) -->
+              <path d="M 90 20 L 130 180 L 190 180 L 150 20 Z" fill="#181818"/>
+              <path d="M 180 20 L 210 170 L 270 170 L 240 20 Z" fill="#181818"/>
+              <!-- Shoes on ground -->
+              <path d="M 80 240 C 95 190, 135 180, 175 180 C 205 190, 220 220, 230 240 L 80 240 Z" fill="#111111"/>
+              <path d="M 115 195 C 145 185, 180 185, 205 198 C 185 215, 145 218, 115 195 Z" fill="#ffffff"/>
+              <path d="M 75 240 C 120 235, 190 235, 235 240 C 235 255, 200 260, 140 260 C 85 260, 75 255, 75 240 Z" fill="#ffffff"/>
+            </svg>
+          {%- endif -%}
+        </div>
+
+        <!-- Image 2 -->
+        <div class="jotar-trending__image-wrap">
+          {%- if section.settings.image_2 != blank -%}
+            {{
+              section.settings.image_2
+              | image_url: width: 600
+              | image_tag:
+                class: 'jotar-trending__image',
+                loading: 'lazy',
+                alt: 'Editorial Look 2'
+            }}
+          {%- else -%}
+            <svg class="jotar-trending__image" viewBox="0 0 320 300" fill="none">
+              <rect width="320" height="300" fill="#eae8e4"/>
+              <!-- Lifestyle Sneaker Model 2 (Beige paired sneakers angled) -->
+              <g transform="translate(40, 60)">
+                <path d="M 30 140 C 50 100, 100 85, 150 80 C 190 90, 210 115, 218 140 L 30 140 Z" fill="#d2c5b0"/>
+                <path d="M 60 105 C 95 95, 135 95, 160 108 C 140 125, 100 128, 60 105 Z" fill="#f5ede0"/>
+                <path d="M 25 140 C 70 135, 160 135, 222 140 C 222 155, 190 160, 120 160 C 60 160, 25 155, 25 140 Z" fill="#ffffff"/>
+                <circle cx="175" cy="150" r="4" fill="#ff7f50"/>
+              </g>
+            </svg>
+          {%- endif -%}
+        </div>
+
+        <!-- Image 3 -->
+        <div class="jotar-trending__image-wrap">
+          {%- if section.settings.image_3 != blank -%}
+            {{
+              section.settings.image_3
+              | image_url: width: 600
+              | image_tag:
+                class: 'jotar-trending__image',
+                loading: 'lazy',
+                alt: 'Editorial Look 3'
+            }}
+          {%- else -%}
+            <svg class="jotar-trending__image" viewBox="0 0 320 300" fill="none">
+              <rect width="320" height="300" fill="#f0f0f0"/>
+              <!-- Lifestyle Sneaker Model 3 (Clean White/Gray shoes on grey sweatpants) -->
+              <path d="M 70 20 L 110 170 L 170 170 L 130 20 Z" fill="#7d8287"/>
+              <path d="M 190 20 L 220 160 L 280 160 L 250 20 Z" fill="#7d8287"/>
+              <path d="M 80 230 C 100 190, 140 180, 185 180 C 215 190, 230 215, 240 230 L 80 230 Z" fill="#ffffff"/>
+              <path d="M 115 195 Q 160 185 200 205" stroke="#111111" stroke-width="4"/>
+              <path d="M 75 230 C 120 225, 200 225, 245 230 C 245 245, 210 250, 150 250 C 90 250, 75 245, 75 230 Z" fill="#e2e2e0"/>
+            </svg>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Trending Editorial",
+  "tag": "section",
+  "class": "section-jotar-trending",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "TRENDING COLLECTION"
+    },
+    {
+      "type": "text",
+      "id": "btn_label",
+      "label": "Button Label",
+      "default": "SHOP COLLECTION"
+    },
+    {
+      "type": "url",
+      "id": "btn_url",
+      "label": "Button URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Editorial Image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Editorial Image 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_3",
+      "label": "Editorial Image 3"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trending Editorial"
+    }
+  ]
+}
+{% endschema %}

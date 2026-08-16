@@ -138,9 +138,11 @@
         {{ content_for_layout }}
       </main>
 
-      <footer>
-        {% sections 'footer-group' %}
-      </footer>
+      {%- unless template.name == 'index' -%}
+        <footer>
+          {% sections 'footer-group' %}
+        </footer>
+      {%- endunless -%}
     </div>
 
     {% render 'cart-drawer', render_wrapper: true %}
@@ -151,5 +153,7 @@
     {% if settings.quick_add or settings.mobile_quick_add %}
       {% render 'quick-add-modal' %}
     {% endif %}
+
+    <script src="{{ 'jotar-homepage.js' | asset_url }}" defer></script>
   </body>
 </html>

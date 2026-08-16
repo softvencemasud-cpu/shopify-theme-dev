@@ -1,0 +1,238 @@
+{% comment %}
+  Jotar Footwear - Newsletter + Dark Footer Section
+{% endcomment %}
+
+<footer class="jotar-footer-section" id="jotar-footer-{{ section.id }}">
+  <div class="jotar-container">
+    <!-- Newsletter Area -->
+    <div class="jotar-newsletter">
+      <div class="jotar-newsletter__wrapper">
+        <div>
+          <h2 class="jotar-newsletter__heading">
+            {{ section.settings.newsletter_heading | default: 'GET 10% OFF<br>YOUR FIRST ORDER' }}
+          </h2>
+          <p class="jotar-newsletter__subtext">
+            {{ section.settings.newsletter_subtext | default: 'Join our newsletter and be the first to know about new arrivals and exclusive offers.' }}
+          </p>
+        </div>
+
+        <div>
+          {%- form 'customer', class: 'jotar-newsletter__form' -%}
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <input
+              type="email"
+              name="contact[email]"
+              class="jotar-newsletter__input"
+              value="{{ form.email }}"
+              aria-required="true"
+              autocorrect="off"
+              autocapitalize="off"
+              autocomplete="email"
+              {% if form.errors %}
+                autofocus
+                aria-invalid="true"
+                aria-describedby="Newsletter-error--{{ section.id }}"
+              {% elsif form.posted_successfully? %}
+                aria-describedby="Newsletter-success--{{ section.id }}"
+              {% endif %}
+              placeholder="{{ section.settings.email_placeholder | default: 'Enter your email' }}"
+              required
+            >
+            <button
+              type="submit"
+              class="jotar-newsletter__submit"
+              name="commit"
+            >
+              {{ section.settings.subscribe_btn_label | default: 'SUBSCRIBE' }}
+            </button>
+          {%- endform -%}
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Links Grid -->
+    <div class="jotar-footer__grid">
+      <!-- Brand Info Column -->
+      <div class="jotar-footer__brand-col">
+        <h3 class="jotar-footer__logo">
+          {{ section.settings.brand_name | default: 'JOTAR' }}
+          <span style="font-size:0.65em;font-weight:400;letter-spacing:0.15em;display:block;">FOOTWEAR</span>
+        </h3>
+        <p class="jotar-footer__tagline">
+          {{ section.settings.brand_tagline | default: 'Step into style with premium comfort and timeless design.' }}
+        </p>
+        <div class="jotar-footer__socials">
+          <a href="https://facebook.com" class="jotar-footer__social-link" aria-label="Facebook" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+          </a>
+          <a href="https://instagram.com" class="jotar-footer__social-link" aria-label="Instagram" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+          </a>
+          <a href="https://tiktok.com" class="jotar-footer__social-link" aria-label="TikTok" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg>
+          </a>
+          <a href="https://youtube.com" class="jotar-footer__social-link" aria-label="YouTube" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- SHOP Column -->
+      <div>
+        <h4 class="jotar-footer__title">SHOP</h4>
+        <ul class="jotar-footer__list">
+          <li><a href="{{ routes.collections_url }}/men" class="jotar-footer__link">Men</a></li>
+          <li><a href="{{ routes.collections_url }}/women" class="jotar-footer__link">Women</a></li>
+          <li><a href="{{ routes.collections_url }}/sneakers" class="jotar-footer__link">Sneakers</a></li>
+          <li><a href="{{ routes.collections_url }}/new-arrivals" class="jotar-footer__link">New Arrivals</a></li>
+          <li><a href="{{ routes.all_products_collection_url }}" class="jotar-footer__link">Collections</a></li>
+        </ul>
+      </div>
+
+      <!-- ABOUT Column -->
+      <div>
+        <h4 class="jotar-footer__title">ABOUT</h4>
+        <ul class="jotar-footer__list">
+          <li><a href="/pages/about-us" class="jotar-footer__link">About Us</a></li>
+          <li><a href="/pages/our-story" class="jotar-footer__link">Our Story</a></li>
+          <li><a href="/pages/careers" class="jotar-footer__link">Careers</a></li>
+          <li><a href="/pages/sustainability" class="jotar-footer__link">Sustainability</a></li>
+          <li><a href="/blogs/news" class="jotar-footer__link">Blog</a></li>
+        </ul>
+      </div>
+
+      <!-- SUPPORT Column -->
+      <div>
+        <h4 class="jotar-footer__title">SUPPORT</h4>
+        <ul class="jotar-footer__list">
+          <li><a href="/pages/contact" class="jotar-footer__link">Contact Us</a></li>
+          <li><a href="/pages/faq" class="jotar-footer__link">FAQ</a></li>
+          <li><a href="/pages/shipping" class="jotar-footer__link">Shipping</a></li>
+          <li><a href="/pages/returns" class="jotar-footer__link">Returns & Exchanges</a></li>
+          <li><a href="/pages/size-guide" class="jotar-footer__link">Size Guide</a></li>
+        </ul>
+      </div>
+
+      <!-- POLICIES Column -->
+      <div>
+        <h4 class="jotar-footer__title">POLICIES</h4>
+        <ul class="jotar-footer__list">
+          <li><a href="/policies/privacy-policy" class="jotar-footer__link">Privacy Policy</a></li>
+          <li><a href="/policies/terms-of-service" class="jotar-footer__link">Terms of Service</a></li>
+          <li><a href="/policies/refund-policy" class="jotar-footer__link">Refund Policy</a></li>
+          <li><a href="/policies/shipping-policy" class="jotar-footer__link">Shipping Policy</a></li>
+        </ul>
+      </div>
+
+      <!-- FOLLOW US Column -->
+      <div>
+        <h4 class="jotar-footer__title">FOLLOW US</h4>
+        <ul class="jotar-footer__list">
+          <li>
+            <a href="https://instagram.com" class="jotar-footer__link" target="_blank" rel="noopener">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path></svg>
+              Instagram
+            </a>
+          </li>
+          <li>
+            <a href="https://facebook.com" class="jotar-footer__link" target="_blank" rel="noopener">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+              Facebook
+            </a>
+          </li>
+          <li>
+            <a href="https://youtube.com" class="jotar-footer__link" target="_blank" rel="noopener">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+              YouTube
+            </a>
+          </li>
+          <li>
+            <a href="https://tiktok.com" class="jotar-footer__link" target="_blank" rel="noopener">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg>
+              TikTok
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom Copyright & Payment Icons -->
+    <div class="jotar-footer__bottom">
+      <div>
+        © {{ 'now' | date: '%Y' }} Jotar Footwear. All Rights Reserved.
+      </div>
+      <div class="jotar-footer__payments">
+        <!-- Visa SVG -->
+        <svg class="jotar-payment-icon" viewBox="0 0 38 24" width="38" height="24">
+          <rect width="38" height="24" rx="3" fill="#ffffff"/>
+          <path d="M15.5 16L17.5 8H19.5L17.5 16H15.5ZM13.8 8L12 13.5L11.8 12.5C11.5 11.3 10.3 10 9.1 9.4L11 16H13.2L16.2 8H13.8ZM24.4 13.4C24.4 11.2 21.2 11.1 21.2 10.1C21.2 9.7 21.6 9.3 22.4 9.2C22.8 9.2 23.9 9.1 25.1 9.7L25.5 8.1C24.8 7.8 23.8 7.6 22.6 7.6C20.3 7.6 18.7 8.8 18.7 10.5C18.7 13.2 22.4 13 22.4 14.4C22.4 14.9 21.9 15.3 21 15.3C19.9 15.3 18.7 14.8 18.2 14.5L17.8 16.1C18.6 16.5 19.9 16.8 21.2 16.8C23.6 16.8 25.2 15.6 24.4 13.4ZM28.5 8H26.7C26.1 8 25.7 8.2 25.5 8.7L22.5 16H24.7L25.1 14.8H27.8L28.1 16H30.1L28.5 8ZM25.7 13.2L26.8 10.1L27.4 13.2H25.7Z" fill="#1a1f71"/>
+        </svg>
+
+        <!-- Mastercard SVG -->
+        <svg class="jotar-payment-icon" viewBox="0 0 38 24" width="38" height="24">
+          <rect width="38" height="24" rx="3" fill="#ffffff"/>
+          <circle cx="15" cy="12" r="7" fill="#eb001b"/>
+          <circle cx="23" cy="12" r="7" fill="#f79e1b" fill-opacity="0.9"/>
+        </svg>
+
+        <!-- PayPal SVG -->
+        <svg class="jotar-payment-icon" viewBox="0 0 38 24" width="38" height="24">
+          <rect width="38" height="24" rx="3" fill="#ffffff"/>
+          <path d="M12.5 7h5c2.5 0 4 1.2 3.5 3.5-.5 2.2-2.3 3.5-4.5 3.5h-2l-1 5h-2.5l2.5-12z" fill="#003087"/>
+          <path d="M15.5 10h5c2.5 0 4 1.2 3.5 3.5-.5 2.2-2.3 3.5-4.5 3.5h-2l-1 5h-2.5l2.5-12z" fill="#0079c1" fill-opacity="0.8"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Jotar Newsletter & Footer",
+  "tag": "section",
+  "class": "section-jotar-footer",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "newsletter_heading",
+      "label": "Newsletter Heading",
+      "default": "GET 10% OFF\nYOUR FIRST ORDER"
+    },
+    {
+      "type": "textarea",
+      "id": "newsletter_subtext",
+      "label": "Newsletter Subtext",
+      "default": "Join our newsletter and be the first to know about new arrivals and exclusive offers."
+    },
+    {
+      "type": "text",
+      "id": "email_placeholder",
+      "label": "Email Placeholder",
+      "default": "Enter your email"
+    },
+    {
+      "type": "text",
+      "id": "subscribe_btn_label",
+      "label": "Subscribe Button Label",
+      "default": "SUBSCRIBE"
+    },
+    {
+      "type": "text",
+      "id": "brand_name",
+      "label": "Brand Name",
+      "default": "JOTAR"
+    },
+    {
+      "type": "text",
+      "id": "brand_tagline",
+      "label": "Brand Tagline",
+      "default": "Step into style with premium comfort and timeless design."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Jotar Newsletter & Footer"
+    }
+  ]
+}
+{% endschema %}

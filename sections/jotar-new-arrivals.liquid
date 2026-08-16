@@ -1,0 +1,269 @@
+{% comment %}
+  Jotar Footwear - New Arrivals Section
+{% endcomment %}
+
+<section class="jotar-new-arrivals" id="jotar-new-arrivals-{{ section.id }}">
+  <div class="jotar-container">
+    <div class="jotar-section-header">
+      <h2 class="jotar-section-title">{{ section.settings.heading | default: 'NEW ARRIVALS' }}</h2>
+      {%- if section.settings.view_all_label != blank -%}
+        <a
+          href="{{ section.settings.collection.url | default: section.settings.view_all_url | default: routes.all_products_collection_url }}"
+          class="jotar-view-all"
+        >
+          {{ section.settings.view_all_label }}
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      {%- endif -%}
+    </div>
+
+    <div class="jotar-products-grid">
+      {%- assign product_limit = section.settings.products_to_show | default: 4 -%}
+      {%- if section.settings.collection != blank and section.settings.collection.products_count > 0 -%}
+        {%- for product in section.settings.collection.products limit: product_limit -%}
+          <div class="jotar-product-card">
+            <div class="jotar-product-card__media-wrap">
+              {%- if section.settings.show_badge -%}
+                <span class="jotar-product-card__badge">New</span>
+              {%- endif -%}
+
+              {%- if section.settings.show_wishlist -%}
+                <button class="jotar-product-card__wishlist" aria-label="Add to Wishlist">
+                  <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                  </svg>
+                </button>
+              {%- endif -%}
+
+              <a href="{{ product.url }}" style="display:contents;">
+                {%- if product.featured_media != blank -%}
+                  {{
+                    product.featured_media
+                    | image_url: width: 600
+                    | image_tag:
+                      class: 'jotar-product-card__image',
+                      loading: 'lazy',
+                      alt: product.title
+                  }}
+                {%- else -%}
+                  {{ 'product-1' | placeholder_svg_tag: 'jotar-product-card__image' }}
+                {%- endif -%}
+              </a>
+            </div>
+
+            <a href="{{ product.url }}" style="text-decoration:none; color:inherit;">
+              <h3 class="jotar-product-card__title">{{ product.title }}</h3>
+            </a>
+
+            <div class="jotar-product-card__price">
+              {{ product.price | money }}
+            </div>
+
+            {%- if section.settings.show_swatches -%}
+              <div class="jotar-product-card__swatches">
+                <span class="jotar-swatch-dot" style="background-color: #111111;"></span>
+                <span class="jotar-swatch-dot" style="background-color: #9e9e9e;"></span>
+                <span class="jotar-swatch-dot" style="background-color: #e5e5e5;"></span>
+              </div>
+            {%- endif -%}
+
+            {%- if section.settings.show_rating -%}
+              <div class="jotar-product-card__rating">
+                <span class="jotar-stars">★★★★★</span>
+                <span>(120)</span>
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        <!-- High-fidelity Reference Fallback Products -->
+        <!-- Card 1: Urban Runner 2.0 -->
+        <div class="jotar-product-card">
+          <div class="jotar-product-card__media-wrap">
+            <span class="jotar-product-card__badge">New</span>
+            <button class="jotar-product-card__wishlist" aria-label="Add to Wishlist">
+              <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+              </svg>
+            </button>
+            <svg class="jotar-product-card__image" viewBox="0 0 260 160" fill="none">
+              <path d="M 30 115 C 55 75, 115 65, 170 60 C 210 70, 230 95, 235 115 L 30 115 Z" fill="#ffffff"/>
+              <path d="M 65 80 C 100 70, 150 68, 180 80 C 160 98, 110 100, 65 80 Z" fill="#111111"/>
+              <path d="M 25 115 C 80 110, 190 110, 240 115 C 240 135, 205 140, 130 140 C 60 140, 25 135, 25 115 Z" fill="#222222"/>
+              <circle cx="195" cy="128" r="4" fill="#ffffff"/>
+            </svg>
+          </div>
+          <h3 class="jotar-product-card__title">Urban Runner 2.0</h3>
+          <div class="jotar-product-card__price">৳ 4,490</div>
+          <div class="jotar-product-card__swatches">
+            <span class="jotar-swatch-dot" style="background-color: #111111;"></span>
+            <span class="jotar-swatch-dot" style="background-color: #777777;"></span>
+            <span class="jotar-swatch-dot" style="background-color: #f0f0f0;"></span>
+          </div>
+          <div class="jotar-product-card__rating">
+            <span class="jotar-stars">★★★★★</span>
+            <span>(120)</span>
+          </div>
+        </div>
+
+        <!-- Card 2: Jotar Classic Lite -->
+        <div class="jotar-product-card">
+          <div class="jotar-product-card__media-wrap">
+            <span class="jotar-product-card__badge">New</span>
+            <button class="jotar-product-card__wishlist" aria-label="Add to Wishlist">
+              <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+              </svg>
+            </button>
+            <svg class="jotar-product-card__image" viewBox="0 0 260 160" fill="none">
+              <path d="M 35 115 C 55 75, 110 65, 165 60 C 210 70, 230 95, 238 115 L 35 115 Z" fill="#e8dfd1"/>
+              <path d="M 70 80 C 105 70, 145 68, 170 80 C 150 98, 110 100, 70 80 Z" fill="#ffffff"/>
+              <path d="M 30 115 C 80 110, 190 110, 242 115 C 242 135, 205 140, 130 140 C 65 140, 30 135, 30 115 Z" fill="#faf7f2"/>
+            </svg>
+          </div>
+          <h3 class="jotar-product-card__title">Jotar Classic Lite</h3>
+          <div class="jotar-product-card__price">৳ 3,990</div>
+          <div class="jotar-product-card__swatches">
+            <span class="jotar-swatch-dot" style="background-color: #d4c5b3;"></span>
+            <span class="jotar-swatch-dot" style="background-color: #333333;"></span>
+            <span class="jotar-swatch-dot" style="background-color: #ffffff;"></span>
+          </div>
+          <div class="jotar-product-card__rating">
+            <span class="jotar-stars">★★★★★</span>
+            <span>(95)</span>
+          </div>
+        </div>
+
+        <!-- Card 3: Street Move -->
+        <div class="jotar-product-card">
+          <div class="jotar-product-card__media-wrap">
+            <span class="jotar-product-card__badge">New</span>
+            <button class="jotar-product-card__wishlist" aria-label="Add to Wishlist">
+              <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+              </svg>
+            </button>
+            <svg class="jotar-product-card__image" viewBox="0 0 260 160" fill="none">
+              <path d="M 30 115 C 55 75, 115 65, 170 60 C 210 70, 230 95, 235 115 L 30 115 Z" fill="#ffffff"/>
+              <!-- 3 Sport Stripes -->
+              <path d="M 120 75 L 110 110 M 132 75 L 122 110 M 144 75 L 134 110" stroke="#111111" stroke-width="4"/>
+              <path d="M 25 115 C 80 110, 190 110, 240 115 C 240 135, 205 140, 130 140 C 60 140, 25 135, 25 115 Z" fill="#222222"/>
+            </svg>
+          </div>
+          <h3 class="jotar-product-card__title">Street Move</h3>
+          <div class="jotar-product-card__price">৳ 4,290</div>
+          <div class="jotar-product-card__swatches">
+            <span class="jotar-swatch-dot" style="background-color: #ffffff;"></span>
+            <span class="jotar-swatch-dot" style="background-color: #111111;"></span>
+            <span class="jotar-swatch-dot" style="background-color: #1565c0;"></span>
+          </div>
+          <div class="jotar-product-card__rating">
+            <span class="jotar-stars">★★★★★</span>
+            <span>(74)</span>
+          </div>
+        </div>
+
+        <!-- Card 4: Flex Comfort Pro -->
+        <div class="jotar-product-card">
+          <div class="jotar-product-card__media-wrap">
+            <span class="jotar-product-card__badge">New</span>
+            <button class="jotar-product-card__wishlist" aria-label="Add to Wishlist">
+              <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+              </svg>
+            </button>
+            <svg class="jotar-product-card__image" viewBox="0 0 260 160" fill="none">
+              <path d="M 30 115 C 55 75, 115 65, 170 60 C 210 70, 230 95, 235 115 L 30 115 Z" fill="#1c1c1c"/>
+              <path d="M 65 80 C 100 70, 150 68, 180 80 C 160 98, 110 100, 65 80 Z" fill="#2d2d2d"/>
+              <path d="M 25 115 C 80 110, 190 110, 240 115 C 240 135, 205 140, 130 140 C 60 140, 25 135, 25 115 Z" fill="#111111"/>
+            </svg>
+          </div>
+          <h3 class="jotar-product-card__title">Flex Comfort Pro</h3>
+          <div class="jotar-product-card__price">৳ 4,190</div>
+          <div class="jotar-product-card__swatches">
+            <span class="jotar-swatch-dot" style="background-color: #111111;"></span>
+            <span class="jotar-swatch-dot" style="background-color: #3e2723;"></span>
+            <span class="jotar-swatch-dot" style="background-color: #ffffff;"></span>
+          </div>
+          <div class="jotar-product-card__rating">
+            <span class="jotar-stars">★★★★★</span>
+            <span>(58)</span>
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "New Arrivals",
+  "tag": "section",
+  "class": "section-jotar-new-arrivals",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "NEW ARRIVALS"
+    },
+    {
+      "type": "text",
+      "id": "view_all_label",
+      "label": "View All Label",
+      "default": "VIEW ALL"
+    },
+    {
+      "type": "url",
+      "id": "view_all_url",
+      "label": "View All Link"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Select Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "default": 4,
+      "label": "Products to Show"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badge",
+      "label": "Show 'New' Badge",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_wishlist",
+      "label": "Show Wishlist Heart",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_swatches",
+      "label": "Show Color Swatches",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "label": "Show Star Rating",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "New Arrivals"
+    }
+  ]
+}
+{% endschema %}

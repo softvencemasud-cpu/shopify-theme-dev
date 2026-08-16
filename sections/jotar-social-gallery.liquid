@@ -1,0 +1,158 @@
+{% comment %}
+  Jotar Footwear - Instagram / Social Gallery Section
+{% endcomment %}
+
+<section class="jotar-social-gallery" id="jotar-social-{{ section.id }}">
+  <div class="jotar-container">
+    <div class="jotar-section-header">
+      <h2 class="jotar-section-title">{{ section.settings.heading | default: 'FOLLOW OUR STYLE' }}</h2>
+      {%- if section.settings.handle_label != blank -%}
+        <a
+          href="{{ section.settings.handle_url | default: 'https://instagram.com' }}"
+          class="jotar-view-all"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {{ section.settings.handle_label }}
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      {%- endif -%}
+    </div>
+
+    <div class="jotar-social-gallery__grid">
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          <a
+            href="{{ block.settings.link | default: 'https://instagram.com' }}"
+            class="jotar-social-card"
+            target="_blank"
+            rel="noopener noreferrer"
+            {{ block.shopify_attributes }}
+          >
+            {%- if block.settings.image != blank -%}
+              {{
+                block.settings.image
+                | image_url: width: 400
+                | image_tag:
+                  class: 'jotar-social-card__image',
+                  loading: 'lazy',
+                  alt: 'Social Style Look'
+              }}
+            {%- else -%}
+              <!-- Fallback Lifestyle Photo representation -->
+              <svg class="jotar-social-card__image" viewBox="0 0 200 170" fill="none">
+                <rect width="200" height="170" fill="#ededed"/>
+                <circle cx="100" cy="85" r="40" fill="#dddddd"/>
+                <path d="M 60 120 C 75 90, 125 80, 155 120 Z" fill="#222"/>
+              </svg>
+            {%- endif -%}
+
+            <div class="jotar-social-card__icon" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+            </div>
+          </a>
+        {%- endfor -%}
+      {%- else -%}
+        <!-- 6 Fallback Social Items Matching Screenshot -->
+        {%- for i in (1..6) -%}
+          <a href="https://instagram.com" class="jotar-social-card" target="_blank" rel="noopener noreferrer">
+            <svg class="jotar-social-card__image" viewBox="0 0 200 170" fill="none">
+              {%- case i -%}
+                {%- when 1 -%}
+                  <rect width="200" height="170" fill="#1c1c1c"/>
+                  <path d="M 40 120 C 55 80, 110 70, 160 120 Z" fill="#2e2e2e"/>
+                {%- when 2 -%}
+                  <rect width="200" height="170" fill="#eae4db"/>
+                  <path d="M 40 120 C 55 80, 110 70, 160 120 Z" fill="#d2c3af"/>
+                {%- when 3 -%}
+                  <rect width="200" height="170" fill="#f4f4f4"/>
+                  <path d="M 40 120 C 55 80, 110 70, 160 120 Z" fill="#111111"/>
+                {%- when 4 -%}
+                  <rect width="200" height="170" fill="#111111"/>
+                  <path d="M 40 120 C 55 80, 110 70, 160 120 Z" fill="#333333"/>
+                {%- when 5 -%}
+                  <rect width="200" height="170" fill="#ffffff"/>
+                  <path d="M 40 120 C 55 80, 110 70, 160 120 Z" fill="#e0e0e0"/>
+                {%- else -%}
+                  <rect width="200" height="170" fill="#262626"/>
+                  <path d="M 40 120 C 55 80, 110 70, 160 120 Z" fill="#ffffff"/>
+              {%- endcase -%}
+            </svg>
+            <div class="jotar-social-card__icon" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+            </div>
+          </a>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Social Gallery",
+  "tag": "section",
+  "class": "section-jotar-social-gallery",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "FOLLOW OUR STYLE"
+    },
+    {
+      "type": "text",
+      "id": "handle_label",
+      "label": "Instagram Handle / Link Text",
+      "default": "@jotar.footwear"
+    },
+    {
+      "type": "url",
+      "id": "handle_url",
+      "label": "Instagram URL"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Social Post",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Social Image"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Post Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Social Gallery",
+      "blocks": [
+        { "type": "image" },
+        { "type": "image" },
+        { "type": "image" },
+        { "type": "image" },
+        { "type": "image" },
+        { "type": "image" }
+      ]
+    }
+  ]
+}
+{% endschema %}

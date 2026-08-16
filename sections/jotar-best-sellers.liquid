@@ -1,0 +1,193 @@
+{% comment %}
+  Jotar Footwear - Black Best Sellers Carousel Section
+{% endcomment %}
+
+<section class="jotar-best-sellers" id="jotar-best-sellers-{{ section.id }}">
+  <div class="jotar-container">
+    <div class="jotar-section-header">
+      <h2 class="jotar-section-title">{{ section.settings.heading | default: 'BEST SELLERS' }}</h2>
+      {%- if section.settings.view_all_label != blank -%}
+        <a
+          href="{{ section.settings.collection.url | default: section.settings.view_all_url | default: routes.all_products_collection_url }}"
+          class="jotar-view-all"
+        >
+          {{ section.settings.view_all_label }}
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      {%- endif -%}
+    </div>
+
+    <div class="jotar-carousel-wrapper">
+      <button
+        class="jotar-carousel-arrow jotar-carousel-arrow--prev"
+        data-target="jotar-best-track-{{ section.id }}"
+        aria-label="Previous Slide"
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+
+      <div class="jotar-carousel-track" id="jotar-best-track-{{ section.id }}">
+        {%- assign product_limit = section.settings.products_to_show | default: 8 -%}
+        {%- if section.settings.collection != blank and section.settings.collection.products_count > 0 -%}
+          {%- for product in section.settings.collection.products limit: product_limit -%}
+            <a href="{{ product.url }}" class="jotar-best-card">
+              <div class="jotar-best-card__media">
+                {%- if product.featured_media != blank -%}
+                  {{
+                    product.featured_media
+                    | image_url: width: 400
+                    | image_tag:
+                      class: 'jotar-best-card__image',
+                      loading: 'lazy',
+                      alt: product.title
+                  }}
+                {%- else -%}
+                  {{ 'product-2' | placeholder_svg_tag: 'jotar-best-card__image' }}
+                {%- endif -%}
+              </div>
+              <h3 class="jotar-best-card__title">{{ product.title }}</h3>
+              <div class="jotar-best-card__price">{{ product.price | money }}</div>
+            </a>
+          {%- endfor -%}
+        {%- else -%}
+          <!-- 6 High-fidelity Fallback Sneaker Cards Matching Screenshot -->
+          <!-- 1. Top Runner -->
+          <a href="{{ routes.all_products_collection_url }}" class="jotar-best-card">
+            <div class="jotar-best-card__media">
+              <svg class="jotar-best-card__image" viewBox="0 0 200 130" fill="none">
+                <path d="M 25 90 C 45 60, 95 50, 140 45 C 170 55, 185 75, 190 90 L 25 90 Z" fill="#eaeaea"/>
+                <path d="M 20 90 C 65 85, 150 85, 195 90 C 195 105, 170 110, 110 110 C 50 110, 20 105, 20 90 Z" fill="#ffffff"/>
+              </svg>
+            </div>
+            <h3 class="jotar-best-card__title">Top Runner</h3>
+            <div class="jotar-best-card__price">৳ 4,290</div>
+          </a>
+
+          <!-- 2. All Day Comfort -->
+          <a href="{{ routes.all_products_collection_url }}" class="jotar-best-card">
+            <div class="jotar-best-card__media">
+              <svg class="jotar-best-card__image" viewBox="0 0 200 130" fill="none">
+                <path d="M 25 90 C 45 60, 95 50, 140 45 C 170 55, 185 75, 190 90 L 25 90 Z" fill="#222222"/>
+                <path d="M 20 90 C 65 85, 150 85, 195 90 C 195 105, 170 110, 110 110 C 50 110, 20 105, 20 90 Z" fill="#141414"/>
+              </svg>
+            </div>
+            <h3 class="jotar-best-card__title">All Day Comfort</h3>
+            <div class="jotar-best-card__price">৳ 3,790</div>
+          </a>
+
+          <!-- 3. Urban Black -->
+          <a href="{{ routes.all_products_collection_url }}" class="jotar-best-card">
+            <div class="jotar-best-card__media">
+              <svg class="jotar-best-card__image" viewBox="0 0 200 130" fill="none">
+                <path d="M 25 90 C 45 60, 95 50, 140 45 C 170 55, 185 75, 190 90 L 25 90 Z" fill="#181818"/>
+                <path d="M 50 65 Q 90 55 125 70" stroke="#444" stroke-width="2"/>
+                <path d="M 20 90 C 65 85, 150 85, 195 90 C 195 105, 170 110, 110 110 C 50 110, 20 105, 20 90 Z" fill="#262626"/>
+              </svg>
+            </div>
+            <h3 class="jotar-best-card__title">Urban Black</h3>
+            <div class="jotar-best-card__price">৳ 4,590</div>
+          </a>
+
+          <!-- 4. Easy Step -->
+          <a href="{{ routes.all_products_collection_url }}" class="jotar-best-card">
+            <div class="jotar-best-card__media">
+              <svg class="jotar-best-card__image" viewBox="0 0 200 130" fill="none">
+                <path d="M 25 90 C 45 60, 95 50, 140 45 C 170 55, 185 75, 190 90 L 25 90 Z" fill="#b0a595"/>
+                <path d="M 20 90 C 65 85, 150 85, 195 90 C 195 105, 170 110, 110 110 C 50 110, 20 105, 20 90 Z" fill="#f0ece6"/>
+              </svg>
+            </div>
+            <h3 class="jotar-best-card__title">Easy Step</h3>
+            <div class="jotar-best-card__price">৳ 4,190</div>
+          </a>
+
+          <!-- 5. Run Max -->
+          <a href="{{ routes.all_products_collection_url }}" class="jotar-best-card">
+            <div class="jotar-best-card__media">
+              <svg class="jotar-best-card__image" viewBox="0 0 200 130" fill="none">
+                <path d="M 25 90 C 45 60, 95 50, 140 45 C 170 55, 185 75, 190 90 L 25 90 Z" fill="#f5f5f5"/>
+                <path d="M 130 92 C 150 90, 170 94, 178 100" stroke="#ff6b00" stroke-width="4"/>
+                <path d="M 20 90 C 65 85, 150 85, 195 90 C 195 105, 170 110, 110 110 C 50 110, 20 105, 20 90 Z" fill="#ffffff"/>
+              </svg>
+            </div>
+            <h3 class="jotar-best-card__title">Run Max</h3>
+            <div class="jotar-best-card__price">৳ 4,690</div>
+          </a>
+
+          <!-- 6. Classic High -->
+          <a href="{{ routes.all_products_collection_url }}" class="jotar-best-card">
+            <div class="jotar-best-card__media">
+              <svg class="jotar-best-card__image" viewBox="0 0 200 130" fill="none">
+                <path d="M 30 95 C 40 60, 60 30, 85 25 C 100 22, 108 40, 105 60 C 130 65, 165 75, 188 95 L 30 95 Z" fill="#ffffff"/>
+                <path d="M 50 55 C 70 40, 95 38, 98 65 C 80 72, 60 70, 50 55 Z" fill="#111111"/>
+                <path d="M 25 95 C 70 90, 150 90, 192 95 C 192 108, 165 112, 110 112 C 55 112, 25 108, 25 95 Z" fill="#e0e0e0"/>
+              </svg>
+            </div>
+            <h3 class="jotar-best-card__title">Classic High</h3>
+            <div class="jotar-best-card__price">৳ 4,390</div>
+          </a>
+        {%- endif -%}
+      </div>
+
+      <button
+        class="jotar-carousel-arrow jotar-carousel-arrow--next"
+        data-target="jotar-best-track-{{ section.id }}"
+        aria-label="Next Slide"
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Best Sellers Carousel",
+  "tag": "section",
+  "class": "section-jotar-best-sellers",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "BEST SELLERS"
+    },
+    {
+      "type": "text",
+      "id": "view_all_label",
+      "label": "View All Label",
+      "default": "VIEW ALL"
+    },
+    {
+      "type": "url",
+      "id": "view_all_url",
+      "label": "View All Link"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Select Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 4,
+      "max": 16,
+      "step": 1,
+      "default": 8,
+      "label": "Products to Show"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Best Sellers Carousel"
+    }
+  ]
+}
+{% endschema %}
