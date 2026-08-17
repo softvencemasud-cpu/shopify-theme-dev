@@ -1,0 +1,1398 @@
+{% comment %}
+  Jotar / NOVA - Gallery Page Section
+  Exact match to reference design with filter tabs, masonry grid, expand icons, and interactive modal lightbox.
+{% endcomment %}
+
+<div class="jotar-gallery" id="jotar-gallery-{{ section.id }}">
+  <!-- 1. BREADCRUMBS -->
+  {%- if section.settings.show_breadcrumbs -%}
+    <div class="jotar-gallery-breadcrumbs-wrap">
+      <div class="jotar-gallery-container">
+        <nav class="jotar-gallery-breadcrumbs" aria-label="Breadcrumb">
+          <a href="{{ routes.root_url }}">Home</a>
+          <span class="jotar-gallery-breadcrumbs__sep" aria-hidden="true">&rsaquo;</span>
+          <span class="jotar-gallery-breadcrumbs__current">{{ section.settings.breadcrumb_title | default: 'Gallery' }}</span>
+        </nav>
+      </div>
+    </div>
+  {%- endif -%}
+
+  <!-- 2. HERO HEADER BANNER -->
+  <section class="jotar-gallery-hero">
+    <div class="jotar-gallery-container">
+      <div class="jotar-gallery-hero__wrapper">
+        <div class="jotar-gallery-hero__content">
+          <h1 class="jotar-gallery-hero__title">{{ section.settings.heading | default: 'OUR GALLERY' }}</h1>
+          <p class="jotar-gallery-hero__desc">
+            {{ section.settings.description | default: 'Explore our world through style and movement.<br>From street to studio — this is NOVA.' }}
+          </p>
+        </div>
+        <div class="jotar-gallery-hero__media">
+          {%- if section.settings.hero_image != blank -%}
+            {{
+              section.settings.hero_image
+              | image_url: width: 800
+              | image_tag:
+                class: 'jotar-gallery-hero__img',
+                loading: 'eager',
+                alt: section.settings.heading
+            }}
+          {%- else -%}
+            <img
+              src="{{ 'jotar-gallery-hero.jpg' | asset_url }}"
+              alt="NOVA Gallery Sneaker"
+              class="jotar-gallery-hero__img"
+              loading="eager"
+            >
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. FILTER TABS & TOOLBAR -->
+  <div class="jotar-gallery-toolbar-section">
+    <div class="jotar-gallery-container">
+      <div class="jotar-gallery-toolbar">
+        <div class="jotar-gallery-filters" role="tablist" aria-label="Gallery category filters">
+          <button
+            type="button"
+            class="jotar-gallery-filter-btn is-active"
+            data-filter="all"
+            role="tab"
+            aria-selected="true"
+          >
+            All
+          </button>
+          <button
+            type="button"
+            class="jotar-gallery-filter-btn"
+            data-filter="lifestyle"
+            role="tab"
+            aria-selected="false"
+          >
+            Lifestyle
+          </button>
+          <button
+            type="button"
+            class="jotar-gallery-filter-btn"
+            data-filter="street"
+            role="tab"
+            aria-selected="false"
+          >
+            Street
+          </button>
+          <button
+            type="button"
+            class="jotar-gallery-filter-btn"
+            data-filter="running"
+            role="tab"
+            aria-selected="false"
+          >
+            Running
+          </button>
+          <button
+            type="button"
+            class="jotar-gallery-filter-btn"
+            data-filter="behind-the-scenes"
+            role="tab"
+            aria-selected="false"
+          >
+            Behind the Scenes
+          </button>
+          <button
+            type="button"
+            class="jotar-gallery-filter-btn"
+            data-filter="events"
+            role="tab"
+            aria-selected="false"
+          >
+            Events
+          </button>
+        </div>
+
+        <div class="jotar-gallery-toolbar__actions">
+          <button type="button" class="jotar-gallery-filter-trigger" id="jotar-gallery-filter-trigger">
+            <svg class="jotar-gallery-filter-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="4" y1="21" x2="4" y2="14"></line>
+              <line x1="4" y1="10" x2="4" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12" y2="3"></line>
+              <line x1="20" y1="21" x2="20" y2="16"></line>
+              <line x1="20" y1="12" x2="20" y2="3"></line>
+              <line x1="1" y1="14" x2="7" y2="14"></line>
+              <line x1="9" y1="8" x2="15" y2="8"></line>
+              <line x1="17" y1="16" x2="23" y2="16"></line>
+            </svg>
+            <span>Filter</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. GALLERY GRID SECTION -->
+  <section class="jotar-gallery-grid-section">
+    <div class="jotar-gallery-container">
+      <div class="jotar-gallery-grid" id="jotar-gallery-grid-{{ section.id }}">
+        {%- if section.blocks.size > 0 -%}
+          {%- for block in section.blocks -%}
+            {%- assign item_category = block.settings.category | default: 'lifestyle' | downcase | replace: ' ', '-' -%}
+            {%- assign item_span = block.settings.card_size | default: 'standard' -%}
+            
+            <div
+              class="jotar-gallery-item jotar-gallery-item--{{ item_span }}"
+              data-category="{{ item_category }}"
+              data-index="{{ forloop.index0 }}"
+              {{ block.shopify_attributes }}
+            >
+              <div class="jotar-gallery-card">
+                {%- if block.settings.image != blank -%}
+                  {{
+                    block.settings.image
+                    | image_url: width: 1200
+                    | image_tag:
+                      class: 'jotar-gallery-card__img',
+                      loading: 'lazy',
+                      alt: block.settings.title | default: 'NOVA Gallery'
+                  }}
+                  {%- assign img_src = block.settings.image | image_url: width: 1600 -%}
+                {%- else -%}
+                  {%- assign fallback_img = 'jotar-gallery-01.jpg' -%}
+                  {%- if forloop.index == 2 -%}{%- assign fallback_img = 'jotar-gallery-02.jpg' -%}{%- endif -%}
+                  {%- if forloop.index == 3 -%}{%- assign fallback_img = 'jotar-prod-04.jpg' -%}{%- endif -%}
+                  {%- if forloop.index == 4 -%}{%- assign fallback_img = 'jotar-gallery-04.jpg' -%}{%- endif -%}
+                  {%- if forloop.index == 5 -%}{%- assign fallback_img = 'jotar-prod-02.jpg' -%}{%- endif -%}
+                  {%- if forloop.index == 6 -%}{%- assign fallback_img = 'jotar-prod-05.jpg' -%}{%- endif -%}
+                  {%- if forloop.index == 7 -%}{%- assign fallback_img = 'jotar-gallery-08.jpg' -%}{%- endif -%}
+                  {%- if forloop.index == 8 -%}{%- assign fallback_img = 'jotar-prod-03.jpg' -%}{%- endif -%}
+                  {%- if forloop.index == 9 -%}{%- assign fallback_img = 'jotar-gallery-10.jpg' -%}{%- endif -%}
+                  {%- assign img_src = fallback_img | asset_url -%}
+                  <img
+                    src="{{ img_src }}"
+                    alt="{{ block.settings.title | default: 'NOVA Gallery Item' }}"
+                    class="jotar-gallery-card__img"
+                    loading="lazy"
+                  >
+                {%- endif -%}
+
+                <!-- Hover Overlay & Expand Button -->
+                <div class="jotar-gallery-card__overlay">
+                  <div class="jotar-gallery-card__info">
+                    {%- if block.settings.title != blank -%}
+                      <h3 class="jotar-gallery-card__title">{{ block.settings.title }}</h3>
+                    {%- endif -%}
+                    <span class="jotar-gallery-card__badge">{{ block.settings.category | default: 'Lifestyle' }}</span>
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  class="jotar-gallery-card__zoom-btn"
+                  aria-label="Expand image"
+                  data-zoom-src="{{ img_src }}"
+                  data-zoom-title="{{ block.settings.title | default: 'NOVA Street & Movement' }}"
+                  data-zoom-category="{{ block.settings.category | default: 'Lifestyle' }}"
+                >
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <polyline points="9 21 3 21 3 15"></polyline>
+                    <line x1="21" y1="3" x2="14" y2="10"></line>
+                    <line x1="3" y1="21" x2="10" y2="14"></line>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          {%- endfor -%}
+        {%- else -%}
+          <!-- DEFAULT GALLERY GRID MATCHING EXACT REFERENCE IMAGE -->
+          
+          <!-- Column 1: Tall Steps Street Photo -->
+          <div class="jotar-gallery-item jotar-gallery-item--tall" data-category="street" data-index="0">
+            <div class="jotar-gallery-card">
+              <img src="{{ 'jotar-gallery-01.jpg' | asset_url }}" alt="NOVA Urban Street Style" class="jotar-gallery-card__img" loading="lazy">
+              <div class="jotar-gallery-card__overlay">
+                <div class="jotar-gallery-card__info">
+                  <h3 class="jotar-gallery-card__title">Urban Steps</h3>
+                  <span class="jotar-gallery-card__badge">Street</span>
+                </div>
+              </div>
+              <button
+                type="button"
+                class="jotar-gallery-card__zoom-btn is-visible"
+                aria-label="Expand image"
+                data-zoom-src="{{ 'jotar-gallery-01.jpg' | asset_url }}"
+                data-zoom-title="Urban Steps - Street Edition"
+                data-zoom-category="Street"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <polyline points="9 21 3 21 3 15"></polyline>
+                  <line x1="21" y1="3" x2="14" y2="10"></line>
+                  <line x1="3" y1="21" x2="10" y2="14"></line>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Column 2 Top: Cream Studio Sneaker -->
+          <div class="jotar-gallery-item" data-category="lifestyle" data-index="1">
+            <div class="jotar-gallery-card">
+              <img src="{{ 'jotar-gallery-02.jpg' | asset_url }}" alt="NOVA Athleisure Cream" class="jotar-gallery-card__img" loading="lazy">
+              <div class="jotar-gallery-card__overlay">
+                <div class="jotar-gallery-card__info">
+                  <h3 class="jotar-gallery-card__title">Athleisure Cream</h3>
+                  <span class="jotar-gallery-card__badge">Lifestyle</span>
+                </div>
+              </div>
+              <button
+                type="button"
+                class="jotar-gallery-card__zoom-btn"
+                aria-label="Expand image"
+                data-zoom-src="{{ 'jotar-gallery-02.jpg' | asset_url }}"
+                data-zoom-title="Athleisure Cream Sneaker"
+                data-zoom-category="Lifestyle"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <polyline points="9 21 3 21 3 15"></polyline>
+                  <line x1="21" y1="3" x2="14" y2="10"></line>
+                  <line x1="3" y1="21" x2="10" y2="14"></line>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Column 3 Top: Model Sitting on Stairs -->
+          <div class="jotar-gallery-item" data-category="lifestyle" data-index="2">
+            <div class="jotar-gallery-card">
+              <img src="{{ 'jotar-gallery-04.jpg' | asset_url }}" alt="NOVA Downtown Streetwear" class="jotar-gallery-card__img" loading="lazy">
+              <div class="jotar-gallery-card__overlay">
+                <div class="jotar-gallery-card__info">
+                  <h3 class="jotar-gallery-card__title">Downtown Pulse</h3>
+                  <span class="jotar-gallery-card__badge">Lifestyle</span>
+                </div>
+              </div>
+              <button
+                type="button"
+                class="jotar-gallery-card__zoom-btn"
+                aria-label="Expand image"
+                data-zoom-src="{{ 'jotar-gallery-04.jpg' | asset_url }}"
+                data-zoom-title="Downtown Pulse - Streetwear Collection"
+                data-zoom-category="Lifestyle"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <polyline points="9 21 3 21 3 15"></polyline>
+                  <line x1="21" y1="3" x2="14" y2="10"></line>
+                  <line x1="3" y1="21" x2="10" y2="14"></line>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Column 4 Top: Black Performance in Rain -->
+          <div class="jotar-gallery-item" data-category="running" data-index="3">
+            <div class="jotar-gallery-card">
+              <img src="{{ 'jotar-prod-05.jpg' | asset_url }}" alt="NOVA All-Weather Runner" class="jotar-gallery-card__img" loading="lazy">
+              <div class="jotar-gallery-card__overlay">
+                <div class="jotar-gallery-card__info">
+                  <h3 class="jotar-gallery-card__title">All-Weather Storm</h3>
+                  <span class="jotar-gallery-card__badge">Running</span>
+                </div>
+              </div>
+              <button
+                type="button"
+                class="jotar-gallery-card__zoom-btn"
+                aria-label="Expand image"
+                data-zoom-src="{{ 'jotar-prod-05.jpg' | asset_url }}"
+                data-zoom-title="All-Weather Storm Edition"
+                data-zoom-category="Running"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <polyline points="9 21 3 21 3 15"></polyline>
+                  <line x1="21" y1="3" x2="14" y2="10"></line>
+                  <line x1="3" y1="21" x2="10" y2="14"></line>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Column 5 Top: Stealth Black on Display Box -->
+          <div class="jotar-gallery-item" data-category="lifestyle" data-index="4">
+            <div class="jotar-gallery-card">
+              <img src="{{ 'jotar-prod-03.jpg' | asset_url }}" alt="NOVA Stealth Triple Black" class="jotar-gallery-card__img" loading="lazy">
+              <div class="jotar-gallery-card__overlay">
+                <div class="jotar-gallery-card__info">
+                  <h3 class="jotar-gallery-card__title">Stealth Dark Room</h3>
+                  <span class="jotar-gallery-card__badge">Lifestyle</span>
+                </div>
+              </div>
+              <button
+                type="button"
+                class="jotar-gallery-card__zoom-btn"
+                aria-label="Expand image"
+                data-zoom-src="{{ 'jotar-prod-03.jpg' | asset_url }}"
+                data-zoom-title="Stealth Dark Room Collection"
+                data-zoom-category="Lifestyle"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <polyline points="9 21 3 21 3 15"></polyline>
+                  <line x1="21" y1="3" x2="14" y2="10"></line>
+                  <line x1="3" y1="21" x2="10" y2="14"></line>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Column 2 Bottom: Tan Streetwear Sneaker -->
+          <div class="jotar-gallery-item" data-category="street" data-index="5">
+            <div class="jotar-gallery-card">
+              <img src="{{ 'jotar-prod-04.jpg' | asset_url }}" alt="NOVA Sand Beige Edition" class="jotar-gallery-card__img" loading="lazy">
+              <div class="jotar-gallery-card__overlay">
+                <div class="jotar-gallery-card__info">
+                  <h3 class="jotar-gallery-card__title">Desert Sand Rush</h3>
+                  <span class="jotar-gallery-card__badge">Street</span>
+                </div>
+              </div>
+              <button
+                type="button"
+                class="jotar-gallery-card__zoom-btn"
+                aria-label="Expand image"
+                data-zoom-src="{{ 'jotar-prod-04.jpg' | asset_url }}"
+                data-zoom-title="Desert Sand Rush Edition"
+                data-zoom-category="Street"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <polyline points="9 21 3 21 3 15"></polyline>
+                  <line x1="21" y1="3" x2="14" y2="10"></line>
+                  <line x1="3" y1="21" x2="10" y2="14"></line>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Column 3 Bottom: Black & White Sneaker Pair -->
+          <div class="jotar-gallery-item" data-category="lifestyle" data-index="6">
+            <div class="jotar-gallery-card">
+              <img src="{{ 'jotar-prod-02.jpg' | asset_url }}" alt="NOVA Duo Studio Showcase" class="jotar-gallery-card__img" loading="lazy">
+              <div class="jotar-gallery-card__overlay">
+                <div class="jotar-gallery-card__info">
+                  <h3 class="jotar-gallery-card__title">Monochrome Duo</h3>
+                  <span class="jotar-gallery-card__badge">Lifestyle</span>
+                </div>
+              </div>
+              <button
+                type="button"
+                class="jotar-gallery-card__zoom-btn"
+                aria-label="Expand image"
+                data-zoom-src="{{ 'jotar-prod-02.jpg' | asset_url }}"
+                data-zoom-title="Monochrome Duo Studio Showcase"
+                data-zoom-category="Lifestyle"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <polyline points="9 21 3 21 3 15"></polyline>
+                  <line x1="21" y1="3" x2="14" y2="10"></line>
+                  <line x1="3" y1="21" x2="10" y2="14"></line>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Column 4 Bottom: Workshop Sketch & Blueprints -->
+          <div class="jotar-gallery-item" data-category="behind-the-scenes" data-index="7">
+            <div class="jotar-gallery-card">
+              <img src="{{ 'jotar-gallery-08.jpg' | asset_url }}" alt="NOVA Design Studio Workshop" class="jotar-gallery-card__img" loading="lazy">
+              <div class="jotar-gallery-card__overlay">
+                <div class="jotar-gallery-card__info">
+                  <h3 class="jotar-gallery-card__title">Crafting The Future</h3>
+                  <span class="jotar-gallery-card__badge">Behind the Scenes</span>
+                </div>
+              </div>
+              <button
+                type="button"
+                class="jotar-gallery-card__zoom-btn"
+                aria-label="Expand image"
+                data-zoom-src="{{ 'jotar-gallery-08.jpg' | asset_url }}"
+                data-zoom-title="Crafting The Future - Design Studio Blueprint"
+                data-zoom-category="Behind the Scenes"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <polyline points="9 21 3 21 3 15"></polyline>
+                  <line x1="21" y1="3" x2="14" y2="10"></line>
+                  <line x1="3" y1="21" x2="10" y2="14"></line>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Column 5 Bottom: Athlete Runner Bridge Sprint -->
+          <div class="jotar-gallery-item" data-category="running" data-index="8">
+            <div class="jotar-gallery-card">
+              <img src="{{ 'jotar-gallery-10.jpg' | asset_url }}" alt="NOVA High-Performance Bridge Run" class="jotar-gallery-card__img" loading="lazy">
+              <div class="jotar-gallery-card__overlay">
+                <div class="jotar-gallery-card__info">
+                  <h3 class="jotar-gallery-card__title">Sunrise Sprint</h3>
+                  <span class="jotar-gallery-card__badge">Running</span>
+                </div>
+              </div>
+              <button
+                type="button"
+                class="jotar-gallery-card__zoom-btn"
+                aria-label="Expand image"
+                data-zoom-src="{{ 'jotar-gallery-10.jpg' | asset_url }}"
+                data-zoom-title="Sunrise Sprint - High Performance Runner"
+                data-zoom-category="Running"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <polyline points="9 21 3 21 3 15"></polyline>
+                  <line x1="21" y1="3" x2="14" y2="10"></line>
+                  <line x1="3" y1="21" x2="10" y2="14"></line>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Additional Event Item -->
+          <div class="jotar-gallery-item" data-category="events" data-index="9">
+            <div class="jotar-gallery-card">
+              <img src="{{ 'jotar-social-04.jpg' | asset_url }}" alt="NOVA Launch Event" class="jotar-gallery-card__img" loading="lazy">
+              <div class="jotar-gallery-card__overlay">
+                <div class="jotar-gallery-card__info">
+                  <h3 class="jotar-gallery-card__title">Community Launch</h3>
+                  <span class="jotar-gallery-card__badge">Events</span>
+                </div>
+              </div>
+              <button
+                type="button"
+                class="jotar-gallery-card__zoom-btn"
+                aria-label="Expand image"
+                data-zoom-src="{{ 'jotar-social-04.jpg' | asset_url }}"
+                data-zoom-title="Community Launch Event"
+                data-zoom-category="Events"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <polyline points="9 21 3 21 3 15"></polyline>
+                  <line x1="21" y1="3" x2="14" y2="10"></line>
+                  <line x1="3" y1="21" x2="10" y2="14"></line>
+                </svg>
+              </button>
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. INTERACTIVE FULLSCREEN LIGHTBOX MODAL -->
+  <div class="jotar-lightbox" id="jotar-lightbox-{{ section.id }}" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="jotar-lightbox__backdrop" data-close-lightbox></div>
+    
+    <div class="jotar-lightbox__container">
+      <button type="button" class="jotar-lightbox__close" aria-label="Close lightbox" data-close-lightbox>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <button type="button" class="jotar-lightbox__nav jotar-lightbox__nav--prev" aria-label="Previous image" id="jotar-lightbox-prev">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+
+      <div class="jotar-lightbox__stage">
+        <div class="jotar-lightbox__image-wrap">
+          <img src="" alt="" class="jotar-lightbox__img" id="jotar-lightbox-img">
+        </div>
+        <div class="jotar-lightbox__caption">
+          <div class="jotar-lightbox__meta">
+            <span class="jotar-lightbox__tag" id="jotar-lightbox-tag">Lifestyle</span>
+            <h3 class="jotar-lightbox__title" id="jotar-lightbox-title">NOVA Style</h3>
+          </div>
+          <div class="jotar-lightbox__counter" id="jotar-lightbox-counter">1 / 10</div>
+        </div>
+      </div>
+
+      <button type="button" class="jotar-lightbox__nav jotar-lightbox__nav--next" aria-label="Next image" id="jotar-lightbox-next">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* ==========================================================================
+     JOTAR / NOVA GALLERY PAGE STYLES
+     ========================================================================== */
+  .jotar-gallery {
+    --gallery-bg: #ffffff;
+    --gallery-card-bg: #f5f5f7;
+    --gallery-border-radius: 12px;
+    --gallery-text-main: #111111;
+    --gallery-text-muted: #666666;
+    background-color: var(--gallery-bg);
+    color: var(--gallery-text-main);
+    font-family: var(--font-body-family, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif);
+    padding-bottom: 80px;
+    overflow: hidden;
+  }
+
+  .jotar-gallery-container {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 32px;
+    box-sizing: border-box;
+  }
+
+  /* Breadcrumbs */
+  .jotar-gallery-breadcrumbs-wrap {
+    padding: 24px 0 12px;
+  }
+
+  .jotar-gallery-breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--gallery-text-muted);
+  }
+
+  .jotar-gallery-breadcrumbs a {
+    color: var(--gallery-text-muted);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .jotar-gallery-breadcrumbs a:hover {
+    color: var(--gallery-text-main);
+  }
+
+  .jotar-gallery-breadcrumbs__sep {
+    color: #999999;
+  }
+
+  .jotar-gallery-breadcrumbs__current {
+    color: var(--gallery-text-main);
+    font-weight: 500;
+  }
+
+  /* Hero Header */
+  .jotar-gallery-hero {
+    padding: 10px 0 32px;
+  }
+
+  .jotar-gallery-hero__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    background: linear-gradient(135deg, #f9f9fb 0%, #f1f2f6 100%);
+    border-radius: 20px;
+    padding: 40px 50px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .jotar-gallery-hero__content {
+    flex: 1;
+    max-width: 520px;
+    z-index: 2;
+  }
+
+  .jotar-gallery-hero__title {
+    font-size: clamp(32px, 4.5vw, 54px);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin: 0 0 16px 0;
+    text-transform: uppercase;
+    color: #111111;
+  }
+
+  .jotar-gallery-hero__desc {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #555555;
+    margin: 0;
+  }
+
+  .jotar-gallery-hero__media {
+    flex: 1;
+    max-width: 580px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    position: relative;
+  }
+
+  .jotar-gallery-hero__img {
+    width: 100%;
+    max-height: 300px;
+    object-fit: contain;
+    filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.12));
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .jotar-gallery-hero__wrapper:hover .jotar-gallery-hero__img {
+    transform: scale(1.03) rotate(-1deg);
+  }
+
+  /* Toolbar & Filter Tabs */
+  .jotar-gallery-toolbar-section {
+    padding: 16px 0 28px;
+  }
+
+  .jotar-gallery-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .jotar-gallery-filters {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .jotar-gallery-filter-btn {
+    appearance: none;
+    border: none;
+    background: transparent;
+    padding: 10px 20px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333333;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    font-family: inherit;
+    user-select: none;
+  }
+
+  .jotar-gallery-filter-btn:hover {
+    background-color: #f1f2f4;
+    color: #111111;
+  }
+
+  .jotar-gallery-filter-btn.is-active {
+    background-color: #111111;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  }
+
+  .jotar-gallery-filter-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 18px;
+    border-radius: 8px;
+    border: 1px solid #e2e4e8;
+    background: #ffffff;
+    color: #111111;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+  }
+
+  .jotar-gallery-filter-trigger:hover {
+    border-color: #111111;
+    background-color: #f9f9fb;
+  }
+
+  /* Gallery Grid - Responsive Varied Layout */
+  .jotar-gallery-grid-section {
+    padding: 0;
+  }
+
+  .jotar-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-auto-rows: 240px;
+    gap: 16px;
+  }
+
+  .jotar-gallery-item {
+    position: relative;
+    border-radius: var(--gallery-border-radius);
+    overflow: hidden;
+    transition: transform 0.35s ease, opacity 0.35s ease;
+  }
+
+  /* Tall Column Layout to match reference image */
+  .jotar-gallery-item--tall {
+    grid-row: span 2;
+  }
+
+  .jotar-gallery-item.is-hidden {
+    display: none;
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  .jotar-gallery-card {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--gallery-border-radius);
+    overflow: hidden;
+    background-color: var(--gallery-card-bg);
+    cursor: pointer;
+  }
+
+  .jotar-gallery-card__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
+  }
+
+  .jotar-gallery-card:hover .jotar-gallery-card__img {
+    transform: scale(1.05);
+  }
+
+  /* Overlay on Hover */
+  .jotar-gallery-card__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 60%);
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 20px;
+    transition: opacity 0.3s ease;
+    box-sizing: border-box;
+  }
+
+  .jotar-gallery-card:hover .jotar-gallery-card__overlay {
+    opacity: 1;
+  }
+
+  .jotar-gallery-card__info {
+    transform: translateY(10px);
+    transition: transform 0.3s ease;
+  }
+
+  .jotar-gallery-card:hover .jotar-gallery-card__info {
+    transform: translateY(0);
+  }
+
+  .jotar-gallery-card__title {
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 6px 0;
+    letter-spacing: -0.01em;
+  }
+
+  .jotar-gallery-card__badge {
+    display: inline-block;
+    padding: 4px 10px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+    border-radius: 999px;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  /* Expand / Zoom Button on Cards */
+  .jotar-gallery-card__zoom-btn {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(6px);
+    border: none;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transform: scale(0.85);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 5;
+  }
+
+  .jotar-gallery-card__zoom-btn.is-visible,
+  .jotar-gallery-card:hover .jotar-gallery-card__zoom-btn {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .jotar-gallery-card__zoom-btn:hover {
+    background: #111111;
+    color: #ffffff;
+    transform: scale(1.1);
+  }
+
+  /* ==========================================================================
+     LIGHTBOX MODAL
+     ========================================================================== */
+  .jotar-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .jotar-lightbox.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .jotar-lightbox__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 10, 12, 0.92);
+    backdrop-filter: blur(16px);
+  }
+
+  .jotar-lightbox__container {
+    position: relative;
+    width: 92%;
+    max-width: 1100px;
+    height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+  }
+
+  .jotar-lightbox__close {
+    position: absolute;
+    top: -45px;
+    right: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .jotar-lightbox__close:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: rotate(90deg);
+  }
+
+  .jotar-lightbox__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    z-index: 10;
+  }
+
+  .jotar-lightbox__nav:hover {
+    background: #ffffff;
+    color: #111111;
+    transform: translateY(-50%) scale(1.08);
+  }
+
+  .jotar-lightbox__nav--prev {
+    left: -24px;
+  }
+
+  .jotar-lightbox__nav--next {
+    right: -24px;
+  }
+
+  .jotar-lightbox__stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  .jotar-lightbox__image-wrap {
+    width: 100%;
+    height: calc(100% - 70px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .jotar-lightbox__img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    animation: jotarFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @keyframes jotarFadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.96);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .jotar-lightbox__caption {
+    width: 100%;
+    max-width: 700px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #ffffff;
+    padding: 12px 10px 0;
+    box-sizing: border-box;
+  }
+
+  .jotar-lightbox__tag {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #aaaaaa;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .jotar-lightbox__title {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+    color: #ffffff;
+  }
+
+  .jotar-lightbox__counter {
+    font-size: 13px;
+    font-weight: 500;
+    color: #999999;
+  }
+
+  /* ==========================================================================
+     RESPONSIVE BREAKPOINTS
+     ========================================================================== */
+  @media (max-width: 1200px) {
+    .jotar-gallery-grid {
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: 220px;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .jotar-gallery-container {
+      padding: 0 20px;
+    }
+
+    .jotar-gallery-hero__wrapper {
+      flex-direction: column;
+      text-align: center;
+      padding: 32px 24px;
+      gap: 24px;
+    }
+
+    .jotar-gallery-hero__content {
+      max-width: 100%;
+    }
+
+    .jotar-gallery-hero__media {
+      max-width: 320px;
+    }
+
+    .jotar-gallery-grid {
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: 200px;
+    }
+
+    .jotar-gallery-item--tall {
+      grid-row: span 1;
+    }
+
+    .jotar-lightbox__nav--prev {
+      left: 10px;
+    }
+
+    .jotar-lightbox__nav--next {
+      right: 10px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .jotar-gallery-grid {
+      grid-template-columns: repeat(2, 1fr);
+      grid-auto-rows: 170px;
+      gap: 10px;
+    }
+
+    .jotar-gallery-filters {
+      width: 100%;
+      overflow-x: auto;
+      flex-wrap: nowrap;
+      padding-bottom: 8px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .jotar-gallery-filter-btn {
+      white-space: nowrap;
+      padding: 8px 14px;
+      font-size: 13px;
+    }
+
+    .jotar-gallery-hero__title {
+      font-size: 28px;
+    }
+
+    .jotar-gallery-hero__desc {
+      font-size: 14px;
+    }
+
+    .jotar-gallery-card__zoom-btn {
+      opacity: 1;
+      width: 32px;
+      height: 32px;
+      bottom: 10px;
+      left: 10px;
+    }
+
+    .jotar-gallery-card__zoom-btn svg {
+      width: 14px;
+      height: 14px;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const root = document.getElementById('jotar-gallery-{{ section.id }}');
+    if (!root) return;
+
+    // 1. FILTER FUNCTIONALITY
+    const filterButtons = root.querySelectorAll('.jotar-gallery-filter-btn');
+    const galleryItems = root.querySelectorAll('.jotar-gallery-item');
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => {
+          b.classList.remove('is-active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        btn.classList.add('is-active');
+        btn.setAttribute('aria-selected', 'true');
+
+        const filterValue = btn.getAttribute('data-filter');
+
+        galleryItems.forEach(item => {
+          const itemCat = item.getAttribute('data-category');
+          if (filterValue === 'all' || itemCat === filterValue) {
+            item.classList.remove('is-hidden');
+          } else {
+            item.classList.add('is-hidden');
+          }
+        });
+      });
+    });
+
+    // 2. LIGHTBOX FUNCTIONALITY
+    const lightbox = document.getElementById('jotar-lightbox-{{ section.id }}');
+    const lightboxImg = document.getElementById('jotar-lightbox-img');
+    const lightboxTitle = document.getElementById('jotar-lightbox-title');
+    const lightboxTag = document.getElementById('jotar-lightbox-tag');
+    const lightboxCounter = document.getElementById('jotar-lightbox-counter');
+    const prevBtn = document.getElementById('jotar-lightbox-prev');
+    const nextBtn = document.getElementById('jotar-lightbox-next');
+    const closeTriggers = root.querySelectorAll('[data-close-lightbox]');
+
+    let activeItems = [];
+    let currentIndex = 0;
+
+    function getVisibleItems() {
+      return Array.from(galleryItems).filter(item => !item.classList.contains('is-hidden'));
+    }
+
+    function openLightbox(itemElement) {
+      activeItems = getVisibleItems();
+      currentIndex = activeItems.indexOf(itemElement);
+      if (currentIndex === -1) currentIndex = 0;
+
+      updateLightboxContent();
+      lightbox.classList.add('is-open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('is-open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    function updateLightboxContent() {
+      if (!activeItems.length) return;
+      const currentItem = activeItems[currentIndex];
+      const zoomBtn = currentItem.querySelector('.jotar-gallery-card__zoom-btn');
+      const imgElem = currentItem.querySelector('.jotar-gallery-card__img');
+      
+      const imgSrc = zoomBtn ? zoomBtn.getAttribute('data-zoom-src') : imgElem.src;
+      const title = zoomBtn ? zoomBtn.getAttribute('data-zoom-title') : (imgElem.alt || 'NOVA Gallery');
+      const category = zoomBtn ? zoomBtn.getAttribute('data-zoom-category') : 'Lifestyle';
+
+      lightboxImg.src = imgSrc;
+      lightboxImg.alt = title;
+      lightboxTitle.textContent = title;
+      lightboxTag.textContent = category;
+      lightboxCounter.textContent = `${currentIndex + 1} / ${activeItems.length}`;
+    }
+
+    function prevImage() {
+      if (activeItems.length <= 1) return;
+      currentIndex = (currentIndex - 1 + activeItems.length) % activeItems.length;
+      updateLightboxContent();
+    }
+
+    function nextImage() {
+      if (activeItems.length <= 1) return;
+      currentIndex = (currentIndex + 1) % activeItems.length;
+      updateLightboxContent();
+    }
+
+    // Attach click triggers to cards
+    galleryItems.forEach(item => {
+      const card = item.querySelector('.jotar-gallery-card');
+      if (card) {
+        card.addEventListener('click', (e) => {
+          openLightbox(item);
+        });
+      }
+    });
+
+    // Lightbox Controls
+    if (prevBtn) prevBtn.addEventListener('click', (e) => { e.stopPropagation(); prevImage(); });
+    if (nextBtn) nextBtn.addEventListener('click', (e) => { e.stopPropagation(); nextImage(); });
+    
+    closeTriggers.forEach(trigger => {
+      trigger.addEventListener('click', closeLightbox);
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('is-open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') prevImage();
+      if (e.key === 'ArrowRight') nextImage();
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Jotar Gallery Page",
+  "tag": "section",
+  "class": "section-jotar-gallery",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_breadcrumbs",
+      "label": "Show Breadcrumbs",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "breadcrumb_title",
+      "label": "Breadcrumb Title",
+      "default": "Gallery"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "OUR GALLERY"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Explore our world through style and movement.\nFrom street to studio — this is NOVA."
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero Sneaker Image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "gallery_item",
+      "name": "Gallery Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title / Caption",
+          "default": "Street Movement"
+        },
+        {
+          "type": "select",
+          "id": "category",
+          "label": "Category",
+          "options": [
+            { "value": "lifestyle", "label": "Lifestyle" },
+            { "value": "street", "label": "Street" },
+            { "value": "running", "label": "Running" },
+            { "value": "behind-the-scenes", "label": "Behind the Scenes" },
+            { "value": "events", "label": "Events" }
+          ],
+          "default": "lifestyle"
+        },
+        {
+          "type": "select",
+          "id": "card_size",
+          "label": "Card Size / Span",
+          "options": [
+            { "value": "standard", "label": "Standard (1x1)" },
+            { "value": "tall", "label": "Tall (1x2)" }
+          ],
+          "default": "standard"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Jotar Gallery Page",
+      "blocks": [
+        {
+          "type": "gallery_item",
+          "settings": {
+            "title": "Urban Steps",
+            "category": "street",
+            "card_size": "tall"
+          }
+        },
+        {
+          "type": "gallery_item",
+          "settings": {
+            "title": "Athleisure Cream",
+            "category": "lifestyle",
+            "card_size": "standard"
+          }
+        },
+        {
+          "type": "gallery_item",
+          "settings": {
+            "title": "Downtown Pulse",
+            "category": "lifestyle",
+            "card_size": "standard"
+          }
+        },
+        {
+          "type": "gallery_item",
+          "settings": {
+            "title": "All-Weather Storm",
+            "category": "running",
+            "card_size": "standard"
+          }
+        },
+        {
+          "type": "gallery_item",
+          "settings": {
+            "title": "Stealth Dark Room",
+            "category": "lifestyle",
+            "card_size": "standard"
+          }
+        },
+        {
+          "type": "gallery_item",
+          "settings": {
+            "title": "Desert Sand Rush",
+            "category": "street",
+            "card_size": "standard"
+          }
+        },
+        {
+          "type": "gallery_item",
+          "settings": {
+            "title": "Monochrome Duo",
+            "category": "lifestyle",
+            "card_size": "standard"
+          }
+        },
+        {
+          "type": "gallery_item",
+          "settings": {
+            "title": "Crafting The Future",
+            "category": "behind-the-scenes",
+            "card_size": "standard"
+          }
+        },
+        {
+          "type": "gallery_item",
+          "settings": {
+            "title": "Sunrise Sprint",
+            "category": "running",
+            "card_size": "standard"
+          }
+        },
+        {
+          "type": "gallery_item",
+          "settings": {
+            "title": "Community Launch",
+            "category": "events",
+            "card_size": "standard"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
