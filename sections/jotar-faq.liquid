@@ -1,0 +1,1252 @@
+{% comment %}
+  Jotar / NOVA - Premium FAQ (Help & Support) Section
+  Features:
+  - Live Instant Search Bar with keyword highlighting
+  - Category Pills Quick Navigation (Sizing, Shipping, Returns, Orders, Care)
+  - Smooth Animated Accordions
+  - "Still Have Questions?" Contact Support Card
+  - Full Shopify Theme Customizer Support with rich defaults
+{% endcomment %}
+
+<div class="jotar-faq" id="jotar-faq-{{ section.id }}">
+  <!-- 1. BREADCRUMBS -->
+  {%- if section.settings.show_breadcrumbs -%}
+    <div class="jotar-faq-breadcrumbs-wrap">
+      <div class="jotar-faq-container">
+        <nav class="jotar-faq-breadcrumbs" aria-label="Breadcrumb">
+          <a href="{{ routes.root_url }}">Home</a>
+          <span class="jotar-faq-breadcrumbs__sep" aria-hidden="true">&rsaquo;</span>
+          <span class="jotar-faq-breadcrumbs__current">{{ section.settings.breadcrumb_title | default: 'FAQ' }}</span>
+        </nav>
+      </div>
+    </div>
+  {%- endif -%}
+
+  <!-- 2. HERO HEADER & SEARCH BAR -->
+  <section class="jotar-faq-hero">
+    <div class="jotar-faq-container">
+      <div class="jotar-faq-hero__content">
+        <span class="jotar-faq-eyebrow">{{ section.settings.eyebrow | default: 'HELP & SUPPORT' }}</span>
+        <h1 class="jotar-faq-hero__title">{{ section.settings.heading | default: 'FREQUENTLY ASKED QUESTIONS' }}</h1>
+        <p class="jotar-faq-hero__desc">
+          {{ section.settings.subtext | default: 'Everything you need to know about our footwear, ordering, sizing, shipping, and returns.' }}
+        </p>
+
+        <!-- Live Instant Search Box -->
+        {%- if section.settings.show_search -%}
+          <div class="jotar-faq-search">
+            <div class="jotar-faq-search__wrapper">
+              <svg class="jotar-faq-search__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input
+                type="text"
+                id="jotar-faq-search-input"
+                class="jotar-faq-search__input"
+                placeholder="Search by keyword (e.g., sizing, return policy, delivery)..."
+                aria-label="Search frequently asked questions"
+                autocomplete="off"
+              >
+              <button type="button" class="jotar-faq-search__clear" id="jotar-faq-search-clear" aria-label="Clear search">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </button>
+            </div>
+            <div class="jotar-faq-search__results-count" id="jotar-faq-search-count" style="display: none;"></div>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. CATEGORY TABS -->
+  <div class="jotar-faq-categories-section">
+    <div class="jotar-faq-container">
+      <div class="jotar-faq-categories" role="tablist" aria-label="FAQ Categories">
+        <button type="button" class="jotar-faq-cat-btn is-active" data-category="all" role="tab" aria-selected="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7"></rect>
+            <rect x="14" y="3" width="7" height="7"></rect>
+            <rect x="14" y="14" width="7" height="7"></rect>
+            <rect x="3" y="14" width="7" height="7"></rect>
+          </svg>
+          <span>All Questions</span>
+        </button>
+
+        <button type="button" class="jotar-faq-cat-btn" data-category="sizing" role="tab" aria-selected="false">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+          </svg>
+          <span>Sizing & Fit</span>
+        </button>
+
+        <button type="button" class="jotar-faq-cat-btn" data-category="shipping" role="tab" aria-selected="false">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="1" y="3" width="15" height="13"></rect>
+            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+            <circle cx="5.5" cy="18.5" r="2.5"></circle>
+            <circle cx="18.5" cy="18.5" r="2.5"></circle>
+          </svg>
+          <span>Shipping & Delivery</span>
+        </button>
+
+        <button type="button" class="jotar-faq-cat-btn" data-category="returns" role="tab" aria-selected="false">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="1 4 1 10 7 10"></polyline>
+            <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+          </svg>
+          <span>Returns & Exchanges</span>
+        </button>
+
+        <button type="button" class="jotar-faq-cat-btn" data-category="orders" role="tab" aria-selected="false">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+            <line x1="1" y1="10" x2="23" y2="10"></line>
+          </svg>
+          <span>Orders & Payment</span>
+        </button>
+
+        <button type="button" class="jotar-faq-cat-btn" data-category="care" role="tab" aria-selected="false">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+          </svg>
+          <span>Care & Cleaning</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. FAQ ACCORDION LIST -->
+  <section class="jotar-faq-main-section">
+    <div class="jotar-faq-container jotar-faq-container--narrow">
+      <div class="jotar-faq-accordion-list" id="jotar-faq-list">
+        {%- if section.blocks.size > 0 -%}
+          {%- for block in section.blocks -%}
+            {%- assign block_cat = block.settings.category | default: 'sizing' | downcase -%}
+            <div
+              class="jotar-faq-item"
+              data-category="{{ block_cat }}"
+              {{ block.shopify_attributes }}
+            >
+              <button
+                type="button"
+                class="jotar-faq-trigger"
+                aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}"
+              >
+                <span class="jotar-faq-question">{{ block.settings.question }}</span>
+                <span class="jotar-faq-icon-wrap" aria-hidden="true">
+                  <svg class="jotar-faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </span>
+              </button>
+              <div class="jotar-faq-content" {% if forloop.first %}style="max-height: 500px;"{% endif %}>
+                <div class="jotar-faq-answer">
+                  {{ block.settings.answer }}
+                </div>
+              </div>
+            </div>
+          {%- endfor -%}
+        {%- else -%}
+          <!-- DEFAULT RICH FAQS IF NO BLOCKS ADDED YET -->
+
+          <!-- 1. Sizing -->
+          <div class="jotar-faq-item is-open" data-category="sizing">
+            <button type="button" class="jotar-faq-trigger" aria-expanded="true">
+              <span class="jotar-faq-question">How do NOVA sneakers fit? Are they true to size?</span>
+              <span class="jotar-faq-icon-wrap" aria-hidden="true">
+                <svg class="jotar-faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </span>
+            </button>
+            <div class="jotar-faq-content" style="max-height: 500px;">
+              <div class="jotar-faq-answer">
+                <p>All NOVA sneakers are engineered to fit true to standard US/EU sizing. If you typically wear a half size or have wider feet, we recommend ordering half a size up for maximum comfort during all-day wear and athletic activities.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="jotar-faq-item" data-category="sizing">
+            <button type="button" class="jotar-faq-trigger" aria-expanded="false">
+              <span class="jotar-faq-question">Where can I find the official shoe size conversion chart?</span>
+              <span class="jotar-faq-icon-wrap" aria-hidden="true">
+                <svg class="jotar-faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </span>
+            </button>
+            <div class="jotar-faq-content">
+              <div class="jotar-faq-answer">
+                <p>Every product page includes a <strong>"Size Guide"</strong> button right above the size selector. It displays comprehensive measurements in US, UK, EU, and CM to help you find your exact fit with precision.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Shipping -->
+          <div class="jotar-faq-item" data-category="shipping">
+            <button type="button" class="jotar-faq-trigger" aria-expanded="false">
+              <span class="jotar-faq-question">What are your delivery options and shipping times?</span>
+              <span class="jotar-faq-icon-wrap" aria-hidden="true">
+                <svg class="jotar-faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </span>
+            </button>
+            <div class="jotar-faq-content">
+              <div class="jotar-faq-answer">
+                <p>We offer two shipping methods on all orders:</p>
+                <ul>
+                  <li><strong>Standard Shipping:</strong> 3–5 business days (Free on orders over $100).</li>
+                  <li><strong>Express Courier:</strong> 1–2 business days with priority fulfillment.</li>
+                </ul>
+                <p>Orders placed before 2:00 PM EST are dispatched on the very same business day.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="jotar-faq-item" data-category="shipping">
+            <button type="button" class="jotar-faq-trigger" aria-expanded="false">
+              <span class="jotar-faq-question">Do you offer international shipping outside the United States?</span>
+              <span class="jotar-faq-icon-wrap" aria-hidden="true">
+                <svg class="jotar-faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </span>
+            </button>
+            <div class="jotar-faq-content">
+              <div class="jotar-faq-answer">
+                <p>Yes, we ship to over 60 countries worldwide via DHL Express. All international customs duties, import taxes, and courier fees are calculated transparently at checkout with no surprise fees on delivery.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. Returns -->
+          <div class="jotar-faq-item" data-category="returns">
+            <button type="button" class="jotar-faq-trigger" aria-expanded="false">
+              <span class="jotar-faq-question">What is your return & exchange policy?</span>
+              <span class="jotar-faq-icon-wrap" aria-hidden="true">
+                <svg class="jotar-faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </span>
+            </button>
+            <div class="jotar-faq-content">
+              <div class="jotar-faq-answer">
+                <p>We want you to love your shoes! We offer a <strong>30-day hassle-free return and exchange guarantee</strong> from the date of delivery. Items must be unworn, in original brand packaging with all tags attached.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="jotar-faq-item" data-category="returns">
+            <button type="button" class="jotar-faq-trigger" aria-expanded="false">
+              <span class="jotar-faq-question">How do I initiate a return or swap for another size?</span>
+              <span class="jotar-faq-icon-wrap" aria-hidden="true">
+                <svg class="jotar-faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </span>
+            </button>
+            <div class="jotar-faq-content">
+              <div class="jotar-faq-answer">
+                <p>Simply contact our support team at <a href="mailto:support@novasneakers.com">support@novasneakers.com</a> with your order number. We will immediately issue a prepaid return shipping label and process your replacement or full refund upon receipt.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. Orders & Payment -->
+          <div class="jotar-faq-item" data-category="orders">
+            <button type="button" class="jotar-faq-trigger" aria-expanded="false">
+              <span class="jotar-faq-question">What payment methods do you accept?</span>
+              <span class="jotar-faq-icon-wrap" aria-hidden="true">
+                <svg class="jotar-faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </span>
+            </button>
+            <div class="jotar-faq-content">
+              <div class="jotar-faq-answer">
+                <p>We accept all major credit cards (Visa, Mastercard, American Express, Discover), PayPal, Apple Pay, Google Pay, and Shop Pay. We also offer buy-now-pay-later installments with 0% APR via Klarna & Afterpay.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="jotar-faq-item" data-category="orders">
+            <button type="button" class="jotar-faq-trigger" aria-expanded="false">
+              <span class="jotar-faq-question">Can I change or cancel my order after placing it?</span>
+              <span class="jotar-faq-icon-wrap" aria-hidden="true">
+                <svg class="jotar-faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </span>
+            </button>
+            <div class="jotar-faq-content">
+              <div class="jotar-faq-answer">
+                <p>If you need to make changes or cancel your order, please reach out to us within 1 hour of placing the order. Once our warehouse begins processing and packing, orders cannot be cancelled, but you can easily exchange or return upon delivery.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. Care & Cleaning -->
+          <div class="jotar-faq-item" data-category="care">
+            <button type="button" class="jotar-faq-trigger" aria-expanded="false">
+              <span class="jotar-faq-question">How should I clean and protect my NOVA sneakers?</span>
+              <span class="jotar-faq-icon-wrap" aria-hidden="true">
+                <svg class="jotar-faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </span>
+            </button>
+            <div class="jotar-faq-content">
+              <div class="jotar-faq-answer">
+                <p>For everyday cleaning, use a soft bristle brush or microfiber cloth with lukewarm water and mild sneaker cleanser. Air dry naturally at room temperature away from direct sunlight. Never put sneakers in a washing machine or tumble dryer to protect the structural integrity of the midsole.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="jotar-faq-item" data-category="care">
+            <button type="button" class="jotar-faq-trigger" aria-expanded="false">
+              <span class="jotar-faq-question">Are NOVA sneakers waterproof or water-resistant?</span>
+              <span class="jotar-faq-icon-wrap" aria-hidden="true">
+                <svg class="jotar-faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </span>
+            </button>
+            <div class="jotar-faq-content">
+              <div class="jotar-faq-answer">
+                <p>Our engineered mesh and leather models feature water-repellent coatings designed to withstand light rain and splashes. For full storm protection, check out our All-Weather editions with sealed waterproof inner membranes.</p>
+              </div>
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- Empty Search Fallback State -->
+      <div class="jotar-faq-empty-state" id="jotar-faq-empty" style="display: none;">
+        <div class="jotar-faq-empty-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            <line x1="8" y1="11" x2="14" y2="11"></line>
+          </svg>
+        </div>
+        <h3>No matching questions found</h3>
+        <p>Try searching for a different keyword or browse questions by category above.</p>
+        <button type="button" class="jotar-faq-empty-btn" id="jotar-faq-reset-btn">View All Questions</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. "STILL HAVE QUESTIONS?" SUPPORT CARD -->
+  {%- if section.settings.show_contact_card -%}
+    <section class="jotar-faq-contact-section">
+      <div class="jotar-faq-container jotar-faq-container--narrow">
+        <div class="jotar-faq-contact-card">
+          <div class="jotar-faq-contact-header">
+            <span class="jotar-faq-contact-badge">GET IN TOUCH</span>
+            <h2 class="jotar-faq-contact-title">{{ section.settings.contact_title | default: 'Still have questions?' }}</h2>
+            <p class="jotar-faq-contact-desc">
+              {{ section.settings.contact_desc | default: "Can't find what you're looking for? Our friendly support team is here to help you every step of the way." }}
+            </p>
+          </div>
+
+          <div class="jotar-faq-contact-methods">
+            <!-- Method 1: Email Support -->
+            <a href="mailto:{{ section.settings.contact_email | default: 'support@novasneakers.com' }}" class="jotar-faq-contact-box">
+              <div class="jotar-faq-contact-box__icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                  <path d="M22 7l-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                </svg>
+              </div>
+              <div class="jotar-faq-contact-box__info">
+                <h4>Email Us</h4>
+                <p>{{ section.settings.contact_email | default: 'support@novasneakers.com' }}</p>
+                <span class="jotar-faq-contact-box__hint">Response in 24 hours</span>
+              </div>
+            </a>
+
+            <!-- Method 2: Phone Support -->
+            <a href="tel:{{ section.settings.contact_phone | default: '+15551234567' }}" class="jotar-faq-contact-box">
+              <div class="jotar-faq-contact-box__icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                </svg>
+              </div>
+              <div class="jotar-faq-contact-box__info">
+                <h4>Call Support</h4>
+                <p>{{ section.settings.contact_phone | default: '+1 (555) 123-4567' }}</p>
+                <span class="jotar-faq-contact-box__hint">Mon–Fri: 9AM – 6PM</span>
+              </div>
+            </a>
+
+            <!-- Method 3: Contact Page Link -->
+            <a href="{{ section.settings.contact_page_url | default: '/pages/contact' }}" class="jotar-faq-contact-box">
+              <div class="jotar-faq-contact-box__icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                </svg>
+              </div>
+              <div class="jotar-faq-contact-box__info">
+                <h4>Help Center</h4>
+                <p>Send a Direct Message</p>
+                <span class="jotar-faq-contact-box__hint">Submit online ticket</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  {%- endif -%}
+</div>
+
+<style>
+  /* ==========================================================================
+     JOTAR / NOVA FAQ SECTION STYLES
+     ========================================================================== */
+  .jotar-faq {
+    --faq-bg: #ffffff;
+    --faq-text-main: #111111;
+    --faq-text-muted: #666666;
+    --faq-card-bg: #fafafa;
+    --faq-card-hover: #f3f3f5;
+    --faq-border: #e8e8ed;
+    --faq-accent: #111111;
+    --faq-radius: 12px;
+    background-color: var(--faq-bg);
+    color: var(--faq-text-main);
+    font-family: var(--font-body-family, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif);
+    padding-bottom: 90px;
+  }
+
+  .jotar-faq-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 28px;
+    box-sizing: border-box;
+  }
+
+  .jotar-faq-container--narrow {
+    max-width: 860px;
+  }
+
+  /* Breadcrumbs */
+  .jotar-faq-breadcrumbs-wrap {
+    padding: 24px 0 12px;
+  }
+
+  .jotar-faq-breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--faq-text-muted);
+  }
+
+  .jotar-faq-breadcrumbs a {
+    color: var(--faq-text-muted);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .jotar-faq-breadcrumbs a:hover {
+    color: var(--faq-text-main);
+  }
+
+  .jotar-faq-breadcrumbs__sep {
+    color: #aaaaaa;
+  }
+
+  .jotar-faq-breadcrumbs__current {
+    color: var(--faq-text-main);
+    font-weight: 500;
+  }
+
+  /* Hero Section */
+  .jotar-faq-hero {
+    padding: 20px 0 36px;
+    text-align: center;
+  }
+
+  .jotar-faq-hero__content {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .jotar-faq-eyebrow {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #777777;
+    margin-bottom: 12px;
+  }
+
+  .jotar-faq-hero__title {
+    font-size: clamp(30px, 4vw, 46px);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin: 0 0 16px 0;
+    text-transform: uppercase;
+    color: #111111;
+  }
+
+  .jotar-faq-hero__desc {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #555555;
+    margin: 0 0 32px 0;
+  }
+
+  /* Search Input */
+  .jotar-faq-search {
+    max-width: 580px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .jotar-faq-search__wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .jotar-faq-search__icon {
+    position: absolute;
+    left: 20px;
+    color: #888888;
+    pointer-events: none;
+  }
+
+  .jotar-faq-search__input {
+    width: 100%;
+    padding: 16px 50px 16px 52px;
+    font-size: 15px;
+    border-radius: 999px;
+    border: 1.5px solid var(--faq-border);
+    background-color: #ffffff;
+    color: #111111;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    outline: none;
+    font-family: inherit;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .jotar-faq-search__input:focus {
+    border-color: #111111;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+  }
+
+  .jotar-faq-search__clear {
+    position: absolute;
+    right: 18px;
+    background: #e8e8ed;
+    border: none;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #555555;
+    transition: all 0.2s ease;
+  }
+
+  .jotar-faq-search__clear.is-visible {
+    display: flex;
+  }
+
+  .jotar-faq-search__clear:hover {
+    background: #111111;
+    color: #ffffff;
+  }
+
+  .jotar-faq-search__results-count {
+    font-size: 13px;
+    color: #666666;
+    margin-top: 10px;
+  }
+
+  /* Categories Bar */
+  .jotar-faq-categories-section {
+    padding: 0 0 36px;
+  }
+
+  .jotar-faq-categories {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .jotar-faq-cat-btn {
+    appearance: none;
+    border: 1px solid var(--faq-border);
+    background-color: #ffffff;
+    padding: 10px 18px;
+    border-radius: 999px;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: #444444;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    font-family: inherit;
+    user-select: none;
+  }
+
+  .jotar-faq-cat-btn svg {
+    color: #777777;
+    transition: color 0.2s ease;
+  }
+
+  .jotar-faq-cat-btn:hover {
+    border-color: #111111;
+    color: #111111;
+    background-color: #fafafa;
+  }
+
+  .jotar-faq-cat-btn:hover svg {
+    color: #111111;
+  }
+
+  .jotar-faq-cat-btn.is-active {
+    background-color: #111111;
+    border-color: #111111;
+    color: #ffffff;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  }
+
+  .jotar-faq-cat-btn.is-active svg {
+    color: #ffffff;
+  }
+
+  /* Accordion Item */
+  .jotar-faq-accordion-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .jotar-faq-item {
+    border: 1px solid var(--faq-border);
+    border-radius: var(--faq-radius);
+    background-color: #ffffff;
+    overflow: hidden;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+  }
+
+  .jotar-faq-item:hover {
+    border-color: #cccccc;
+  }
+
+  .jotar-faq-item.is-open {
+    border-color: #111111;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+  }
+
+  .jotar-faq-item.is-hidden {
+    display: none;
+  }
+
+  .jotar-faq-trigger {
+    width: 100%;
+    padding: 22px 24px;
+    background: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    text-align: left;
+    cursor: pointer;
+    font-family: inherit;
+    color: var(--faq-text-main);
+  }
+
+  .jotar-faq-question {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+  }
+
+  .jotar-faq-icon-wrap {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #f1f2f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background-color 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .jotar-faq-chevron {
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .jotar-faq-item.is-open .jotar-faq-chevron {
+    transform: rotate(180deg);
+  }
+
+  .jotar-faq-item.is-open .jotar-faq-icon-wrap {
+    background-color: #111111;
+    color: #ffffff;
+  }
+
+  .jotar-faq-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .jotar-faq-answer {
+    padding: 0 24px 24px 24px;
+    font-size: 15px;
+    line-height: 1.7;
+    color: #555555;
+    border-top: 1px solid #f2f2f5;
+    margin-top: 2px;
+    padding-top: 18px;
+  }
+
+  .jotar-faq-answer p {
+    margin: 0 0 10px 0;
+  }
+
+  .jotar-faq-answer p:last-child {
+    margin-bottom: 0;
+  }
+
+  .jotar-faq-answer ul {
+    margin: 8px 0 12px 20px;
+    padding: 0;
+  }
+
+  .jotar-faq-answer li {
+    margin-bottom: 6px;
+  }
+
+  .jotar-faq-answer strong {
+    color: #111111;
+  }
+
+  .jotar-faq-answer a {
+    color: #111111;
+    font-weight: 600;
+    text-decoration: underline;
+  }
+
+  /* Empty state */
+  .jotar-faq-empty-state {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #fafafc;
+    border-radius: 16px;
+    border: 1px dashed #d8d8de;
+    margin-top: 20px;
+  }
+
+  .jotar-faq-empty-icon {
+    color: #999999;
+    margin-bottom: 14px;
+  }
+
+  .jotar-faq-empty-state h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+  }
+
+  .jotar-faq-empty-state p {
+    font-size: 14px;
+    color: #666666;
+    margin: 0 0 18px 0;
+  }
+
+  .jotar-faq-empty-btn {
+    background-color: #111111;
+    color: #ffffff;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 999px;
+    font-size: 13.5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+  }
+
+  .jotar-faq-empty-btn:hover {
+    opacity: 0.85;
+  }
+
+  /* Contact Support Card */
+  .jotar-faq-contact-section {
+    padding-top: 60px;
+  }
+
+  .jotar-faq-contact-card {
+    background: linear-gradient(135deg, #111111 0%, #1c1c1f 100%);
+    border-radius: 20px;
+    padding: 44px 40px;
+    color: #ffffff;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+  }
+
+  .jotar-faq-contact-header {
+    max-width: 580px;
+    margin: 0 auto 36px;
+  }
+
+  .jotar-faq-contact-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+  }
+
+  .jotar-faq-contact-title {
+    font-size: clamp(24px, 3.5vw, 34px);
+    font-weight: 800;
+    margin: 0 0 12px 0;
+    letter-spacing: -0.02em;
+    color: #ffffff;
+  }
+
+  .jotar-faq-contact-desc {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #bbbbbb;
+    margin: 0;
+  }
+
+  .jotar-faq-contact-methods {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .jotar-faq-contact-box {
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    padding: 24px 20px;
+    text-decoration: none;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .jotar-faq-contact-box:hover {
+    background: rgba(255, 255, 255, 0.14);
+    border-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-4px);
+  }
+
+  .jotar-faq-contact-box__icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+    color: #ffffff;
+  }
+
+  .jotar-faq-contact-box__info h4 {
+    font-size: 15px;
+    font-weight: 700;
+    margin: 0 0 6px 0;
+    color: #ffffff;
+  }
+
+  .jotar-faq-contact-box__info p {
+    font-size: 13.5px;
+    color: #dddddd;
+    margin: 0 0 6px 0;
+    word-break: break-all;
+  }
+
+  .jotar-faq-contact-box__hint {
+    font-size: 11px;
+    color: #999999;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  /* ==========================================================================
+     RESPONSIVE BREAKPOINTS
+     ========================================================================== */
+  @media (max-width: 768px) {
+    .jotar-faq-container {
+      padding: 0 20px;
+    }
+
+    .jotar-faq-categories {
+      justify-content: flex-start;
+      overflow-x: auto;
+      flex-wrap: nowrap;
+      padding-bottom: 8px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .jotar-faq-cat-btn {
+      white-space: nowrap;
+      font-size: 13px;
+      padding: 8px 14px;
+    }
+
+    .jotar-faq-contact-card {
+      padding: 32px 20px;
+    }
+
+    .jotar-faq-contact-methods {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .jotar-faq-contact-box {
+      flex-direction: row;
+      text-align: left;
+      gap: 16px;
+      padding: 18px;
+    }
+
+    .jotar-faq-contact-box__icon {
+      margin-bottom: 0;
+      flex-shrink: 0;
+    }
+
+    .jotar-faq-trigger {
+      padding: 18px 20px;
+    }
+
+    .jotar-faq-question {
+      font-size: 15px;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const root = document.getElementById('jotar-faq-{{ section.id }}');
+    if (!root) return;
+
+    const catButtons = root.querySelectorAll('.jotar-faq-cat-btn');
+    const faqItems = root.querySelectorAll('.jotar-faq-item');
+    const searchInput = document.getElementById('jotar-faq-search-input');
+    const searchClear = document.getElementById('jotar-faq-search-clear');
+    const searchCount = document.getElementById('jotar-faq-search-count');
+    const emptyState = document.getElementById('jotar-faq-empty');
+    const resetBtn = document.getElementById('jotar-faq-reset-btn');
+
+    let currentCategory = 'all';
+
+    // 1. Accordion Toggle
+    faqItems.forEach(item => {
+      const trigger = item.querySelector('.jotar-faq-trigger');
+      const content = item.querySelector('.jotar-faq-content');
+
+      trigger.addEventListener('click', () => {
+        const isOpen = item.classList.contains('is-open');
+
+        // Close other items in smooth single-accordion mode
+        faqItems.forEach(other => {
+          if (other !== item) {
+            other.classList.remove('is-open');
+            other.querySelector('.jotar-faq-trigger').setAttribute('aria-expanded', 'false');
+            other.querySelector('.jotar-faq-content').style.maxHeight = null;
+          }
+        });
+
+        if (isOpen) {
+          item.classList.remove('is-open');
+          trigger.setAttribute('aria-expanded', 'false');
+          content.style.maxHeight = null;
+        } else {
+          item.classList.add('is-open');
+          trigger.setAttribute('aria-expanded', 'true');
+          content.style.maxHeight = content.scrollHeight + 50 + 'px';
+        }
+      });
+    });
+
+    // 2. Filter & Search Combined Logic
+    function applyFilterAndSearch() {
+      const query = (searchInput ? searchInput.value : '').toLowerCase().trim();
+      let visibleCount = 0;
+
+      faqItems.forEach(item => {
+        const itemCat = item.getAttribute('data-category');
+        const question = item.querySelector('.jotar-faq-question').textContent.toLowerCase();
+        const answer = item.querySelector('.jotar-faq-answer').textContent.toLowerCase();
+
+        const matchesCategory = currentCategory === 'all' || itemCat === currentCategory;
+        const matchesSearch = !query || question.includes(query) || answer.includes(query);
+
+        if (matchesCategory && matchesSearch) {
+          item.classList.remove('is-hidden');
+          visibleCount++;
+        } else {
+          item.classList.add('is-hidden');
+        }
+      });
+
+      // Update Search Count & Empty state
+      if (searchCount) {
+        if (query) {
+          searchCount.style.display = 'block';
+          searchCount.textContent = `Found ${visibleCount} result${visibleCount === 1 ? '' : 's'} for "${query}"`;
+        } else {
+          searchCount.style.display = 'none';
+        }
+      }
+
+      if (emptyState) {
+        emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
+      }
+    }
+
+    // 3. Category Buttons
+    catButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        catButtons.forEach(b => {
+          b.classList.remove('is-active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        btn.classList.add('is-active');
+        btn.setAttribute('aria-selected', 'true');
+
+        currentCategory = btn.getAttribute('data-category');
+        applyFilterAndSearch();
+      });
+    });
+
+    // 4. Live Search Handler
+    if (searchInput) {
+      searchInput.addEventListener('input', () => {
+        if (searchInput.value.trim().length > 0) {
+          searchClear.classList.add('is-visible');
+        } else {
+          searchClear.classList.remove('is-visible');
+        }
+        applyFilterAndSearch();
+      });
+
+      if (searchClear) {
+        searchClear.addEventListener('click', () => {
+          searchInput.value = '';
+          searchClear.classList.remove('is-visible');
+          applyFilterAndSearch();
+          searchInput.focus();
+        });
+      }
+    }
+
+    if (resetBtn) {
+      resetBtn.addEventListener('click', () => {
+        if (searchInput) searchInput.value = '';
+        if (searchClear) searchClear.classList.remove('is-visible');
+        const allBtn = root.querySelector('.jotar-faq-cat-btn[data-category="all"]');
+        if (allBtn) allBtn.click();
+      });
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Jotar FAQ Section",
+  "tag": "section",
+  "class": "section-jotar-faq",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_breadcrumbs",
+      "label": "Show Breadcrumbs",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "breadcrumb_title",
+      "label": "Breadcrumb Title",
+      "default": "FAQ"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "HELP & SUPPORT"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "FREQUENTLY ASKED QUESTIONS"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "Everything you need to know about our footwear, ordering, sizing, shipping, and returns."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_search",
+      "label": "Enable Live Search Bar",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Contact Card Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_contact_card",
+      "label": "Show 'Still Have Questions?' Card",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "contact_title",
+      "label": "Contact Card Title",
+      "default": "Still have questions?"
+    },
+    {
+      "type": "textarea",
+      "id": "contact_desc",
+      "label": "Contact Card Description",
+      "default": "Can't find what you're looking for? Our friendly support team is here to help you every step of the way."
+    },
+    {
+      "type": "text",
+      "id": "contact_email",
+      "label": "Support Email",
+      "default": "support@novasneakers.com"
+    },
+    {
+      "type": "text",
+      "id": "contact_phone",
+      "label": "Support Phone",
+      "default": "+1 (555) 123-4567"
+    },
+    {
+      "type": "url",
+      "id": "contact_page_url",
+      "label": "Contact Page URL"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "FAQ Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "How do NOVA sneakers fit? Are they true to size?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>All NOVA sneakers fit true to standard size. If you are between sizes, we suggest sizing up.</p>"
+        },
+        {
+          "type": "select",
+          "id": "category",
+          "label": "Category",
+          "options": [
+            { "value": "sizing", "label": "Sizing & Fit" },
+            { "value": "shipping", "label": "Shipping & Delivery" },
+            { "value": "returns", "label": "Returns & Exchanges" },
+            { "value": "orders", "label": "Orders & Payment" },
+            { "value": "care", "label": "Care & Cleaning" }
+          ],
+          "default": "sizing"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Jotar FAQ Section",
+      "blocks": [
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "How do NOVA sneakers fit? Are they true to size?",
+            "answer": "<p>All NOVA sneakers are engineered to fit true to standard US/EU sizing. If you typically wear a half size or have wider feet, we recommend ordering half a size up for maximum comfort.</p>",
+            "category": "sizing"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Where can I find the official shoe size conversion chart?",
+            "answer": "<p>Every product page includes a Size Guide button right above the size selector displaying measurements in US, UK, EU, and CM.</p>",
+            "category": "sizing"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "What are your delivery options and shipping times?",
+            "answer": "<p>Standard Shipping takes 3-5 business days (Free over $100). Express Courier takes 1-2 business days with priority fulfillment.</p>",
+            "category": "shipping"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "What is your return & exchange policy?",
+            "answer": "<p>We offer a 30-day hassle-free return and exchange guarantee from the date of delivery for unworn items in original packaging.</p>",
+            "category": "returns"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "What payment methods do you accept?",
+            "answer": "<p>We accept Visa, Mastercard, American Express, Apple Pay, Google Pay, PayPal, and flexible installments with Klarna and Afterpay.</p>",
+            "category": "orders"
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "How should I clean and protect my NOVA sneakers?",
+            "answer": "<p>Use a soft bristle brush or microfiber cloth with lukewarm water and mild sneaker cleanser. Air dry at room temperature away from direct heat.</p>",
+            "category": "care"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
