@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "jotar-size-guide",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

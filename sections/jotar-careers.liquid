@@ -1,0 +1,268 @@
+{% comment %}
+  Jotar / NOVA - Careers Page Section
+{% endcomment %}
+
+<div class="jotar-page-wrap" id="jotar-careers-{{ section.id }}">
+  <div class="jotar-container">
+    <!-- Breadcrumbs -->
+    <div class="jotar-page-breadcrumbs">
+      <a href="{{ routes.root_url }}">Home</a>
+      <span class="jotar-page-breadcrumbs__sep">&rsaquo;</span>
+      <span class="jotar-page-breadcrumbs__current">Careers</span>
+    </div>
+
+    <!-- Hero -->
+    <div class="jotar-careers-hero">
+      <span class="jotar-eyebrow">WE ARE HIRING</span>
+      <h1 class="jotar-page-title">BUILD THE FUTURE<br>OF FOOTWEAR</h1>
+      <p class="jotar-page-subtitle">
+        At NOVA, we combine craftsmanship, innovation, and culture to create footwear that inspires movement. Join a passionate team driven by creativity and performance.
+      </p>
+    </div>
+
+    <!-- Perks / Why Join -->
+    <div class="jotar-careers-perks">
+      <div class="jotar-perk-card">
+        <div class="jotar-perk-icon">👟</div>
+        <h3>Sneaker Stipend</h3>
+        <p>Free seasonal drops and exclusive employee discounts on all NOVA collections.</p>
+      </div>
+      <div class="jotar-perk-card">
+        <div class="jotar-perk-icon">🌍</div>
+        <h3>Flexible & Remote</h3>
+        <p>Work from anywhere or collaborate in our modern design studios in New York and London.</p>
+      </div>
+      <div class="jotar-perk-card">
+        <div class="jotar-perk-icon">⚡</div>
+        <h3>Health & Wellness</h3>
+        <p>Comprehensive medical, dental, and gym memberships for your active lifestyle.</p>
+      </div>
+      <div class="jotar-perk-card">
+        <div class="jotar-perk-icon">🚀</div>
+        <h3>Growth & Learning</h3>
+        <p>Annual budget dedicated to conferences, courses, and leadership development.</p>
+      </div>
+    </div>
+
+    <!-- Open Positions -->
+    <div class="jotar-careers-positions">
+      <div class="jotar-positions-header">
+        <h2>Open Positions</h2>
+        <span class="jotar-positions-count">4 Roles Available</span>
+      </div>
+
+      <div class="jotar-jobs-list">
+        <!-- Job 1 -->
+        <div class="jotar-job-card">
+          <div class="jotar-job-info">
+            <h3>Senior Footwear Designer</h3>
+            <div class="jotar-job-meta">
+              <span class="jotar-job-tag">Design & Innovation</span>
+              <span class="jotar-job-tag">New York, NY / Hybrid</span>
+              <span class="jotar-job-tag">Full-Time</span>
+            </div>
+            <p>Lead the creative design direction for our next-generation running and lifestyle sneaker silhouettes.</p>
+          </div>
+          <a href="mailto:careers@novasneakers.com?subject=Application:%20Senior%20Footwear%20Designer" class="jotar-job-btn">Apply Now</a>
+        </div>
+
+        <!-- Job 2 -->
+        <div class="jotar-job-card">
+          <div class="jotar-job-info">
+            <h3>E-Commerce & Digital Marketing Lead</h3>
+            <div class="jotar-job-meta">
+              <span class="jotar-job-tag">Marketing</span>
+              <span class="jotar-job-tag">Remote (US/EU)</span>
+              <span class="jotar-job-tag">Full-Time</span>
+            </div>
+            <p>Scale our global digital presence, optimize direct-to-consumer funnels, and lead performance campaigns.</p>
+          </div>
+          <a href="mailto:careers@novasneakers.com?subject=Application:%20E-Commerce%20Marketing%20Lead" class="jotar-job-btn">Apply Now</a>
+        </div>
+
+        <!-- Job 3 -->
+        <div class="jotar-job-card">
+          <div class="jotar-job-info">
+            <h3>Materials & Sustainability Specialist</h3>
+            <div class="jotar-job-meta">
+              <span class="jotar-job-tag">Sustainability & R&D</span>
+              <span class="jotar-job-tag">London / Hybrid</span>
+              <span class="jotar-job-tag">Full-Time</span>
+            </div>
+            <p>Research and implement eco-friendly, circular, and recycled performance materials across all shoe models.</p>
+          </div>
+          <a href="mailto:careers@novasneakers.com?subject=Application:%20Materials%20Specialist" class="jotar-job-btn">Apply Now</a>
+        </div>
+
+        <!-- Job 4 -->
+        <div class="jotar-job-card">
+          <div class="jotar-job-info">
+            <h3>Customer Experience & Community Lead</h3>
+            <div class="jotar-job-meta">
+              <span class="jotar-job-tag">Customer Support</span>
+              <span class="jotar-job-tag">Remote</span>
+              <span class="jotar-job-tag">Full-Time</span>
+            </div>
+            <p>Deliver world-class concierge support, sizing guidance, and build meaningful relationships with our community.</p>
+          </div>
+          <a href="mailto:careers@novasneakers.com?subject=Application:%20Customer%20Experience%20Lead" class="jotar-job-btn">Apply Now</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- General Application CTA -->
+    <div class="jotar-careers-cta">
+      <h3>Don't see your role?</h3>
+      <p>We are always looking for exceptional talent. Send your portfolio or resume to our talent team.</p>
+      <a href="mailto:careers@novasneakers.com" class="jotar-btn-black">Send Open Application &rarr;</a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .jotar-page-wrap {
+    padding: 20px 0 90px;
+    background: #ffffff;
+    color: #111111;
+  }
+  .jotar-page-breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 24px;
+  }
+  .jotar-page-breadcrumbs a { color: #666; text-decoration: none; }
+  .jotar-page-breadcrumbs a:hover { color: #111; }
+  .jotar-page-breadcrumbs__current { color: #111; font-weight: 500; }
+  
+  .jotar-careers-hero {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 50px;
+  }
+  .jotar-page-title {
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin: 12px 0 16px;
+    text-transform: uppercase;
+  }
+  .jotar-page-subtitle {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #555;
+    margin: 0;
+  }
+
+  .jotar-careers-perks {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 60px;
+  }
+  .jotar-perk-card {
+    background: #f8f8fa;
+    border-radius: 14px;
+    padding: 30px 24px;
+    border: 1px solid #ebebeb;
+    transition: transform 0.25s ease;
+  }
+  .jotar-perk-card:hover { transform: translateY(-4px); }
+  .jotar-perk-icon { font-size: 28px; margin-bottom: 14px; }
+  .jotar-perk-card h3 { font-size: 18px; font-weight: 700; margin: 0 0 8px; }
+  .jotar-perk-card p { font-size: 14px; color: #666; line-height: 1.5; margin: 0; }
+
+  .jotar-careers-positions {
+    margin-bottom: 60px;
+  }
+  .jotar-positions-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #111;
+    padding-bottom: 14px;
+    margin-bottom: 24px;
+  }
+  .jotar-positions-header h2 { font-size: 26px; font-weight: 800; margin: 0; text-transform: uppercase; }
+  .jotar-positions-count { font-size: 14px; font-weight: 600; color: #666; }
+
+  .jotar-jobs-list { display: flex; flex-direction: column; gap: 16px; }
+  .jotar-job-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 14px;
+    padding: 28px;
+    gap: 20px;
+    transition: all 0.25s ease;
+  }
+  .jotar-job-card:hover {
+    border-color: #111;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  }
+  .jotar-job-info h3 { font-size: 20px; font-weight: 700; margin: 0 0 10px; }
+  .jotar-job-meta { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+  .jotar-job-tag {
+    background: #f1f2f4;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #444;
+  }
+  .jotar-job-info p { font-size: 14.5px; color: #666; margin: 0; line-height: 1.5; }
+  .jotar-job-btn {
+    background: #111;
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.2s ease;
+  }
+  .jotar-job-btn:hover { background: #333; }
+
+  .jotar-careers-cta {
+    background: #111;
+    color: #fff;
+    border-radius: 18px;
+    padding: 44px;
+    text-align: center;
+  }
+  .jotar-careers-cta h3 { font-size: 26px; font-weight: 800; margin: 0 0 10px; }
+  .jotar-careers-cta p { font-size: 15px; color: #aaa; margin: 0 0 24px; }
+  .jotar-btn-black {
+    display: inline-block;
+    background: #fff;
+    color: #111;
+    padding: 12px 28px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+  .jotar-btn-black:hover { opacity: 0.9; }
+
+  @media (max-width: 900px) {
+    .jotar-careers-perks { grid-template-columns: repeat(2, 1fr); }
+    .jotar-job-card { flex-direction: column; align-items: flex-start; }
+  }
+  @media (max-width: 600px) {
+    .jotar-careers-perks { grid-template-columns: 1fr; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Jotar Careers Page",
+  "settings": []
+}
+{% endschema %}

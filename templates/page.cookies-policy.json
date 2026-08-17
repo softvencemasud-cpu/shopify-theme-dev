@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "main": {
+      "type": "jotar-legal",
+      "settings": {
+        "title": "Cookies Policy"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

@@ -1,0 +1,209 @@
+{% comment %}
+  Jotar / NOVA - Track Order Page Section
+{% endcomment %}
+
+<div class="jotar-page-wrap" id="jotar-track-{{ section.id }}">
+  <div class="jotar-container">
+    <!-- Breadcrumbs -->
+    <div class="jotar-page-breadcrumbs">
+      <a href="{{ routes.root_url }}">Home</a>
+      <span class="jotar-page-breadcrumbs__sep">&rsaquo;</span>
+      <span class="jotar-page-breadcrumbs__current">Track Order</span>
+    </div>
+
+    <!-- Hero -->
+    <div class="jotar-track-hero">
+      <span class="jotar-eyebrow">LIVE FULFILLMENT STATUS</span>
+      <h1 class="jotar-page-title">TRACK YOUR ORDER</h1>
+      <p class="jotar-page-subtitle">
+        Enter your order confirmation number and email below to view real-time delivery status and tracking updates.
+      </p>
+    </div>
+
+    <!-- Tracking Lookup Box -->
+    <div class="jotar-track-box">
+      <form class="jotar-track-form" onsubmit="event.preventDefault(); document.getElementById('jotar-track-result').style.display = 'block';">
+        <div class="jotar-track-inputs">
+          <div class="jotar-track-field">
+            <label for="track-order-num">Order Number</label>
+            <input type="text" id="track-order-num" placeholder="e.g. #NV-84920" required>
+          </div>
+          <div class="jotar-track-field">
+            <label for="track-email">Email or Phone Number</label>
+            <input type="email" id="track-email" placeholder="e.g. alex@example.com" required>
+          </div>
+        </div>
+        <button type="submit" class="jotar-btn-black jotar-track-btn">Track Shipment &rarr;</button>
+      </form>
+
+      <!-- Live Tracking Result Status (Simulated Interactive UI) -->
+      <div id="jotar-track-result" class="jotar-track-result" style="display: none;">
+        <div class="jotar-result-header">
+          <div>
+            <span class="jotar-result-status">IN TRANSIT</span>
+            <h3>Estimated Delivery: Tomorrow by 7:00 PM</h3>
+            <p>Carrier: DHL Express Priority • Tracking #9400111899223399482</p>
+          </div>
+        </div>
+
+        <!-- Progress Steps -->
+        <div class="jotar-progress-steps">
+          <div class="jotar-p-step is-completed">
+            <div class="jotar-p-dot">✓</div>
+            <span>Order Confirmed</span>
+          </div>
+          <div class="jotar-p-step is-completed">
+            <div class="jotar-p-dot">✓</div>
+            <span>Packed & Handed Over</span>
+          </div>
+          <div class="jotar-p-step is-active">
+            <div class="jotar-p-dot">🚚</div>
+            <span>In Transit</span>
+          </div>
+          <div class="jotar-p-step">
+            <div class="jotar-p-dot">📦</div>
+            <span>Out for Delivery</span>
+          </div>
+          <div class="jotar-p-step">
+            <div class="jotar-p-dot">🏠</div>
+            <span>Delivered</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Help Info -->
+    <div class="jotar-track-help">
+      <div class="jotar-help-item">
+        <h4>Tracking number not working?</h4>
+        <p>Tracking information may take up to 24 hours to update after dispatch from our warehouse.</p>
+      </div>
+      <div class="jotar-help-item">
+        <h4>Need immediate help?</h4>
+        <p>Email our delivery concierge at <a href="mailto:support@novasneakers.com">support@novasneakers.com</a> with your order details.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .jotar-track-hero { text-align: center; max-width: 780px; margin: 0 auto 40px; }
+  .jotar-track-box {
+    background: #f8f8fa;
+    border: 1px solid #e5e5e8;
+    border-radius: 20px;
+    padding: 44px 40px;
+    max-width: 860px;
+    margin: 0 auto 60px;
+  }
+  .jotar-track-inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 24px;
+  }
+  .jotar-track-field label {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+    color: #333;
+  }
+  .jotar-track-field input {
+    width: 100%;
+    padding: 16px 20px;
+    border-radius: 12px;
+    border: 1px solid #d5d5db;
+    background: #fff;
+    font-size: 15px;
+    font-family: inherit;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease;
+  }
+  .jotar-track-field input:focus { border-color: #111; }
+  .jotar-track-btn {
+    width: 100%;
+    padding: 16px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    background: #111;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+  }
+
+  .jotar-track-result {
+    margin-top: 40px;
+    padding-top: 36px;
+    border-top: 1px solid #e0e0e4;
+    animation: jotarFadeIn 0.3s ease;
+  }
+  .jotar-result-header { margin-bottom: 32px; }
+  .jotar-result-status {
+    display: inline-block;
+    padding: 4px 12px;
+    background: #e6f4ea;
+    color: #137333;
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 999px;
+    margin-bottom: 8px;
+  }
+  .jotar-result-header h3 { font-size: 22px; font-weight: 800; margin: 0 0 6px; }
+  .jotar-result-header p { font-size: 14px; color: #666; margin: 0; }
+
+  .jotar-progress-steps {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    text-align: center;
+    position: relative;
+  }
+  .jotar-p-step { display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 600; color: #888; }
+  .jotar-p-dot {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #e2e4e8;
+    color: #666;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .jotar-p-step.is-completed .jotar-p-dot { background: #111; color: #fff; }
+  .jotar-p-step.is-completed span { color: #111; }
+  .jotar-p-step.is-active .jotar-p-dot { background: #0066ff; color: #fff; box-shadow: 0 0 0 4px rgba(0,102,255,0.2); }
+  .jotar-p-step.is-active span { color: #0066ff; font-weight: 700; }
+
+  .jotar-track-help {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+  .jotar-help-item { background: #ffffff; border: 1px solid #ebebeb; border-radius: 14px; padding: 24px; }
+  .jotar-help-item h4 { font-size: 16px; font-weight: 700; margin: 0 0 8px; }
+  .jotar-help-item p { font-size: 14px; color: #666; line-height: 1.5; margin: 0; }
+  .jotar-help-item a { color: #111; font-weight: 600; }
+
+  @media (max-width: 768px) {
+    .jotar-track-inputs { grid-template-columns: 1fr; }
+    .jotar-progress-steps { grid-template-columns: 1fr; gap: 16px; text-align: left; }
+    .jotar-p-step { flex-direction: row; }
+    .jotar-track-help { grid-template-columns: 1fr; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Jotar Track Order",
+  "settings": []
+}
+{% endschema %}

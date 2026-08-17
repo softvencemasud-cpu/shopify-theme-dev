@@ -1,0 +1,142 @@
+{% comment %}
+  Jotar / NOVA - Press & Media Page Section
+{% endcomment %}
+
+<div class="jotar-page-wrap" id="jotar-press-{{ section.id }}">
+  <div class="jotar-container">
+    <!-- Breadcrumbs -->
+    <div class="jotar-page-breadcrumbs">
+      <a href="{{ routes.root_url }}">Home</a>
+      <span class="jotar-page-breadcrumbs__sep">&rsaquo;</span>
+      <span class="jotar-page-breadcrumbs__current">Press & Media</span>
+    </div>
+
+    <!-- Hero -->
+    <div class="jotar-press-hero">
+      <span class="jotar-eyebrow">PRESS ROOM</span>
+      <h1 class="jotar-page-title">NEWS & MEDIA</h1>
+      <p class="jotar-page-subtitle">
+        Discover the latest news, collection launches, and editorial features covering NOVA sneakers worldwide.
+      </p>
+    </div>
+
+    <!-- Featured Publications Badges -->
+    <div class="jotar-press-logos">
+      <span class="jotar-press-logo">HYPEBEAST</span>
+      <span class="jotar-press-logo">GQ</span>
+      <span class="jotar-press-logo">VOGUE</span>
+      <span class="jotar-press-logo">HIGHSNOBIETY</span>
+      <span class="jotar-press-logo">COMPLEX</span>
+      <span class="jotar-press-logo">FORBES</span>
+    </div>
+
+    <!-- Articles Grid -->
+    <div class="jotar-press-articles">
+      <!-- Article 1 -->
+      <div class="jotar-article-card">
+        <span class="jotar-article-source">HYPEBEAST • Oct 2025</span>
+        <h3>How NOVA is Redefining Daily Athletic Luxury</h3>
+        <p>"Combining ergonomic precision with urban minimalism, NOVA's latest drop sets a new standard for street-ready lifestyle sneakers."</p>
+        <a href="#" class="jotar-article-link">Read Full Feature &rarr;</a>
+      </div>
+
+      <!-- Article 2 -->
+      <div class="jotar-article-card">
+        <span class="jotar-article-source">GQ MAGAZINE • Aug 2025</span>
+        <h3>The Best New Sneaker Brand You Need On Your Radar</h3>
+        <p>"From the lightweight foam tooling to buttery leather finishes, NOVA delivers sneakerhead comfort with clean boardroom aesthetics."</p>
+        <a href="#" class="jotar-article-link">Read Full Feature &rarr;</a>
+      </div>
+
+      <!-- Article 3 -->
+      <div class="jotar-article-card">
+        <span class="jotar-article-source">FORBES • May 2025</span>
+        <h3>Direct-to-Consumer Footwear Brand NOVA Scales Zero-Waste Vision</h3>
+        <p>"How the footwear innovator is eliminating plastic waste and driving sustainable manufacturing in modern sneaker design."</p>
+        <a href="#" class="jotar-article-link">Read Full Feature &rarr;</a>
+      </div>
+    </div>
+
+    <!-- Press Inquiries & Media Kit Card -->
+    <div class="jotar-press-kit">
+      <div class="jotar-press-kit__content">
+        <h2>Press & Media Inquiries</h2>
+        <p>For press releases, high-resolution imagery, interviews, and brand assets, please contact our PR team.</p>
+        <a href="mailto:press@novasneakers.com" class="jotar-btn-black">Contact PR Team (press@novasneakers.com)</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .jotar-press-hero { text-align: center; max-width: 780px; margin: 0 auto 40px; }
+  .jotar-press-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 36px;
+    flex-wrap: wrap;
+    padding: 24px 0;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 50px;
+  }
+  .jotar-press-logo {
+    font-size: 18px;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    color: #888;
+    text-transform: uppercase;
+    transition: color 0.2s ease;
+  }
+  .jotar-press-logo:hover { color: #111; }
+
+  .jotar-press-articles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 60px;
+  }
+  .jotar-article-card {
+    background: #fbfbfb;
+    border: 1px solid #eaeaea;
+    border-radius: 16px;
+    padding: 32px 26px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.25s ease;
+  }
+  .jotar-article-card:hover {
+    border-color: #111;
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  }
+  .jotar-article-source { font-size: 12px; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 12px; display: block; }
+  .jotar-article-card h3 { font-size: 19px; font-weight: 700; margin: 0 0 12px; line-height: 1.35; }
+  .jotar-article-card p { font-size: 14.5px; color: #555; line-height: 1.6; margin: 0 0 20px; }
+  .jotar-article-link { font-size: 14px; font-weight: 700; color: #111; text-decoration: none; }
+  .jotar-article-link:hover { text-decoration: underline; }
+
+  .jotar-press-kit {
+    background: #111;
+    color: #fff;
+    border-radius: 20px;
+    padding: 48px 40px;
+    text-align: center;
+  }
+  .jotar-press-kit h2 { font-size: 28px; font-weight: 800; margin: 0 0 12px; }
+  .jotar-press-kit p { font-size: 15px; color: #aaa; max-width: 600px; margin: 0 auto 28px; line-height: 1.6; }
+
+  @media (max-width: 900px) {
+    .jotar-press-articles { grid-template-columns: 1fr; }
+    .jotar-press-logos { gap: 20px; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Jotar Press Page",
+  "settings": []
+}
+{% endschema %}

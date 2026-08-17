@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "jotar-press",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

@@ -1,0 +1,138 @@
+{% comment %}
+  Jotar / NOVA - Sustainability Page Section
+{% endcomment %}
+
+<div class="jotar-page-wrap" id="jotar-sustainability-{{ section.id }}">
+  <div class="jotar-container">
+    <!-- Breadcrumbs -->
+    <div class="jotar-page-breadcrumbs">
+      <a href="{{ routes.root_url }}">Home</a>
+      <span class="jotar-page-breadcrumbs__sep">&rsaquo;</span>
+      <span class="jotar-page-breadcrumbs__current">Sustainability</span>
+    </div>
+
+    <!-- Hero -->
+    <div class="jotar-sustain-hero">
+      <span class="jotar-eyebrow">OUR PLANET PLEDGE</span>
+      <h1 class="jotar-page-title">CRAFTED FOR<br>TOMORROW</h1>
+      <p class="jotar-page-subtitle">
+        We believe extraordinary performance and sustainability go hand in hand. Every NOVA sneaker is designed to minimize environmental impact while maximizing comfort and durability.
+      </p>
+    </div>
+
+    <!-- Metrics Banner -->
+    <div class="jotar-sustain-metrics">
+      <div class="jotar-sustain-metric">
+        <span class="jotar-sustain-metric__num">85%</span>
+        <span class="jotar-sustain-metric__label">Recycled Upper Fibers</span>
+      </div>
+      <div class="jotar-sustain-metric">
+        <span class="jotar-sustain-metric__num">100%</span>
+        <span class="jotar-sustain-metric__label">Plastic-Free Packaging</span>
+      </div>
+      <div class="jotar-sustain-metric">
+        <span class="jotar-sustain-metric__num">0</span>
+        <span class="jotar-sustain-metric__label">Landfill Waste by 2030</span>
+      </div>
+      <div class="jotar-sustain-metric">
+        <span class="jotar-sustain-metric__num">100%</span>
+        <span class="jotar-sustain-metric__label">Carbon Neutral Delivery</span>
+      </div>
+    </div>
+
+    <!-- 4 Sustainability Pillars -->
+    <div class="jotar-sustain-pillars">
+      <div class="jotar-sustain-card">
+        <div class="jotar-sustain-card__icon">🌱</div>
+        <h3>Bio-Based & Recycled Materials</h3>
+        <p>We source post-consumer recycled PET bottles for our breathable mesh and cultivate bio-based EVA derived from renewable sugarcane for our lightweight cushioning midsoles.</p>
+      </div>
+
+      <div class="jotar-sustain-card">
+        <div class="jotar-sustain-card__icon">♻️</div>
+        <h3>Circular Shoe Take-Back Program</h3>
+        <p>When your NOVA sneakers reach the end of their lifecycle, send them back to us. We deconstruct and grind the rubber soles into athletic playground turf and rubber tracks.</p>
+      </div>
+
+      <div class="jotar-sustain-card">
+        <div class="jotar-sustain-card__icon">📦</div>
+        <h3>FSC Certified Minimalist Packaging</h3>
+        <p>Our shoe boxes are made from 100% recycled kraft paper, printed with organic soy inks, and designed without single-use plastic wrap or stuffed paper fillers.</p>
+      </div>
+
+      <div class="jotar-sustain-card">
+        <div class="jotar-sustain-card__icon">☀️</div>
+        <h3>Ethical & Solar-Powered Studios</h3>
+        <p>Every manufacturing partner adheres to strict Fair Labor standards, living wage certifications, and runs on at least 50% on-site solar renewable electricity.</p>
+      </div>
+    </div>
+
+    <!-- Quote Banner -->
+    <div class="jotar-sustain-quote">
+      <blockquote>
+        "True luxury is knowing where your products come from and leaving the planet better than we found it."
+      </blockquote>
+      <cite>— NOVA Sustainability Committee</cite>
+    </div>
+  </div>
+</div>
+
+<style>
+  .jotar-sustain-hero { text-align: center; max-width: 820px; margin: 0 auto 50px; }
+  .jotar-sustain-metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background: #111;
+    color: #fff;
+    border-radius: 18px;
+    padding: 36px 20px;
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  .jotar-sustain-metric { padding: 10px; }
+  .jotar-sustain-metric__num { display: block; font-size: clamp(32px, 4vw, 48px); font-weight: 800; color: #fff; margin-bottom: 6px; }
+  .jotar-sustain-metric__label { font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: #aaa; }
+
+  .jotar-sustain-pillars {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-bottom: 60px;
+  }
+  .jotar-sustain-card {
+    background: #f8f8fa;
+    border: 1px solid #e8e8ed;
+    border-radius: 16px;
+    padding: 36px 30px;
+  }
+  .jotar-sustain-card__icon { font-size: 32px; margin-bottom: 14px; }
+  .jotar-sustain-card h3 { font-size: 20px; font-weight: 700; margin: 0 0 10px; }
+  .jotar-sustain-card p { font-size: 15px; color: #555; line-height: 1.6; margin: 0; }
+
+  .jotar-sustain-quote {
+    background: linear-gradient(135deg, #f4f5f8 0%, #ebecee 100%);
+    border-radius: 18px;
+    padding: 50px 40px;
+    text-align: center;
+  }
+  .jotar-sustain-quote blockquote {
+    font-size: clamp(18px, 2.5vw, 24px);
+    font-weight: 600;
+    font-style: italic;
+    color: #111;
+    margin: 0 0 14px 0;
+  }
+  .jotar-sustain-quote cite { font-size: 14px; color: #666; font-style: normal; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+
+  @media (max-width: 900px) {
+    .jotar-sustain-metrics { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .jotar-sustain-pillars { grid-template-columns: 1fr; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Jotar Sustainability Page",
+  "settings": []
+}
+{% endschema %}

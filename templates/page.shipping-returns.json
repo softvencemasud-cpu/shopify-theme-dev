@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "jotar-shipping-returns",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

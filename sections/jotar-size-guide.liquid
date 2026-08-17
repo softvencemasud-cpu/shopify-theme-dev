@@ -1,0 +1,147 @@
+{% comment %}
+  Jotar / NOVA - Shoe Size Guide Section
+{% endcomment %}
+
+<div class="jotar-page-wrap" id="jotar-size-guide-{{ section.id }}">
+  <div class="jotar-container">
+    <!-- Breadcrumbs -->
+    <div class="jotar-page-breadcrumbs">
+      <a href="{{ routes.root_url }}">Home</a>
+      <span class="jotar-page-breadcrumbs__sep">&rsaquo;</span>
+      <span class="jotar-page-breadcrumbs__current">Size Guide</span>
+    </div>
+
+    <!-- Hero -->
+    <div class="jotar-size-hero">
+      <span class="jotar-eyebrow">FIT & ACCURACY</span>
+      <h1 class="jotar-page-title">SNEAKER SIZE GUIDE</h1>
+      <p class="jotar-page-subtitle">
+        Find your perfect fit. Compare international shoe sizes and follow our easy measuring guide below.
+      </p>
+    </div>
+
+    <!-- Size Conversion Table -->
+    <div class="jotar-size-table-wrap">
+      <div class="jotar-size-table-header">
+        <h2>Unisex Footwear Conversion Table</h2>
+        <span class="jotar-size-badge">True to Size (Standard D Width)</span>
+      </div>
+
+      <div class="jotar-table-responsive">
+        <table class="jotar-custom-table jotar-size-table">
+          <thead>
+            <tr>
+              <th>US Men</th>
+              <th>US Women</th>
+              <th>UK</th>
+              <th>EU</th>
+              <th>Foot Length (CM)</th>
+              <th>Foot Length (IN)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>6.0</td><td>7.5</td><td>5.5</td><td>38.5</td><td>24.0 cm</td><td>9.4"</td></tr>
+            <tr><td>6.5</td><td>8.0</td><td>6.0</td><td>39.0</td><td>24.5 cm</td><td>9.6"</td></tr>
+            <tr><td>7.0</td><td>8.5</td><td>6.5</td><td>40.0</td><td>25.0 cm</td><td>9.8"</td></tr>
+            <tr><td>7.5</td><td>9.0</td><td>7.0</td><td>40.5</td><td>25.5 cm</td><td>10.0"</td></tr>
+            <tr><td>8.0</td><td>9.5</td><td>7.5</td><td>41.0</td><td>26.0 cm</td><td>10.2"</td></tr>
+            <tr><td>8.5</td><td>10.0</td><td>8.0</td><td>42.0</td><td>26.5 cm</td><td>10.4"</td></tr>
+            <tr><td>9.0</td><td>10.5</td><td>8.5</td><td>42.5</td><td>27.0 cm</td><td>10.6"</td></tr>
+            <tr><td>9.5</td><td>11.0</td><td>9.0</td><td>43.0</td><td>27.5 cm</td><td>10.8"</td></tr>
+            <tr><td>10.0</td><td>11.5</td><td>9.5</td><td>44.0</td><td>28.0 cm</td><td>11.0"</td></tr>
+            <tr><td>10.5</td><td>12.0</td><td>10.0</td><td>44.5</td><td>28.5 cm</td><td>11.2"</td></tr>
+            <tr><td>11.0</td><td>12.5</td><td>10.5</td><td>45.0</td><td>29.0 cm</td><td>11.4"</td></tr>
+            <tr><td>11.5</td><td>13.0</td><td>11.0</td><td>45.5</td><td>29.5 cm</td><td>11.6"</td></tr>
+            <tr><td>12.0</td><td>13.5</td><td>11.5</td><td>46.0</td><td>30.0 cm</td><td>11.8"</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- How to Measure Section -->
+    <div class="jotar-measure-guide">
+      <h2>How to Measure Your Feet at Home</h2>
+      <div class="jotar-measure-grid">
+        <div class="jotar-measure-step">
+          <div class="jotar-measure-icon">📄</div>
+          <h4>1. Stand on Paper</h4>
+          <p>Place a sheet of paper on a hard flat floor against a wall. Stand upright on the paper with your heel lightly touching the wall.</p>
+        </div>
+        <div class="jotar-measure-step">
+          <div class="jotar-measure-icon">✏️</div>
+          <h4>2. Mark the Length</h4>
+          <p>Mark the longest point of your toes on the paper with a pencil held perpendicular to the floor.</p>
+        </div>
+        <div class="jotar-measure-step">
+          <div class="jotar-measure-icon">📏</div>
+          <h4>3. Measure & Compare</h4>
+          <p>Use a ruler to measure the distance from the edge of the paper to the marked line in centimeters and match it to our chart above.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fit Advice Strip -->
+    <div class="jotar-fit-advice">
+      <div class="jotar-fit-advice__card">
+        <h3>💡 Pro Fit Tip:</h3>
+        <p>If your measurement falls between two sizes, or if you prefer a roomier athletic toe box with thick socks, we recommend selecting <strong>half a size up</strong>.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .jotar-size-hero { text-align: center; max-width: 800px; margin: 0 auto 40px; }
+  .jotar-size-table-wrap { margin-bottom: 60px; }
+  .jotar-size-table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #111;
+    padding-bottom: 14px;
+    margin-bottom: 20px;
+  }
+  .jotar-size-table-header h2 { font-size: 22px; font-weight: 800; margin: 0; text-transform: uppercase; }
+  .jotar-size-badge { font-size: 13px; font-weight: 600; background: #f1f2f4; padding: 6px 14px; border-radius: 999px; }
+  .jotar-size-table td { text-align: center; }
+  .jotar-size-table th { text-align: center; }
+  .jotar-size-table tbody tr:hover { background-color: #fcfcfc; }
+
+  .jotar-measure-guide {
+    background: #f8f8fa;
+    border-radius: 18px;
+    padding: 44px 36px;
+    margin-bottom: 40px;
+  }
+  .jotar-measure-guide h2 { font-size: 24px; font-weight: 800; text-transform: uppercase; margin: 0 0 28px; text-align: center; }
+  .jotar-measure-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .jotar-measure-step { background: #fff; padding: 24px; border-radius: 14px; border: 1px solid #ebebeb; }
+  .jotar-measure-icon { font-size: 30px; margin-bottom: 12px; }
+  .jotar-measure-step h4 { font-size: 17px; font-weight: 700; margin: 0 0 8px; }
+  .jotar-measure-step p { font-size: 14px; color: #666; line-height: 1.5; margin: 0; }
+
+  .jotar-fit-advice__card {
+    background: #111;
+    color: #fff;
+    border-radius: 14px;
+    padding: 24px 30px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .jotar-fit-advice__card h3 { font-size: 16px; font-weight: 700; margin: 0; white-space: nowrap; }
+  .jotar-fit-advice__card p { font-size: 14.5px; color: #ddd; margin: 0; line-height: 1.5; }
+
+  @media (max-width: 768px) {
+    .jotar-measure-grid { grid-template-columns: 1fr; }
+    .jotar-fit-advice__card { flex-direction: column; align-items: flex-start; }
+    .jotar-size-table-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Jotar Size Guide",
+  "settings": []
+}
+{% endschema %}
