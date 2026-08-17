@@ -1,6 +1,6 @@
 {% comment %}
   Jotar / NOVA - Premium FAQ (Help & Support) Section
-  Unified, perfectly aligned container width for all elements (Breadcrumb, Header, Search, Categories, Accordions, Contact Card).
+  Full header width alignment (1440px container matching header logo & cart bounds exactly).
 {% endcomment %}
 
 <div class="jotar-faq" id="jotar-faq-{{ section.id }}">
@@ -109,7 +109,7 @@
       </div>
     </div>
 
-    <!-- 4. FAQ ACCORDION LIST -->
+    <!-- 4. FAQ ACCORDION LIST - FULL CONTAINER WIDTH ALIGNED WITH LOGO & CART -->
     <section class="jotar-faq-main-section">
       <div class="jotar-faq-accordion-list" id="jotar-faq-list">
         {%- if section.blocks.size > 0 -%}
@@ -393,7 +393,7 @@
 
 <style>
   /* ==========================================================================
-     JOTAR / NOVA FAQ SECTION STYLES - UNIFIED PERFECT ALIGNMENT
+     JOTAR / NOVA FAQ SECTION STYLES - FULL HEADER WIDTH ALIGNED (1440px)
      ========================================================================== */
   .jotar-faq {
     --faq-bg: #ffffff;
@@ -408,20 +408,24 @@
     color: var(--faq-text-main);
     font-family: var(--font-body-family, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif);
     padding-bottom: 90px;
+    width: 100%;
   }
 
-  /* Unified width for ALL FAQ elements */
+  /* Full Header-aligned Container Width */
   .jotar-faq-container {
     width: 100%;
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 0 24px;
+    max-width: var(--jotar-max-width, 1440px);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 32px;
+    padding-right: 32px;
     box-sizing: border-box;
   }
 
-  /* Breadcrumbs aligned directly with content */
+  /* Breadcrumbs aligned directly with logo */
   .jotar-faq-breadcrumbs-wrap {
     padding: 24px 0 16px;
+    width: 100%;
   }
 
   .jotar-faq-breadcrumbs {
@@ -455,10 +459,12 @@
   .jotar-faq-hero {
     padding: 10px 0 32px;
     text-align: center;
+    width: 100%;
   }
 
   .jotar-faq-hero__content {
     width: 100%;
+    max-width: 800px;
     margin: 0 auto;
   }
 
@@ -473,7 +479,7 @@
   }
 
   .jotar-faq-hero__title {
-    font-size: clamp(30px, 4vw, 44px);
+    font-size: clamp(30px, 4.5vw, 48px);
     font-weight: 800;
     line-height: 1.15;
     letter-spacing: -0.02em;
@@ -483,19 +489,16 @@
   }
 
   .jotar-faq-hero__desc {
-    font-size: 15.5px;
+    font-size: 16px;
     line-height: 1.6;
     color: #555555;
     margin: 0 0 28px 0;
-    max-width: 640px;
-    margin-left: auto;
-    margin-right: auto;
   }
 
-  /* Search Input - Cleanly proportioned inside container */
+  /* Search Input */
   .jotar-faq-search {
     width: 100%;
-    max-width: 680px;
+    max-width: 640px;
     margin: 0 auto;
     position: relative;
   }
@@ -515,13 +518,13 @@
 
   .jotar-faq-search__input {
     width: 100%;
-    padding: 15px 50px 15px 52px;
+    padding: 16px 50px 16px 52px;
     font-size: 15px;
     border-radius: 999px;
     border: 1.5px solid var(--faq-border);
     background-color: #ffffff;
     color: #111111;
-    box-shadow: 0 3px 16px rgba(0, 0, 0, 0.03);
+    box-shadow: 0 3px 16px rgba(0, 0, 0, 0.04);
     outline: none;
     font-family: inherit;
     transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
@@ -566,7 +569,8 @@
 
   /* Categories Bar */
   .jotar-faq-categories-section {
-    padding: 0 0 32px;
+    padding: 0 0 36px;
+    width: 100%;
   }
 
   .jotar-faq-categories {
@@ -582,9 +586,9 @@
     appearance: none;
     border: 1px solid var(--faq-border);
     background-color: #ffffff;
-    padding: 9px 18px;
+    padding: 10px 20px;
     border-radius: 999px;
-    font-size: 13.5px;
+    font-size: 14px;
     font-weight: 500;
     color: #444444;
     cursor: pointer;
@@ -622,7 +626,7 @@
     color: #ffffff;
   }
 
-  /* Accordion Item - Full width of 900px container */
+  /* Accordion Item - Full width matching header bounds */
   .jotar-faq-main-section {
     width: 100%;
   }
@@ -630,7 +634,7 @@
   .jotar-faq-accordion-list {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 16px;
     width: 100%;
   }
 
@@ -659,13 +663,13 @@
 
   .jotar-faq-trigger {
     width: 100%;
-    padding: 20px 24px;
+    padding: 22px 28px;
     background: transparent;
     border: none;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 16px;
+    gap: 20px;
     text-align: left;
     cursor: pointer;
     font-family: inherit;
@@ -674,15 +678,15 @@
   }
 
   .jotar-faq-question {
-    font-size: 16px;
+    font-size: 16.5px;
     font-weight: 600;
     line-height: 1.4;
     letter-spacing: -0.01em;
   }
 
   .jotar-faq-icon-wrap {
-    width: 32px;
-    height: 32px;
+    width: 34px;
+    height: 34px;
     border-radius: 50%;
     background-color: #f1f2f4;
     display: flex;
@@ -712,13 +716,13 @@
   }
 
   .jotar-faq-answer {
-    padding: 0 24px 24px 24px;
-    font-size: 15px;
+    padding: 0 28px 26px 28px;
+    font-size: 15.5px;
     line-height: 1.7;
     color: #555555;
     border-top: 1px solid #f2f2f5;
     margin-top: 2px;
-    padding-top: 18px;
+    padding-top: 20px;
     box-sizing: border-box;
   }
 
@@ -792,16 +796,16 @@
     opacity: 0.85;
   }
 
-  /* Contact Support Card - Exact 100% matching container width */
+  /* Contact Support Card - Full container width */
   .jotar-faq-contact-section {
-    padding-top: 50px;
+    padding-top: 60px;
     width: 100%;
   }
 
   .jotar-faq-contact-card {
     background: linear-gradient(135deg, #111111 0%, #1c1c1f 100%);
     border-radius: 20px;
-    padding: 40px 36px;
+    padding: 48px 40px;
     color: #ffffff;
     text-align: center;
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
@@ -810,8 +814,8 @@
   }
 
   .jotar-faq-contact-header {
-    max-width: 580px;
-    margin: 0 auto 32px;
+    max-width: 600px;
+    margin: 0 auto 36px;
   }
 
   .jotar-faq-contact-badge {
@@ -827,7 +831,7 @@
   }
 
   .jotar-faq-contact-title {
-    font-size: clamp(24px, 3.5vw, 32px);
+    font-size: clamp(24px, 3.5vw, 34px);
     font-weight: 800;
     margin: 0 0 12px 0;
     letter-spacing: -0.02em;
@@ -835,7 +839,7 @@
   }
 
   .jotar-faq-contact-desc {
-    font-size: 15px;
+    font-size: 15.5px;
     line-height: 1.6;
     color: #bbbbbb;
     margin: 0;
@@ -844,7 +848,7 @@
   .jotar-faq-contact-methods {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
+    gap: 20px;
     width: 100%;
     box-sizing: border-box;
   }
@@ -853,7 +857,7 @@
     background: rgba(255, 255, 255, 0.07);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 14px;
-    padding: 22px 18px;
+    padding: 26px 20px;
     text-decoration: none;
     color: #ffffff;
     display: flex;
@@ -871,14 +875,14 @@
   }
 
   .jotar-faq-contact-box__icon {
-    width: 44px;
-    height: 44px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.12);
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
     color: #ffffff;
   }
 
@@ -890,7 +894,7 @@
   }
 
   .jotar-faq-contact-box__info p {
-    font-size: 13px;
+    font-size: 13.5px;
     color: #dddddd;
     margin: 0 0 6px 0;
     word-break: break-all;
@@ -908,7 +912,8 @@
      ========================================================================== */
   @media (max-width: 768px) {
     .jotar-faq-container {
-      padding: 0 16px;
+      padding-left: 18px;
+      padding-right: 18px;
     }
 
     .jotar-faq-categories {
