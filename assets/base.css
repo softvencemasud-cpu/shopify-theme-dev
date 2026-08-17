@@ -2216,3 +2216,8 @@ main>.shopify-section:first-child .section:not(.disable-section-top-offset) {
   }
 }
 
+
+
+.jotar-contact-side-img{
+  object-fit:none !important
+}
